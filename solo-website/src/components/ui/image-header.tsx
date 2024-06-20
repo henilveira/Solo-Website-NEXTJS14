@@ -5,17 +5,19 @@ import PropTypes from 'prop-types';
 interface ImagemProps {
   src: string;
   alt: string;
+  className: any;
   width: number;
   height: number;
 }
 
-const Imagem: React.FC<ImagemProps> = ({ src, alt, width, height }) => {
+const Imagem: React.FC<ImagemProps> = ({ src, alt, width, height, className }) => {
   return (
     <Image
       src={src}
       alt={alt}
       width={width}
       height={height}
+      className={className}
     />
   );
 };

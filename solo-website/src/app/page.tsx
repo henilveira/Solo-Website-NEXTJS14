@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Image from 'next/image';
@@ -14,36 +15,76 @@ import { ToastAction } from "@/components/ui/toast";
 export default function Component() {
 
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+    const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+    };
+
   return (
-        <div className="flex flex-col min-h-[100dvh] bg-neutral-900">
-          <header className="mx-36 text-white px-4 lg:px-6 py-4 flex items-center justify-between">
-            <Link href="#" className="flex items-center gap-2" prefetch={false}>
-              <BotIcon className="h-6 w-6" />
-              <span className="text-lg font-semibold">Solo</span>
-            </Link>
-            <nav className="hidden lg:flex items-center gap-8">
-              <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-                Sobre
-              </Link>
-              <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-                Contato
-              </Link>
-              <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-                Inciar sessão
-              </Link>
-              <Link
-                href="#"
-                className="inline-flex h-9 items-center justify-center rounded-md bg-azulsolo px-4 py-2 text-sm font-medium text-white-900 shadow-sm transition-colors hover:bg-azulsolo/90 focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:pointer-events-none disabled:opacity-50"
-                prefetch={false}
-              >
-                Cadastre-se
-              </Link>
-            </nav>
-            <Button variant="outline" size="icon" className="lg:hidden">
-              <MenuIcon className="h-6 w-6" />
-              <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-          </header>
+    <div className="relative flex flex-col min-h-[100vh] bg-neutral-900">
+<header className="mx-4 lg:mx-36 text-white px-4 lg:px-6 py-4 flex items-center justify-between">
+        <Link href="#" className="flex items-center gap-2" prefetch={false}>
+          <BotIcon className="h-6 w-6" />
+          <span className="text-lg font-semibold">Solo</span>
+        </Link>
+        <nav className="hidden lg:flex items-center gap-8">
+          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Sobre
+          </Link>
+          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Contato
+          </Link>
+          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Iniciar sessão
+          </Link>
+          <Link
+            href="#"
+            className="inline-flex h-9 items-center justify-center rounded-md bg-azulsolo px-4 py-2 text-sm font-medium text-white-900 shadow-sm transition-colors hover:bg-azulsolo/90 focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:pointer-events-none disabled:opacity-50"
+            prefetch={false}
+          >
+            Cadastre-se
+          </Link>
+        </nav>
+        <Button variant="solo" size="icon" className="lg:hidden" onClick={toggleMenu}>
+          <MenuIcon className="h-6 w-6" />
+          <span className="sr-only">Toggle navigation menu</span>
+        </Button>
+      </header>
+      <div
+        className={`lg:hidden fixed inset-0 bg-neutral-800 text-white transform ${
+          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        } transition-transform duration-300 ease-in-out z-50`}
+      >
+        <div className="flex items-center justify-between p-4">
+          <Link href="#" className="flex items-center gap-2" prefetch={false}>
+            <BotIcon className="h-6 w-6" />
+            <span className="text-lg font-semibold">Solo</span>
+          </Link>
+          <Button variant="solo" size="icon" onClick={toggleMenu}>
+            <MenuIcon className="h-6 w-6" />
+            <span className="sr-only">Close navigation menu</span>
+          </Button>
+        </div>
+        <nav className="flex flex-col items-start p-4 space-y-4">
+          <Link href="#" className="text-sm font-medium py-2" prefetch={false}>
+            Sobre
+          </Link>
+          <Link href="#" className="text-sm font-medium py-2" prefetch={false}>
+            Contato
+          </Link>
+          <Link href="#" className="text-sm font-medium py-2" prefetch={false}>
+            Iniciar sessão
+          </Link>
+          <Link
+            href="#"
+            className="inline-flex h-9 items-center justify-center rounded-md bg-azulsolo px-4 py-2 text-sm font-medium text-white-900 shadow-sm transition-colors hover:bg-azulsolo/90 focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:pointer-events-none disabled:opacity-50"
+            prefetch={false}
+          >
+            Cadastre-se
+          </Link>
+        </nav>
+        </div>
           <main className="flex-1">
             <section className="text-white py-12 md:py-24 lg:py-32">
               <div className="container px-4 md:px-6">
@@ -55,15 +96,7 @@ export default function Component() {
                     <p className="max-w-[600px] text-gray-300 md:text-xl">
                       A Solo garante a melhor experiência de automações para a sua empresa, com apenas alguns cliques.
                     </p>
-                    <Button onClick={() => {
-                      toast({
-                        title: "Scheduled: Catch up ",
-                        description: "Friday, February 10, 2023 at 5:57 PM",
-                        action: (
-                          <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
-                        ),
-                      })
-            }} variant="solo" className="inline-flex items-center gap-2">
+                    <Button variant="solo" className="inline-flex items-center gap-2">
                       Começe agora
                       <ChevronRightIcon className="h-4 w-4" />
                     </Button>
@@ -82,26 +115,25 @@ export default function Component() {
             <section className="py-12 md:py-24 lg:py-32 dark:bg-gray-800">
               <div className="container px-4 md:px-6">
                 <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-                  <div className="flex items-center justify-center">
-                  <Imagem
+                  <div className="order-2 lg:order-1 flex items-center justify-center">
+                    <Imagem
                       src="/robo_pagina.svg"
                       alt="Robo"
                       width={600}
                       height={300}
                     />
                   </div>
-                  <div className="space-y-4">
-                    <div className="inline-block rounded-lg bg-azulsolo text-white px-3 py-1 text-sm ">Automações</div>
+                  <div className="order-1 lg:order-2 space-y-4">
+                    <div className="inline-block rounded-lg bg-azulsolo text-white px-3 py-1 text-sm">Automações</div>
                     <h2 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl">
                       Automatize suas tarefas com facilidade
                     </h2>
                     <p className="max-w-[600px] text-gray-300 md:text-xl dark:text-white">
-                      Crie robôs personalizados para automatizar suas tarefas repetitivas e libere seu time para se
-                      concentrar no que realmente importa.
+                      Crie robôs personalizados para automatizar suas tarefas repetitivas e libere seu time para se concentrar no que realmente importa.
                     </p>
                     <ul className="grid gap-4">
                       <li className="flex items-center gap-2">
-                        <CheckIcon className="h-5 w-5  text-green-500" />
+                        <CheckIcon className="h-5 w-5 text-green-500" />
                         <span className="text-white">Automação de processos</span>
                       </li>
                       <li className="flex items-center gap-2">
@@ -117,6 +149,7 @@ export default function Component() {
                 </div>
               </div>
             </section>
+
             <section className=" text-white pt-12 md:pt-24 lg:pt-32">
               <div className="container px-4 md:px-6">
                 <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
@@ -155,10 +188,10 @@ export default function Component() {
                 </div>
               </div>
             </section>
-            <section className="min-h-screen w-full flex items-center justify-center">
+            <section className="pt-12 md:pt-24 lg:pt-32 min-h-screen w-full flex items-center justify-center">
               <div className="container px-4 md:px-6 ">
                 <div className="flex justify-center align-center flex-col mb-12">
-                  <h1 className="text-5xl text-bold text-white font-bold text-center">Conheça algumas automações</h1>
+                  <h1 className="text-4xl text-bold text-white font-bold text-center sm:text-4xl md:text-5xl">Conheça algumas automações</h1>
                 </div>
                 <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
                 <div className="flex flex-col p-6 bg-azulsolo rounded-3xl dark:bg-zinc-850 justify-between ">
@@ -172,6 +205,7 @@ export default function Component() {
                         alt="Clipe"
                         width={175}
                         height={300}
+                        className=""
                       />
                     </div>
                     <div className="mt-6">
@@ -189,6 +223,7 @@ export default function Component() {
                         alt="Wifi"
                         width={175}
                         height={300}
+                        className=""
                       />
                     </div>
                     <div className="mt-6">
@@ -206,6 +241,7 @@ export default function Component() {
                         alt="Arquivo"
                         width={100}
                         height={300}
+                        className=""
                       />
                     </div>
                     <div className="mt-6">
@@ -215,12 +251,11 @@ export default function Component() {
                 </div>
               </div>
             </section>
-            <section className="min-h-fit w-full flex items-center justify-center">
+            <section className="pt-12 md:pt-24 lg:pt-32 w-full flex items-center justify-center">
               <div className="text-center w-full max-w-6xl">
-                <h1 className="text-5xl mb-12 font-bold text-white">Nossas propostas</h1>
-                <div className="px-4 md:px-6 flex flex-wrap justify-center space-x-4 gap-5">
+                <h1 className="text-4xl mb-12 font-bold text-white sm:text-4xl md:text-5xl">Nossas propostas</h1>
+                <div className="px-4 md:px-6 flex flex-wrap justify-center gap-5">
                   <Bloco 
-
                     alt="Timer"
                     src="/timer.svg"
                     paragrafo="Otimização de tempo"
@@ -229,7 +264,7 @@ export default function Component() {
                   />
                   <Bloco 
                     alt="Correto"
-                    src="/correct.svg"
+                    src="/performance.svg"
                     paragrafo="Melhora de performance"
                     width={100}
                     height={100}
@@ -251,6 +286,9 @@ export default function Component() {
                 </div>
               </div>
             </section>
+
+
+
             <section className="mt-20 py-12 md:py-24 lg:py-32 dark:bg-gray-800">
               <div className="container px-4 md:px-6">
               <div className="text-center flex justify-center items-center flex-col gap-3">
@@ -269,6 +307,7 @@ export default function Component() {
                       alt="Contato"
                       width={600}
                       height={300}
+                      className=""
                     />
                   </div>
 
