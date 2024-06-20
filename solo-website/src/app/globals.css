@@ -1,4 +1,4 @@
-@tailwind base;
+  @tailwind base;
   @tailwind components;
   @tailwind utilities;
 
@@ -15,6 +15,9 @@
 
       --primary: 0 0% 9%;
       --primary-foreground: 0 0% 98%;
+
+      --solo: #1573FE;
+      --solo-foreground: #FFFFFF;
 
       --secondary: 0 0% 96.1%;
       --secondary-foreground: 0 0% 9%;
@@ -47,6 +50,9 @@
 
       --primary: 0 0% 98%;
       --primary-foreground: 0 0% 9%;
+      
+      --solo: #FFFFFF;
+      --solo-foreground: #1573FE;
 
       --secondary: 0 0% 14.9%;
       --secondary-foreground: 0 0% 98%;

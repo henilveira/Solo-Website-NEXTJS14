@@ -2,7 +2,14 @@
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
-const Imagem = ({ src, alt, width, height }) => {
+interface ImagemProps {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+const Imagem: React.FC<ImagemProps> = ({ src, alt, width, height }) => {
   return (
     <Image
       src={src}
