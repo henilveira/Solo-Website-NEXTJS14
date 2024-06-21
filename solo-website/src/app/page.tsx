@@ -1,5 +1,7 @@
 'use client'
 
+import { MdOutlineEmail } from "react-icons/md";
+import { FaPhone } from "react-icons/fa";
 import { useState } from 'react'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -9,10 +11,72 @@ import Bloco from "@/components/ui/bloco";
 import FormularioContato from "../../contato/pages";
 import { toast, useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
-
+import { useEffect, useRef } from 'react';
+import ScrollToTopButton from '@/components/ui/botao-cima';
+import Footer from "@/components/ui/footer";
+import Team from "@/components/ui/conheca-time";
 
 
 export default function Component() {
+
+  const sectionRefs = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    const handleScroll = (event: Event) => {
+      event.preventDefault();
+      const target = event.currentTarget as HTMLAnchorElement;
+      const targetId = target.getAttribute("href")?.slice(1);
+
+      if (targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop,
+            behavior: "smooth",
+          });
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    sectionRefs.current.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(anchor => {
+      anchor.addEventListener("click", handleScroll as EventListener);
+    });
+
+    return () => {
+      sectionRefs.current.forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+      anchorLinks.forEach(anchor => {
+        anchor.removeEventListener("click", handleScroll as EventListener);
+      });
+    };
+  }, []);
+
+  const scrollToSection = (index: number) => {
+    if (sectionRefs.current[index]) {
+      window.scrollTo({
+        top: sectionRefs.current[index].offsetTop,
+        behavior: 'smooth',
+      });
+    }
+  };
 
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,27 +87,25 @@ export default function Component() {
 
   return (
     <div className="relative flex flex-col min-h-[100vh] bg-neutral-900">
-<header className="mx-4 lg:mx-36 text-white px-4 lg:px-6 py-4 flex items-center justify-between">
+  	  <header  className="mx-4 lg:mx-36 text-white px-4 lg:px-6 py-4 flex items-center justify-between">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
           <BotIcon className="h-6 w-6" />
           <span className="text-lg font-semibold">Solo</span>
         </Link>
         <nav className="hidden lg:flex items-center gap-8">
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link onClick={() => scrollToSection(6)} href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Sobre
           </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link onClick={() => scrollToSection(7)} href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Contato
           </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Iniciar sessão
-          </Link>
           <Link
+            onClick={() => scrollToSection(7)}
             href="#"
             className="inline-flex h-9 items-center justify-center rounded-md bg-azulsolo px-4 py-2 text-sm font-medium text-white-900 shadow-sm transition-colors hover:bg-azulsolo/90 focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:pointer-events-none disabled:opacity-50"
             prefetch={false}
           >
-            Cadastre-se
+            Automatizar
           </Link>
         </nav>
         <Button variant="solo" size="icon" className="lg:hidden" onClick={toggleMenu}>
@@ -52,7 +114,7 @@ export default function Component() {
         </Button>
       </header>
       <div
-        className={`lg:hidden fixed inset-0 bg-neutral-800 text-white transform ${
+        className={`lg:hidden fixed inset-0 bg-neutral-800  text-white transform ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out z-50`}
       >
@@ -70,23 +132,22 @@ export default function Component() {
           <Link href="#" className="text-sm font-medium py-2" prefetch={false}>
             Sobre
           </Link>
-          <Link href="#" className="text-sm font-medium py-2" prefetch={false}>
+          <Link onClick={() => scrollToSection(6)} href="#" className="text-sm font-medium py-2" prefetch={false}>
             Contato
-          </Link>
-          <Link href="#" className="text-sm font-medium py-2" prefetch={false}>
-            Iniciar sessão
           </Link>
           <Link
             href="#"
             className="inline-flex h-9 items-center justify-center rounded-md bg-azulsolo px-4 py-2 text-sm font-medium text-white-900 shadow-sm transition-colors hover:bg-azulsolo/90 focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:pointer-events-none disabled:opacity-50"
             prefetch={false}
           >
-            Cadastre-se
+            Automatizar
           </Link>
         </nav>
         </div>
           <main className="flex-1">
-            <section className="text-white py-12 md:py-24 lg:py-32">
+            <section ref={(el) => {
+          if (el) sectionRefs.current[0] = el as HTMLDivElement;
+        }} className="text-white py-12 md:py-24 lg:py-32">
               <div className="container px-4 md:px-6">
                 <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
                   <div className="space-y-4">
@@ -96,7 +157,7 @@ export default function Component() {
                     <p className="max-w-[600px] text-gray-300 md:text-xl">
                       A Solo garante a melhor experiência de automações para a sua empresa, com apenas alguns cliques.
                     </p>
-                    <Button variant="solo" className="inline-flex items-center gap-2">
+                    <Button onClick={() => scrollToSection(6)} variant="solo" className="inline-flex items-center gap-2">
                       Começe agora
                       <ChevronRightIcon className="h-4 w-4" />
                     </Button>
@@ -107,12 +168,15 @@ export default function Component() {
                       alt="Header"
                       width={600}
                       height={300}
+                      className=''
                     />
                   </div>
                 </div>
               </div>
             </section>
-            <section className="py-12 md:py-24 lg:py-32 dark:bg-gray-800">
+            <section ref={(el) => {
+          if (el) sectionRefs.current[1] = el as HTMLDivElement;
+        }} className="py-24 md:py-36 lg:py-40 dark:bg-gray-800">
               <div className="container px-4 md:px-6">
                 <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
                   <div className="order-2 lg:order-1 flex items-center justify-center">
@@ -121,6 +185,7 @@ export default function Component() {
                       alt="Robo"
                       width={600}
                       height={300}
+                      className=''
                     />
                   </div>
                   <div className="order-1 lg:order-2 space-y-4">
@@ -150,7 +215,9 @@ export default function Component() {
               </div>
             </section>
 
-            <section className=" text-white pt-12 md:pt-24 lg:pt-32">
+            <section ref={(el) => {
+          if (el) sectionRefs.current[3] = el as HTMLDivElement;
+        }} className=" text-white py-24 md:py-36 lg:py-40">
               <div className="container px-4 md:px-6">
                 <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
                   <div className="space-y-4">
@@ -159,7 +226,7 @@ export default function Component() {
                       Conecte seus sistemas com facilidade
                     </h2>
                     <p className="max-w-[600px] text-gray-300 md:text-xl">
-                      Integre seus sistemas e aplicativos favoritos com a Solo e automatize seus fluxos de trabalho.
+                      Integre seus sistemas e aplicativos corporativos com a Solo e automatize seus fluxos de trabalho.
                     </p>
                     <ul className="grid gap-4">
                       <li className="flex items-center gap-2">
@@ -188,7 +255,10 @@ export default function Component() {
                 </div>
               </div>
             </section>
-            <section className="pt-12 md:pt-24 lg:pt-32 min-h-screen w-full flex items-center justify-center">
+            
+            <section ref={(el) => {
+          if (el) sectionRefs.current[4] = el as HTMLDivElement;
+        }} className="py-20 md:py-36 lg:py-40  w-full flex items-center justify-center">
               <div className="container px-4 md:px-6 ">
                 <div className="flex justify-center align-center flex-col mb-12">
                   <h1 className="text-4xl text-bold text-white font-bold text-center sm:text-4xl md:text-5xl">Conheça algumas automações</h1>
@@ -251,7 +321,9 @@ export default function Component() {
                 </div>
               </div>
             </section>
-            <section className="pt-12 md:pt-24 lg:pt-32 w-full flex items-center justify-center">
+            <section ref={(el) => {
+          if (el) sectionRefs.current[5] = el as HTMLDivElement;
+        }} className="py-24 md:py-36 lg:py-40 w-full flex items-center justify-center">
               <div className="text-center w-full max-w-6xl">
                 <h1 className="text-4xl mb-12 font-bold text-white sm:text-4xl md:text-5xl">Nossas propostas</h1>
                 <div className="px-4 md:px-6 flex flex-wrap justify-center gap-5">
@@ -286,10 +358,15 @@ export default function Component() {
                 </div>
               </div>
             </section>
+            <section ref={(el) => {
+          if (el) sectionRefs.current[6] = el as HTMLDivElement;
+        }}>
+              <Team />
+            </section>
 
-
-
-            <section className="mt-20 py-12 md:py-24 lg:py-32 dark:bg-gray-800">
+            <section ref={(el) => {
+          if (el) sectionRefs.current[7] = el as HTMLDivElement;
+        }} className=" py-12 md:py-24 lg:py-32 dark:bg-gray-800">
               <div className="container px-4 md:px-6">
               <div className="text-center flex justify-center items-center flex-col gap-3">
                 <h1 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl">
@@ -317,23 +394,9 @@ export default function Component() {
                 </div>
               </div>
             </section>
-
-  
           </main>
-          <footer className=" text-white px-4 lg:px-6 py-6 flex items-center justify-between">
-            <p className="text-sm">&copy; 2024 Solo. Todos direitos reservados.</p>
-            <nav className="hidden lg:flex items-center gap-4">
-              <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-                Termos de serviço
-              </Link>
-              <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-                Politica de Privacidade
-              </Link>
-              <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-                Suporte
-              </Link>
-            </nav>
-          </footer>
+          <Footer />
+          <ScrollToTopButton />
         </div>
   )
 }
