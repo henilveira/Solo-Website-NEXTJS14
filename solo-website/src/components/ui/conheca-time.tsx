@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { Button } from "@/components/ui/button"
 
 import {
     Tooltip,
@@ -11,7 +12,14 @@ import {
   
 
 export default function Team() {
+
+  const ExternalLink = ({ to, children }) => (
+    <Link to={{ pathname: to }} target="_blank" rel="noopener noreferrer">
+      {children}
+    </Link>
+  );
   return (
+
     <section className="w-full py-24 md:py-36 lg:py-40">
       <div className="container mx-auto grid gap-8 px-4 md:px-6">
         <div className="text-center">
@@ -20,12 +28,12 @@ export default function Team() {
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
           {/* Member 1 */}
-          <div className="relative overflow-hidden rounded-3xl transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+          <div className="border relative overflow-hidden rounded-3xl transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
             <div className="p-4 bg-neutral-950 text-center flex flex-col items-center justify-between h-full">
               <div className="flex flex-col items-center">
                 <Avatar className="my-4 w-20 h-20">
                   <AvatarImage src="https://pbs.twimg.com/profile_images/1801286211404808194/176w5SZ6_400x400.jpg" />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarFallback>HA</AvatarFallback>
                 </Avatar>
                 <h3 className="text-xl font-bold text-white">Henrique Ataide</h3>
                 <p className="text-sm text-azulsolo font-semibold">CO-Founder</p>
@@ -34,22 +42,22 @@ export default function Team() {
                 </p>
               </div>
               <div className="pt-8 flex justify-center items-center gap-4">
-                <Link href="#">
+                <a target="_blank" href="https://www.linkedin.com/in/henrique-ataide/">
                   <FaLinkedin className="text-white h-7 w-7" />
-                </Link>
-                <Link href="#">
+                </a>
+                <a target="_blank" href="https://www.github.com/imrickss">
                   <FaGithub className="h-8 w-7 text-white" />
-                </Link>
+                </a>
               </div>
             </div>
           </div>
           {/* Member 2 */}
-          <div className="relative overflow-hidden rounded-3xl transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+          <div className="border relative overflow-hidden rounded-3xl transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
             <div className="p-4 bg-neutral-950 text-center flex flex-col items-center justify-between h-full">
               <div className="flex flex-col items-center">
                 <Avatar className="my-4 w-20 h-20">
                   <AvatarImage src="https://pbs.twimg.com/profile_images/1799208166984404992/Uh98hFqJ_400x400.jpg" />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarFallback>PO</AvatarFallback>
                 </Avatar>
                 <h3 className="text-xl font-bold text-white">Pedro Olivo</h3>
                 <p className="text-sm text-azulsolo font-semibold">CEO</p>
@@ -58,9 +66,9 @@ export default function Team() {
                 </p>
               </div>
               <div className="pt-8 flex justify-center items-center gap-4">
-                <Link href="#">
+                <a target="_blank" href="https://www.linkedin.com/in/pedro-olivo-1589a7229/">
                   <FaLinkedin className="text-white h-7 w-7" />
-                </Link>
+                </a>
                 <Link href="#">
                   <FaGithub className="h-8 w-7 text-white" />
                 </Link>
@@ -68,7 +76,7 @@ export default function Team() {
             </div>
           </div>
           {/* Member 3 */}
-          <div className="relative overflow-hidden rounded-3xl transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+          <div className="border relative overflow-hidden rounded-3xl transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
             <div className="p-4 bg-neutral-950 text-center flex flex-col items-center justify-between h-full">
               <div className="flex flex-col items-center">
                 <Avatar className="my-4 w-20 h-20">
@@ -83,13 +91,13 @@ export default function Team() {
                 </p>
               </div>
               <div className="pt-8 flex justify-center items-center gap-4">
-                <Link href="#">
+                <a target="_blank" href="https://www.linkedin.com/in/gabriel-da-silva-carvalho-8802a1232/">
                 
                   <FaLinkedin className="text-white h-7 w-7" />
-                </Link>
-                <Link href="#">
+                </a>
+                <a target="_blank" href="https://www.github.com/gabrielCarvalhoGit">
                   <FaGithub className="h-8 w-7 text-white" />
-                </Link>
+                </a>
               </div>
             </div>
           </div>

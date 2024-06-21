@@ -8,7 +8,7 @@ export default function Footer() {
           <BotIcon className="h-6 w-6 mr-2" />
           <span className="text-sm font-medium">Solo</span>
         </Link>
-        <p className="text-white text-sm">Preparado para automatizar sua rotina?</p>
+        <p className="text-white text-center text-sm :text-xs">Preparado para automatizar sua rotina?</p>
         <div className="flex items-center space-x-4">
           <Link href="#" prefetch={false}>
             <MailOpenIcon className="h-5 w-5 text-white" />
