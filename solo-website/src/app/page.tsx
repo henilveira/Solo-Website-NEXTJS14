@@ -1,20 +1,16 @@
 'use client'
 
-import { MdOutlineEmail } from "react-icons/md";
-import { FaPhone } from "react-icons/fa";
 import { useState } from 'react'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import Image from 'next/image';
 import Imagem from '@/components/ui/image-header'
 import Bloco from "@/components/ui/bloco";
 import FormularioContato from "../../contato/pages";
-import { toast, useToast } from "@/components/ui/use-toast";
-import { ToastAction } from "@/components/ui/toast";
 import { useEffect, useRef } from 'react';
 import ScrollToTopButton from '@/components/ui/botao-cima';
 import Footer from "@/components/ui/footer";
 import Team from "@/components/ui/conheca-time";
+import WhatsApp from "@/components/ui/wpp-button";
 
 
 export default function Component() {
@@ -80,17 +76,27 @@ export default function Component() {
 
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
     const toggleMenu = () => {
       setIsMenuOpen(!isMenuOpen);
     };
+
+    const handleLinkClick = (callback?: () => void) => {
+      if (callback) callback();
+      toggleMenu();
+    }
 
   return (
     <div className="relative flex flex-col min-h-[100vh] bg-neutral-900">
   	  <header  className="mx-4 lg:mx-36 text-white px-4 lg:px-6 py-4 flex items-center justify-between">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
-          <BotIcon className="h-6 w-6" />
-          <span className="text-lg font-semibold">Solo</span>
+          <Imagem
+            src="/solo-logo.svg"
+            alt="Solo"
+            width={100}
+            height={300}
+            className=''
+          />
         </Link>
         <nav className="hidden lg:flex items-center gap-8">
           <Link onClick={() => scrollToSection(6)} href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
@@ -114,14 +120,19 @@ export default function Component() {
         </Button>
       </header>
       <div
-        className={`lg:hidden fixed inset-0 bg-neutral-800  text-white transform ${
-          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out z-50`}
-      >
+      className={`lg:hidden fixed inset-0 bg-neutral-800 text-white transform ${
+        isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+      } transition-transform duration-300 ease-in-out z-50`}
+    >
         <div className="flex items-center justify-between p-4">
           <Link href="#" className="flex items-center gap-2" prefetch={false}>
-            <BotIcon className="h-6 w-6" />
-            <span className="text-lg font-semibold">Solo</span>
+            <Imagem
+              src="/solo-logo.svg"
+              alt="Solo"
+              width={100}
+              height={300}
+              className=''
+            />
           </Link>
           <Button variant="solo" size="icon" onClick={toggleMenu}>
             <MenuIcon className="h-6 w-6" />
@@ -129,21 +140,27 @@ export default function Component() {
           </Button>
         </div>
         <nav className="flex flex-col items-start p-4 space-y-4">
-          <Link href="#" className="text-sm font-medium py-2" prefetch={false}>
+          <Link href="#" className="text-sm font-medium py-2" prefetch={false} onClick={() => handleLinkClick(() => scrollToSection(6))}>
             Sobre
           </Link>
-          <Link onClick={() => scrollToSection(6)} href="#" className="text-sm font-medium py-2" prefetch={false}>
+          <Link
+            href="#"
+            className="text-sm font-medium py-2"
+            prefetch={false}
+            onClick={() => handleLinkClick(() => scrollToSection(7))}
+          >
             Contato
           </Link>
           <Link
             href="#"
             className="inline-flex h-9 items-center justify-center rounded-md bg-azulsolo px-4 py-2 text-sm font-medium text-white-900 shadow-sm transition-colors hover:bg-azulsolo/90 focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:pointer-events-none disabled:opacity-50"
             prefetch={false}
+            onClick={() => handleLinkClick(() => scrollToSection(7)) }
           >
             Automatizar
           </Link>
         </nav>
-        </div>
+      </div>
           <main className="flex-1">
             <section ref={(el) => {
           if (el) sectionRefs.current[0] = el as HTMLDivElement;
@@ -157,8 +174,8 @@ export default function Component() {
                     <p className="max-w-[600px] text-gray-300 md:text-xl">
                       A Solo garante a melhor experiência de automações para a sua empresa, com apenas alguns cliques.
                     </p>
-                    <Button onClick={() => scrollToSection(6)} variant="solo" className="inline-flex items-center gap-2">
-                      Começe agora
+                    <Button onClick={() => scrollToSection(7)} variant="solo" className="inline-flex items-center gap-2">
+                      Comece agora
                       <ChevronRightIcon className="h-4 w-4" />
                     </Button>
                   </div>
@@ -255,7 +272,6 @@ export default function Component() {
                 </div>
               </div>
             </section>
-            
             <section ref={(el) => {
           if (el) sectionRefs.current[4] = el as HTMLDivElement;
         }} className="py-20 md:py-36 lg:py-40  w-full flex items-center justify-center">
@@ -264,8 +280,8 @@ export default function Component() {
                   <h1 className="text-4xl text-bold text-white font-bold text-center sm:text-4xl md:text-5xl">Conheça algumas automações</h1>
                 </div>
                 <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
-                <div className="flex flex-col p-6 bg-azulsolo rounded-3xl dark:bg-zinc-850 justify-between ">
-                    <div className="flex justify-center align-center flex-col">
+                <div className="flex flex-col p-6 bg-azulsolo rounded-3xl dark:bg-zinc-850 justify-between transform transition-transform duration-300 hover:scale-105">
+                  <div className="flex justify-center align-center flex-col">
                       <h3 className="text-4xl text-white font-bold text-center py-2">Excel</h3>
                       <p className="text-gray-200 text-center">Gera ou lê arquivo Excel que contém informações para fazer parte de um processo, como enviar por e-mail.</p>
                     </div>
@@ -279,10 +295,10 @@ export default function Component() {
                       />
                     </div>
                     <div className="mt-6">
-                      <Button className="w-full" variant="secondary">Ver mais</Button>
+                      <Button className="w-full" variant="secondary" onClick={(() => scrollToSection(0)) }>Ver mais</Button>
                     </div>
                   </div>
-                  <div className="flex flex-col p-6 bg-azulsolo rounded-3xl dark:bg-zinc-850 justify-between ">
+                  <div className="flex flex-col p-6 bg-azulsolo rounded-3xl dark:bg-zinc-850 justify-between transform transition-transform duration-300 hover:scale-105">
                     <div className="flex justify-center align-center flex-col">
                       <h3 className="text-4xl text-white font-bold text-center py-2">Web</h3>
                       <p className="text-gray-200 text-center">Realiza automaticamente tarefas repetitivas em sites da internet, como inserção e busca de dados.</p>
@@ -297,10 +313,10 @@ export default function Component() {
                       />
                     </div>
                     <div className="mt-6">
-                      <Button className="w-full" variant="secondary">Ver mais</Button>
+                      <Button className="w-full" variant="secondary" onClick={(() => scrollToSection(0)) }>Ver mais</Button>
                     </div>
                   </div>
-                  <div className="flex flex-col p-6 bg-azulsolo rounded-3xl dark:bg-zinc-850 justify-between ">
+                  <div className="flex flex-col p-6 bg-azulsolo rounded-3xl dark:bg-zinc-850 justify-between transform transition-transform duration-300 hover:scale-105">
                     <div className="flex justify-center align-center flex-col">
                       <h3 className="text-4xl text-white font-bold text-center py-2">XML</h3>
                       <p className="text-gray-200 text-center">Extrai informações de arquivos XML, facilitando a organização e análise de dados.</p>
@@ -315,7 +331,7 @@ export default function Component() {
                       />
                     </div>
                     <div className="mt-6">
-                      <Button className="w-full" variant="secondary">Ver mais</Button>
+                      <Button className="w-full" variant="secondary" onClick={(() => scrollToSection(0)) }>Ver mais</Button>
                     </div>
                   </div>
                 </div>
@@ -387,16 +403,14 @@ export default function Component() {
                       className=""
                     />
                   </div>
-
-
                   <FormularioContato />
-    
                 </div>
               </div>
             </section>
           </main>
           <Footer />
           <ScrollToTopButton />
+          <WhatsApp />
         </div>
   )
 }

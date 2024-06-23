@@ -1,33 +1,45 @@
 import Link from "next/link"
+import Imagem from './image-header';
 
 export default function Footer() {
+
+  interface ExternalLinkProps {
+    to: string;
+    children: React.ReactNode;
+  }
+  
+  const ExternalLink: React.FC<ExternalLinkProps> = ({ to, children }) => (
+    <Link href={to} passHref>
+      <a target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    </Link>
+  );
+
+  
   return (
-    <footer className="bg-zinc-950 p-6 md:py-12 w-full">
+    <footer className="bg-neutral-950 p-6 md:py-12 w-full">
       <div className="container max-w-7xl flex items-center justify-between">
         <Link href="#" className="flex text-white items-center" prefetch={false}>
-          <BotIcon className="h-6 w-6 mr-2" />
-          <span className="text-sm font-medium">Solo</span>
+          <Imagem
+              src="/solo-logo.svg"
+              alt="Solo"
+              width={100}
+              height={6}
+              className=''
+            />
         </Link>
         <p className="text-white text-center text-sm :text-xs">Preparado para automatizar sua rotina?</p>
         <div className="flex items-center space-x-4">
-          <Link href="#" prefetch={false}>
+          <a href="#" target="_blank" >
             <MailOpenIcon className="h-5 w-5 text-white" />
-          </Link>
-          <Link href="#" prefetch={false}>
+          </a>
+          <a href="https://wa.me/+5547996750589?text=Ol%C3%A1!%20quero%20conhecer%20mais%20sobre%20as%20automa%C3%A7%C3%B5es" target="_blank" >
             <PhoneIcon className="h-5 w-5 text-white" />
-          </Link>
+          </a>
         </div>
       </div>
-      <div className="container max-w-7xl mt-6 pt-6 border-t">
-        <div className="flex items-center justify-center space-x-4 text-sm text-muted">
-          <Link href="#" prefetch={false}>
-            Sobre
-          </Link>
-          <Link href="#" prefetch={false}>
-            Contato
-          </Link>
-        </div>
-      </div>
+      
     </footer>
   )
 }
