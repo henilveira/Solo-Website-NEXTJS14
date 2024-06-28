@@ -50,13 +50,13 @@ yarn install
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/imrickss/Solo2.git
+git clone https://github.com/imrickss/Solo-Website-NEXTJS14.git
 ```
 
 2. Navegue até o diretório do projeto:
    
 ```bash
-- cd Solo2
+- cd Solo-Website-NEXTJS14
 ```
 
 ```bash
