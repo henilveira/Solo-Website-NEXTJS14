@@ -169,7 +169,7 @@ export default function Component() {
                 <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
                   <div className="space-y-4">
                     <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-8xl">
-                      Robôs fazendo suas !
+                      Robôs fazendo suas tarefas!
                     </h1>
                     <p className="max-w-[600px] text-gray-300 md:text-xl">
                       A Solo garante a melhor experiência de automações para a sua empresa, com apenas alguns cliques.
@@ -181,7 +181,7 @@ export default function Component() {
                   </div>
                   <div className="flex items-center justify-center">
                     <Imagem
-                      src="./Header.svg"
+                      src="header.svg"
                       alt="Header"
                       width={600}
                       height={300}
@@ -262,7 +262,7 @@ export default function Component() {
                   </div>
                   <div className="flex items-center justify-center">
                     <img
-                      src="./ERPS2_pagina.svg"
+                      src="/erps2_pagina.svg"
                       width="550"
                       height="310"
                       alt="ERPS"
