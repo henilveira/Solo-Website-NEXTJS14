@@ -1,9 +1,8 @@
-// app/layout.tsx
 import { ReactNode } from 'react';
-import Head from 'next/head'; // Importe Head do Next.js
+import Head from 'next/head';
 import { Toaster } from "@/components/ui/toaster";
-import { Inter } from 'next/font/google'; // Certifique-se de importar corretamente o Inter do Google Fonts
-import './globals.css'; // Importe estilos globais aqui
+import { Inter } from 'next/font/google';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -11,23 +10,21 @@ export const metadata = {
   title: 'Solo',
   description: 'Solo Solutions licensed',
   icons: {
-    icon: ['/favicon/favicon.ico'], // Caminho para o ícone padrão
-    apple: ['/apple-touch-icon.png?v=4'], // Caminho para o ícone Apple touch (versão 4)
-    shortcut: ['/apple-touch-icon.png'] // Caminho para o ícone de atalho
+    icon: ['/favicon/favicon.ico'],
+    apple: ['/apple-touch-icon.png?v=4'],
+    shortcut: ['/apple-touch-icon.png']
   }
 };
 
 type RootLayoutProps = {
-  children: ReactNode; // children é do tipo ReactNode para aceitar qualquer conteúdo React válido
-  metadata: {
+  children: ReactNode;
+  metadata?: {
     title: string;
     description: string;
-    // Se houver outros metadados, adicione aqui
   };
 };
 
-
-export default function RootLayout({ children }) {
+const RootLayout: React.FC<RootLayoutProps> = ({ children, metadata = { title: '', description: '' } }) => {
   return (
     <html lang="en">
       <Head>
@@ -46,4 +43,6 @@ export default function RootLayout({ children }) {
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
