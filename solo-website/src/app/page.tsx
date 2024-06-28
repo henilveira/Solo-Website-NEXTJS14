@@ -181,7 +181,7 @@ export default function Component() {
                   </div>
                   <div className="flex items-center justify-center">
                     <Imagem
-                      src="/Header.svg"
+                      src="./Header.svg"
                       alt="Header"
                       width={600}
                       height={300}
@@ -262,7 +262,7 @@ export default function Component() {
                   </div>
                   <div className="flex items-center justify-center">
                     <img
-                      src="/ERPS2_pagina.svg"
+                      src="./ERPS2_pagina.svg"
                       width="550"
                       height="310"
                       alt="ERPS"
