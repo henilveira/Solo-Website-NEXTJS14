@@ -181,7 +181,7 @@ export default function Component() {
                   </div>
                   <div className="flex items-center justify-center">
                     <Imagem
-                      src="./header.svg"
+                      src="/header.svg"
                       alt="Header"
                       width={600}
                       height={300}
