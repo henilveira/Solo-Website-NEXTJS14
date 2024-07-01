@@ -2,6 +2,8 @@
 
 Este projeto foi desenvolvido para a empresa Solo, especializada em automação de processos empresariais.
 
+Acesse o site da [Solo](https://solo-website-nextjs-14-kutx.vercel.app/) upado pela Vercel.
+
 ## O que é RPA?
 
 RPA (Robotic Process Automation) refere-se à automação de tarefas repetitivas e baseadas em regras utilizando software, permitindo que robôs executem atividades humanas em sistemas digitais. Isso inclui a automação de processos como manipulação de dados, resposta a emails, e integração de sistemas.
@@ -48,13 +50,13 @@ yarn install
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/imrickss/Solo2.git
+git clone https://github.com/imrickss/Solo-Website-NEXTJS14.git
 ```
 
 2. Navegue até o diretório do projeto:
    
 ```bash
-- cd Solo2
+- cd Solo-Website-NEXTJS14
 ```
 
 ```bash
