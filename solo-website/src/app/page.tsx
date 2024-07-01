@@ -262,7 +262,7 @@ export default function Component() {
                   </div>
                   <div className="flex items-center justify-center">
                     <img
-                      src="/erps_pagina.svg"
+                      src="/erps2_pagina.svg"
                       width="550"
                       height="310"
                       alt="ERPS"
