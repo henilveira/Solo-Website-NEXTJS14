@@ -226,7 +226,7 @@ export default function Team() {
                   : 'text-white bg-neutral-900 hover:bg-neutral-800'
               }`}
             >
-              Equipe
+              Clientes
             </button>
             <button
               onClick={() => handleTabChange('about')}
@@ -236,14 +236,14 @@ export default function Team() {
                 : 'text-white bg-neutral-900 hover:bg-neutral-800'
               }`}
             >
-              Clientes
+              Equipe
             </button>
           </div>
 
           {/* Renderização condicional do conteúdo da aba */}
           <div className="mt-6">
-            {activeTab === 'team' && renderTeamTab()}
-            {activeTab === 'about' && renderAboutTab()}
+            {activeTab === 'about' && renderTeamTab()}
+            {activeTab === 'team' && renderAboutTab()}
           </div>
         </div>
       </div>
