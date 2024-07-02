@@ -2,7 +2,7 @@
 
 Este projeto foi desenvolvido para a empresa Solo, especializada em automação de processos empresariais.
 
-Acesse o site da [Solo](https://solo-website-nextjs-14-kutx.vercel.app/) upado pela Vercel.
+Acesse o site da [Solo](https://www.solosolutions.com.br) upado pela Vercel.
 
 ## O que é RPA?
 
