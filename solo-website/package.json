@@ -40,22 +40,16 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.0",
     "react-icons": "^5.2.1",
-<<<<<<< HEAD
+
     "shadcn-ui": "^0.2.3",
-=======
-    "resend": "^3.4.0",
->>>>>>> e4b8b72ee026ad7e031205ad110d6ede67197e8f
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.14.7",
-=======
-    "@types/node": "^20.14.9",
->>>>>>> e4b8b72ee026ad7e031205ad110d6ede67197e8f
+
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "eslint": "^8.57.0",

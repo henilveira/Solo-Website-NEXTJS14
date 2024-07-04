@@ -26,8 +26,6 @@ async function criarConta(user: string, password: string) {
   redirect('/login')
 }
 
-
-
 const Auth = {
   criarConta,
 }
