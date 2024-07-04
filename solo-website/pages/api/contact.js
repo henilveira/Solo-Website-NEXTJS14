@@ -22,7 +22,7 @@ export default async function ContactAPI(req, res) {
 
         const mail = await transporter.sendMail({
             from: email, // E-mail fornecido pelo usuário
-            to: 'henriqueluiz16022000@gmail.com',
+            to: user,
             replyTo: email, // Define o e-mail para resposta como o fornecido pelo usuário
             subject: 'Contato através da Solo Solutions',
             html: `

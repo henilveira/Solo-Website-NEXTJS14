@@ -29,7 +29,7 @@ export default function Footer() {
               className=''
             />
         </Link>
-        <p className="text-white text-center text-sm :text-xs">Preparado para automatizar sua rotina?</p>
+        <p className="text-white text-center text-lg :text-sm">Preparado para automatizar sua rotina?</p>
         <div className="flex items-center space-x-4">
           <a href="#" target="_blank" >
             <MailOpenIcon className="h-5 w-5 text-white" />

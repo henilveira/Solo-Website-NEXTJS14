@@ -169,7 +169,7 @@ export default function Component() {
                 <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
                   <div className="space-y-4">
                     <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-8xl">
-                      Robôs fazendo suas !
+                      Robôs fazendo suas tarefas!
                     </h1>
                     <p className="max-w-[600px] text-gray-300 md:text-xl">
                       A Solo garante a melhor experiência de automações para a sua empresa, com apenas alguns cliques.
@@ -181,7 +181,7 @@ export default function Component() {
                   </div>
                   <div className="flex items-center justify-center">
                     <Imagem
-                      src="./Header.svg"
+                      src="/header.svg"
                       alt="Header"
                       width={600}
                       height={300}
@@ -233,46 +233,6 @@ export default function Component() {
             </section>
 
             <section ref={(el) => {
-          if (el) sectionRefs.current[3] = el as HTMLDivElement;
-        }} className=" text-white py-24 md:py-36 lg:py-40">
-              <div className="container px-4 md:px-6">
-                <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-                  <div className="space-y-4">
-                    <div className="inline-block rounded-lg bg-azulsolo text-white px-3 py-1 text-sm">Integrações</div>
-                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                      Conecte seus sistemas com facilidade
-                    </h2>
-                    <p className="max-w-[600px] text-gray-300 md:text-xl">
-                      Integre seus sistemas e aplicativos corporativos com a Solo e automatize seus fluxos de trabalho.
-                    </p>
-                    <ul className="grid gap-4">
-                      <li className="flex items-center gap-2">
-                        <CheckIcon className="h-5 w-5 text-green-500" />
-                        <span>CRMs</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckIcon className="h-5 w-5 text-green-500" />
-                        <span>ERPs</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckIcon className="h-5 w-5 text-green-500" />
-                        <span>E-commerce</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <img
-                      src="./ERPS2_pagina.svg"
-                      width="550"
-                      height="310"
-                      alt="ERPS"
-                      className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
-                    />
-                  </div>
-                </div>
-              </div>
-            </section>
-            <section ref={(el) => {
           if (el) sectionRefs.current[4] = el as HTMLDivElement;
         }} className="py-20 md:py-36 lg:py-40  w-full flex items-center justify-center">
               <div className="container px-4 md:px-6 ">
@@ -282,7 +242,7 @@ export default function Component() {
                 <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
                 <div className="flex flex-col p-6 bg-azulsolo rounded-3xl dark:bg-zinc-850 justify-between transform transition-transform duration-300 hover:scale-105">
                   <div className="flex justify-center align-center flex-col">
-                      <h3 className="text-4xl text-white font-bold text-center py-2">Excel</h3>
+                      <h3 className="text-4xl text-white font-bold text-center py-2">Planilhas</h3>
                       <p className="text-gray-200 text-center">Gera ou lê arquivo Excel que contém informações para fazer parte de um processo, como enviar por e-mail.</p>
                     </div>
                     <div className="flex justify-center align-center my-12">
@@ -337,6 +297,48 @@ export default function Component() {
                 </div>
               </div>
             </section>
+
+            <section ref={(el) => {
+          if (el) sectionRefs.current[3] = el as HTMLDivElement;
+        }} className=" text-white py-24 md:py-36 lg:py-40">
+              <div className="container px-4 md:px-6">
+                <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
+                  <div className="space-y-4">
+                    <div className="inline-block rounded-lg bg-azulsolo text-white px-3 py-1 text-sm">Integrações</div>
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                      Conecte seus sistemas com facilidade
+                    </h2>
+                    <p className="max-w-[600px] text-gray-300 md:text-xl">
+                      Integre seus sistemas e aplicativos corporativos com a Solo e automatize seus fluxos de trabalho.
+                    </p>
+                    <ul className="grid gap-4">
+                      <li className="flex items-center gap-2">
+                        <CheckIcon className="h-5 w-5 text-green-500" />
+                        <span>CRMs</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckIcon className="h-5 w-5 text-green-500" />
+                        <span>ERPs</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckIcon className="h-5 w-5 text-green-500" />
+                        <span>E-commerce</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <img
+                      src="/erps2_pagina.svg"
+                      width="550"
+                      height="310"
+                      alt="ERPS"
+                      className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+            
             <section ref={(el) => {
           if (el) sectionRefs.current[5] = el as HTMLDivElement;
         }} className="py-24 md:py-36 lg:py-40 w-full flex items-center justify-center">
@@ -386,11 +388,10 @@ export default function Component() {
               <div className="container px-4 md:px-6">
               <div className="text-center flex justify-center items-center flex-col gap-3">
                 <h1 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl">
-                  Viajamos galáxias para ter você conosco
+                  Temos a solução para seu problema
                 </h1>
                 <p className="max-w-[600px] text-gray-300 md:text-xl dark:text-white">
-                  Envie uma mensagem caso tenha qualquer dúvida do nosso produto, que a nossa
-                  ágil equipe vai te responder em instantes!
+                  Já imaginou automatizar sua rotina ao ponto de não se preocupar com processos repetitivos? Entre em contato conosco
                 </p>
               </div>
                 <div className="mt-24 grid gap-6 lg:grid-cols-2 lg:gap-12">
