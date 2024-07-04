@@ -1,16 +1,25 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+<<<<<<< HEAD
 import Imagem from '@/components/ui/image-header';
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import Link from 'next/link'
+=======
+import { signIn } from ""
+import Imagem from '@/components/ui/image-header';
+>>>>>>> e4b8b72ee026ad7e031205ad110d6ede67197e8f
 
 export default function Login() {
   return (
     <div className="flex flex-col md:flex-row items-center min-h-screen min-w-screen">
       <div className="hidden md:block w-2/3 min-h-screen relative overflow-hidden">
         <Imagem
+<<<<<<< HEAD
           src="/gradiente.svg"
+=======
+          src="/Gradient.jpg"
+>>>>>>> e4b8b72ee026ad7e031205ad110d6ede67197e8f
           className="absolute top-0 left-0 w-full h-full object-cover"
         />
       </div>
@@ -18,12 +27,17 @@ export default function Login() {
         <div className="max-w-sm space-y-4">
           <div className="space-y-2 text-left">
             <Imagem 
+<<<<<<< HEAD
                 src="/solo-logo-black.svg"
+=======
+                src="/solo-logo-black.png"
+>>>>>>> e4b8b72ee026ad7e031205ad110d6ede67197e8f
                 width={150}
                 className="text-center"
                 />
             <h1 className="text-3xl font-bold">Login</h1>
             <p className="text-gray-500 dark:text-gray-400">
+<<<<<<< HEAD
               Insira seu usuário e senha para iniciar sessão.
             </p>
           </div>
@@ -56,6 +70,20 @@ export default function Login() {
             </div>
           </form>
 
+=======
+              Insira seu e-mail para iniciar seu cadastro.
+            </p>
+          </div>
+          <form className="space-y-4" action={async (formData) => {
+                "use server"
+                await signIn("resend", formData)
+            }}>
+            <Input className="h-12" placeholder="Insira seu e-mail" required type="email" />
+            <Button className="w-full" type="submit">
+              Enviar link mágico
+            </Button>
+          </form>
+>>>>>>> e4b8b72ee026ad7e031205ad110d6ede67197e8f
         </div>
       </div>
     </div>
