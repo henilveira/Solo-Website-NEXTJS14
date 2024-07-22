@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Imagem from '@/components/ui/image-header'
 import Bloco from "@/components/ui/bloco";
-import FormularioContato from "../../contato/pages";
+import FormularioContato from "../api/contato/pages";
 import { useEffect, useRef } from 'react';
 import ScrollToTopButton from '@/components/ui/botao-cima';
 import Footer from "@/components/ui/footer";
@@ -106,12 +106,10 @@ export default function Component() {
             Contato
           </Link>
           <Link
-            onClick={() => scrollToSection(7)}
-            href="#"
+            href="/login"
             className="inline-flex h-9 items-center justify-center rounded-md bg-azulsolo px-4 py-2 text-sm font-medium text-white-900 shadow-sm transition-colors hover:bg-azulsolo/90 focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:pointer-events-none disabled:opacity-50"
-            prefetch={false}
           >
-            Automatizar
+            Inciar Sessão
           </Link>
         </nav>
         <Button variant="solo" size="icon" className="lg:hidden" onClick={toggleMenu}>
@@ -152,12 +150,10 @@ export default function Component() {
             Contato
           </Link>
           <Link
-            href="#"
+            href="/login"
             className="inline-flex h-9 items-center justify-center rounded-md bg-azulsolo px-4 py-2 text-sm font-medium text-white-900 shadow-sm transition-colors hover:bg-azulsolo/90 focus:outline-none focus:ring-1 focus:ring-gray-900 disabled:pointer-events-none disabled:opacity-50"
-            prefetch={false}
-            onClick={() => handleLinkClick(() => scrollToSection(7)) }
           >
-            Automatizar
+            Inciar Sessão
           </Link>
         </nav>
       </div>
