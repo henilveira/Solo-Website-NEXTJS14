@@ -20,7 +20,7 @@ const handler = NextAuth({
         if (credentials.email === "henrique@solosolutions.com.br" && credentials.password === "123") {
           return {
             id: "1",
-            name: "Henrique",
+            name: "Henrique Ataide",
             email: "henrique@solosolutions.com.br"
           };
         }

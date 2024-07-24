@@ -3,24 +3,18 @@ import { Button } from "@/components/ui/button";
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation";
 import CreateTable from '@/components/ui/create-table'
-import { SVGProps } from 'react';
+
 import Link from 'next/link'
 
-
 export default async function Admin() {
-
     const session = await getServerSession();
-      
     if (!session) {
         redirect("/login")
     }
 
-
-
   return (
     
     <div className="flex">
-
       <aside className="sticky top-0 h-screen w-32 bg-neutral-900 text-gray-200 border-r-2 border-neutral-700 p-8">
         <nav className="space-y-4 items-center flex flex-col">
           <Link href="/">
