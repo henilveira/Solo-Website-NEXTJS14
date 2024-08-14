@@ -1,16 +1,8 @@
-
 import { Button } from "@/components/ui/button";
-import { getServerSession } from "next-auth"
-import { redirect } from "next/navigation";
-import CreateTable from '@/components/ui/create-table'
-
+import Tables from "@/components/ui/table-shad";
 import Link from 'next/link'
 
 export default async function Admin() {
-    const session = await getServerSession();
-    if (!session) {
-        redirect("/login")
-    }
 
   return (
     
@@ -54,7 +46,8 @@ export default async function Admin() {
         </Link>
         </nav>
       </aside>
-      <CreateTable />
+      {/* <CreateTable /> */}
+      <Tables />
     </div>
   );
 }
