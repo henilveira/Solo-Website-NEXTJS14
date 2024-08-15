@@ -31,7 +31,7 @@ import {
 
 export default function Tables() {
   return (
-    <Card>
+    <Card className="w-screen">
       <CardHeader>
         <CardTitle>Products</CardTitle>
         <CardDescription>

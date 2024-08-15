@@ -5,10 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from 'next/link';
 import { useState, useContext } from 'react';
-import AuthContext from '@/app/login/auth-context'
 
 const LoginForm = () => {
-
     const [error, setError] = useState<string | null>(null);
 
     async function login(e: React.FormEvent<HTMLFormElement>) {
@@ -31,22 +29,27 @@ const LoginForm = () => {
 
             const result = await response.json();
             
-            console.log(result); // Log para depuração
-
+            // Verificando se o token está no formato correto
             if (response.ok) {
-                // Armazenar o token no localStorage ou cookies
-                localStorage.setItem('token', result.token);
-                
-                // Redirecionar para o dashboard
-                window.location.href = "/dashboard/empresas";
+                if (result.access) {
+                    // Armazenar o token no localStorage
+                    localStorage.setItem('token', result.access);
+                    console.log('cookie armazenado')
+                    
+                    // Redirecionar para o dashboard
+                    // window.location.href = "/dashboard/";
+                } else {
+                    setError('O token de acesso não foi encontrado na resposta.');
+                }
             } else {
-                setError(typeof result.error === 'string' ? result.error : 'Login failed');
+                setError(result.detail || 'Login failed');
             }
         } catch (error) {
-            setError('An unexpected error occurred');
+            console.error('Erro na solicitação de login', error);
+            setError('Ocorreu um erro inesperado.');
         }
-    };
-
+        
+    }
     return (
         <form onSubmit={login} className="space-y-4">
             <Input className="h-12" placeholder="Insira seu email" required type="text" name="email"/> {/* Atualizado para 'email' */}

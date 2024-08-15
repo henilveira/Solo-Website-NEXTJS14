@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Toaster } from "@/components/ui/toaster";
 import {Metadata} from 'next'
 import './globals.css';
+import { ThemeProvider } from '@/components/ui/theme-provider';
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -38,8 +39,15 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
           <title>{defaultMetadata.title}</title>
         </Head>
         <body>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
           <main>{children}</main>
           <Toaster />
+        </ThemeProvider>
         </body>
       </html>
     </>

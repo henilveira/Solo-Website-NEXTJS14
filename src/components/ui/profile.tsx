@@ -1,53 +1,69 @@
 // profile.tsx
-import { useState, useEffect } from "react";
+'use client'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import LogoutButton from '@/components/ui/logout-button';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import ProfileSession from "./avatar-session";
-import { getSession } from "next-auth/react";
+import {AuthProvider} from "@/app/login/auth-context";
+import { useState, useEffect } from 'react';
+import {jwtDecode} from 'jwt-decode';
+import { useAuth } from '@/app/login/auth-context';
 
-interface User {
-  name?: string | null;
-  email?: string | null;
-  image?: string | null;
+
+interface TokenPayload {
+  email: string;
+  // outros campos que você pode querer extrair
 }
 
-interface Session {
-  user?: User;
-  expires?: string;
-}
 
 export default function Profile() {
-  const [session, setSession] = useState<Session | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
+
+  const { user, authTokens } = useAuth();
+
+  if (!authTokens) {
+      return <p>Usuário não está logado</p>;
+  }
 
   useEffect(() => {
-    async function fetchSession() {
-      const sessionData = await getSession();
-      setSession(sessionData as Session); // Cast para o tipo Session
-    }
-    fetchSession();
+      // Pega o token de onde ele está armazenado (por exemplo, localStorage)
+      const token = localStorage.getItem('token');
+
+      if (token) {
+          try {
+              // Decodifica o token para extrair o payload
+              const decoded = jwtDecode<TokenPayload>(token);
+              
+              // Seta o email no estado
+              setEmail(decoded.email);
+          } catch (error) {
+              console.error('Erro ao decodificar o token', error);
+          }
+      }
   }, []);
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Avatar className="cursor-pointer">
-          <AvatarImage src="https://avatars.githubusercontent.com/u/139990659?v=4" />
-          <AvatarFallback>HA</AvatarFallback>
-        </Avatar>
-      </PopoverTrigger>
-      <PopoverContent className="p-4 w-50 mr-6 mt-1 bg-neutral-900 text-white shadow-xl">
-        <div className="grid gap-4 p-2">
-          <div className="space-y-2 flex">
-            <Avatar className="cursor-pointer">
-              <AvatarImage src="https://avatars.githubusercontent.com/u/139990659?v=4" />
-              <AvatarFallback>HA</AvatarFallback>
-            </Avatar>
-            {session && <ProfileSession session={session} />}
+    <AuthProvider>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Avatar className="cursor-pointer">
+            <AvatarImage src="https://avatars.githubusercontent.com/u/139990659?v=4" />
+            <AvatarFallback>HA</AvatarFallback>
+          </Avatar>
+        </PopoverTrigger>
+        <PopoverContent className="p-4 w-50 mr-6 mt-1 bg-neutral-900 text-white shadow-xl">
+          <div className="grid gap-4 p-2">
+            <div className="space-y-2 flex">
+              <Avatar className="cursor-pointer">
+                <AvatarImage src="https://avatars.githubusercontent.com/u/139990659?v=4" />
+                <AvatarFallback>HA</AvatarFallback>
+              </Avatar>
+            </div>
+            
+            <span>Olá, {user.email}</span>
+            <LogoutButton />
           </div>
-          <LogoutButton />
-        </div>
-      </PopoverContent>
-    </Popover>
+        </PopoverContent>
+      </Popover>
+    </AuthProvider>
   );
 }
