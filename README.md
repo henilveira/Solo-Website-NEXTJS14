@@ -18,79 +18,37 @@ RPA (Robotic Process Automation) refere-se à automação de tarefas repetitivas
 
 ## Tecnologias Utilizadas
 
-Este projeto utiliza várias tecnologias modernas para sua implementação:
+### Front-end stacks
+<p align="left">
+<img src="https://img.shields.io/badge/TypeScript-0D1117?style=for-the-badge&logo=typescript&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/Tailwind_CSS-0D1117?style=for-the-badge&logo=tailwind&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/Shadcn%20UI-0D1117?style=for-the-badge&logo=shadcnui&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/Next%20Js-0D1117?style=for-the-badge&logo=nextdotjs&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/TailwindCSS-0D1117?style=for-the-badge&logo=tailwindcss&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/JavaScript-0D1117?style=for-the-badge&logo=javascript&labelColor=0D1117"/>
+</p>
 
-- **Next.js 14:** Framework de desenvolvimento web que oferece renderização do lado do servidor e do lado do cliente, com suporte para React 18.
-  
-- **React:** Biblioteca JavaScript para construção de interfaces de usuário.
-  
-- **Tailwind CSS:** Framework CSS utilitário para design responsivo e rápido desenvolvimento de interfaces.
-  
-- **Shadcn UI:** Biblioteca de componentes UI customizados para aplicações web.
+### Back-end stacks
+<p align="left">
+<img src="https://img.shields.io/badge/TypeScript-0D1117?style=for-the-badge&logo=typescript&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/Django-0D1117?style=for-the-badge&logo=django&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/Node%20js-0D1117?style=for-the-badge&logo=nodedotjs&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/JWT-0D1117?style=for-the-badge&logo=JSON%20web%20tokens&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/Python-0D1117?style=for-the-badge&logo=python&labelColor=0D1117"/>
+</p>
 
-## Dependências
+### Databases
+<p align="left">
+<img src="https://img.shields.io/badge/PostgreSQL-0D1117?style=for-the-badge&logo=postgresql&labelColor=0D1117"/>
+</p>
 
-Para rodar este projeto localmente, você precisa ter Node.js e npm (ou yarn) instalados. Após clonar este repositório, instale as dependências necessárias usando o seguinte comando:
+### Outros
+<p align="left">
+<img src="https://img.shields.io/badge/AWS-0D1117?style=for-the-badge&logo=aws&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/vscode-0D1117?style=for-the-badge&logo=vscode&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/Insomnia-0D1117?style=for-the-badge&logo=insomnia&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/Figma-0D1117?style=for-the-badge&logo=figma&labelColor=0D1117"/>
+</p>
 
-```bash
-npm install
-# ou usando yarn
-yarn install
-```
-
-### Dependências Principais
-
-- **Next.js:** `^14.2.4`
-- **React:** `^18.3.1`
-- **Shadcn UI:** `^0.0.4`
-- Outras dependências listadas no arquivo `package.json`.
-
-## Instalação
-
-1. Clone o repositório:
-
-```bash
-git clone https://github.com/imrickss/Solo-Website-NEXTJS14.git
-```
-
-2. Navegue até o diretório do projeto:
-   
-```bash
-- cd Solo-Website-NEXTJS14
-```
-
-```bash
-- cd solo-website
-```
-
-3. Instale as dependências:
-   
-```bash
-npm install @heroicons/react@^2.1.4 @hookform/resolvers@^3.6.0 @radix-ui/react-avatar@^1.1.0 @radix-ui/react-hover-card@^1.1.1 @radix-ui/react-label@^2.1.0 @radix-ui/react-slot@^1.1.0 @radix-ui/react-tabs@^1.1.0 @radix-ui/react-toast@^1.2.1 @radix-ui/react-tooltip@^1.1.0 @shadcn/ui@^0.0.4 axios@^1.7.2 class-variance-authority@^0.7.0 clsx@^2.1.1 dotenv@^16.4.5 lucide-react@^0.394.0 next@^14.2.4 nodemailer@^6.9.14 react@^18.3.1 react-dom@^18.3.1 react-hook-form@^7.52.0 react-icons@^5.2.1 tailwind-merge@^2.3.0 tailwindcss-animate@^1.0.7 zod@^3.23.8 @types/node@^20.14.7 @types/react@^18.3.3 @types/react-dom@^18.3.0 eslint@^8.57.0 eslint-config-next@^14.2.4 postcss@^8.4.38 tailwindcss@^3.4.4 typescript@^5.5.2
-```
-
-## Scripts Disponíveis
-
-No diretório do projeto, você pode rodar os seguintes scripts:
-
-### `npm run dev`
-
-Roda o aplicativo no modo de desenvolvimento. Abra [http://localhost:3000](http://localhost:3000) para visualizá-lo no navegador.
-
-### `npm run build`
-
-Compila o aplicativo para produção na pasta `build`.
-
-### `npm start`
-
-Inicia o servidor de produção com o aplicativo compilado.
-
-### `npm run lint`
-
-Executa o linter para identificar problemas de código.
-
-## Contribuição
-
-Sinta-se à vontade para contribuir com novas funcionalidades, correções de bugs ou melhorias de documentação. Crie um pull request com suas alterações.
-
+###
 
