@@ -18,11 +18,7 @@ interface TokenPayload {
 export default function Profile() {
   const [email, setEmail] = useState<string | null>(null);
 
-  const { user, authTokens } = useAuth();
 
-  if (!authTokens) {
-      return <p>Usuário não está logado</p>;
-  }
 
   useEffect(() => {
       // Pega o token de onde ele está armazenado (por exemplo, localStorage)
@@ -59,7 +55,7 @@ export default function Profile() {
               </Avatar>
             </div>
             
-            <span>Olá, {user.email}</span>
+            <span>Olá</span>
             <LogoutButton />
           </div>
         </PopoverContent>

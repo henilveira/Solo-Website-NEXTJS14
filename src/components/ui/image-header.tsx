@@ -10,7 +10,13 @@ interface ImagemProps {
   height?: number;
 }
 
-const Imagem: React.FC<ImagemProps> = ({ src, alt = '', width = 1920, height = 1080, className }) => {
+const Imagem: React.FC<ImagemProps> = ({ 
+  src, 
+  alt = '', 
+  width = 1920, 
+  height = 1080, 
+  className 
+}) => {
   return (
     <Image
       src={src}
@@ -28,12 +34,6 @@ Imagem.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   className: PropTypes.string,
-};
-
-Imagem.defaultProps = {
-  alt: '',
-  width: 1920,
-  height: 1080,
 };
 
 export default Imagem;

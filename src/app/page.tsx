@@ -189,7 +189,7 @@ export default function Component() {
             </section>
             <section ref={(el) => {
           if (el) sectionRefs.current[1] = el as HTMLDivElement;
-        }} className="py-24 md:py-36 lg:py-40 dark:bg-gray-800">
+        }} className="py-24 md:py-36 lg:py-40 dark:bg-neutral-900 white:bg-neutral-100">
               <div className="container px-4 md:px-6">
                 <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
                   <div className="order-2 lg:order-1 flex items-center justify-center">
@@ -202,25 +202,25 @@ export default function Component() {
                     />
                   </div>
                   <div className="order-1 lg:order-2 space-y-4">
-                    <div className="inline-block rounded-lg bg-azulsolo text-white px-3 py-1 text-sm">Automações</div>
-                    <h2 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl">
+                    <div className="inline-block rounded-lg bg-azulsolo text-white px-3 py-1 text-sm ">Automações</div>
+                    <h2 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl white:text-neutral-900">
                       Automatize suas tarefas com facilidade
                     </h2>
-                    <p className="max-w-[600px] text-gray-300 md:text-xl dark:text-white">
+                    <p className="max-w-[600px] text-gray-300 md:text-xl white:text-neutral-800">
                       Crie robôs personalizados para automatizar suas tarefas repetitivas e libere seu time para se concentrar no que realmente importa.
                     </p>
                     <ul className="grid gap-4">
                       <li className="flex items-center gap-2">
                         <CheckIcon className="h-5 w-5 text-green-500" />
-                        <span className="text-white">Automação de processos</span>
+                        <span className="text-white white:text-neutral-800">Automação de processos</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckIcon className="h-5 w-5 text-green-500" />
-                        <span className="text-white">Integração com sistemas</span>
+                        <span className="text-white white:text-neutral-800">Integração com sistemas</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckIcon className="h-5 w-5 text-green-500" />
-                        <span className="text-white">Relatórios e análises</span>
+                        <span className="text-white white:text-neutral-800">Relatórios e análises</span>
                       </li>
                     </ul>
                   </div>
@@ -236,7 +236,7 @@ export default function Component() {
                   <h1 className="text-4xl text-bold text-white font-bold text-center sm:text-4xl md:text-5xl">Conheça algumas automações</h1>
                 </div>
                 <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
-                <div className="flex flex-col p-6 bg-azulsolo rounded-3xl dark:bg-zinc-850 justify-between transform transition-transform duration-300 hover:scale-105">
+                <div className="flex flex-col p-6 bg-azulsolo rounded-3xl justify-between transform transition-transform duration-300 hover:scale-105">
                   <div className="flex justify-center align-center flex-col">
                       <h3 className="text-4xl text-white font-bold text-center py-2">Planilhas</h3>
                       <p className="text-gray-200 text-center">Gera ou lê arquivo Excel que contém informações para fazer parte de um processo, como enviar por e-mail.</p>
@@ -251,7 +251,7 @@ export default function Component() {
                       />
                     </div>
                     <div className="mt-6">
-                      <Button className="w-full" variant="secondary" onClick={(() => scrollToSection(0)) }>Ver mais</Button>
+                      <Button className="w-full dark:bg-white dark:text-neutral-900" variant="secondary" onClick={(() => scrollToSection(0)) }>Ver mais</Button>
                     </div>
                   </div>
                   <div className="flex flex-col p-6 bg-azulsolo rounded-3xl dark:bg-zinc-850 justify-between transform transition-transform duration-300 hover:scale-105">
@@ -269,7 +269,7 @@ export default function Component() {
                       />
                     </div>
                     <div className="mt-6">
-                      <Button className="w-full" variant="secondary" onClick={(() => scrollToSection(0)) }>Ver mais</Button>
+                      <Button className="w-full dark:bg-white dark:text-neutral-900" variant="secondary" onClick={(() => scrollToSection(0)) }>Ver mais</Button>
                     </div>
                   </div>
                   <div className="flex flex-col p-6 bg-azulsolo rounded-3xl dark:bg-zinc-850 justify-between transform transition-transform duration-300 hover:scale-105">
@@ -287,7 +287,7 @@ export default function Component() {
                       />
                     </div>
                     <div className="mt-6">
-                      <Button className="w-full" variant="secondary" onClick={(() => scrollToSection(0)) }>Ver mais</Button>
+                      <Button className="w-full dark:bg-white dark:text-neutral-900" variant="secondary" onClick={(() => scrollToSection(0)) }>Ver mais</Button>
                     </div>
                   </div>
                 </div>
@@ -380,7 +380,7 @@ export default function Component() {
 
             <section ref={(el) => {
           if (el) sectionRefs.current[7] = el as HTMLDivElement;
-        }} className=" py-12 md:py-24 lg:py-32 dark:bg-gray-800">
+        }} className=" py-12 md:py-24 lg:py-32 dark:bg-neutral-900">
               <div className="container px-4 md:px-6">
               <div className="text-center flex justify-center items-center flex-col gap-3">
                 <h1 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl">

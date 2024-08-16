@@ -20,7 +20,7 @@ export default function Team() {
             <div className="p-4 bg-neutral-950 text-center flex flex-col items-center justify-between h-full">
               <div className="flex flex-col items-center">
                 <Avatar className="my-4 w-20 h-20">
-                  <AvatarImage src="https://pbs.twimg.com/profile_images/1801286211404808194/176w5SZ6_400x400.jpg" />
+                  <AvatarImage src="https://avatars.githubusercontent.com/u/139990659?s=400&u=2604fa510aad2de68ca2a1be91290539840b3771&v=4" />
                   <AvatarFallback>HA</AvatarFallback>
                 </Avatar>
                 <HoverCard>
@@ -32,7 +32,7 @@ export default function Team() {
                   <HoverCardContent className="w-80 relative z-50 bg-neutral-950 text-white sm:w-96">
                     <div className="flex flex-col sm:flex-row sm:justify-between space-x-0 sm:space-x-4">
                       <Avatar>
-                        <AvatarImage src="https://pbs.twimg.com/profile_images/1801286211404808194/176w5SZ6_400x400.jpg" />
+                        <AvatarImage src="https://avatars.githubusercontent.com/u/139990659?s=400&u=2604fa510aad2de68ca2a1be91290539840b3771&v=4" />
                         <AvatarFallback>HA</AvatarFallback>
                       </Avatar>
                       <div className="space-y-1 text-left mt-2 sm:mt-0">
@@ -207,7 +207,7 @@ export default function Team() {
         <div className="text-center">
           <h2 className="text-3xl font-bold text-white tracking-tighter sm:text-4xl md:text-5xl">Sobre nós</h2>
           <div className="mx-auto mt-6 max-w-md md:max-w-5xl">
-            <p className="text-muted">
+            <p className="dark:text-neutral-100 white:text-neutral-800">
               Fundada com o objetivo de transformar a maneira como as empresas gerenciam suas operações, a Solo Solutions
               se destaca pela sua especialização em automação contábil, fornecendo soluções eficientes e personalizadas
               que simplificam e otimizam as rotinas empresariais.
