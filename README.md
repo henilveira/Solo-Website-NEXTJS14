@@ -21,7 +21,6 @@ RPA (Robotic Process Automation) refere-se à automação de tarefas repetitivas
 ### Front-end stacks
 <p align="left">
 <img src="https://img.shields.io/badge/TypeScript-0D1117?style=for-the-badge&logo=typescript&labelColor=0D1117"/>
-<img src="https://img.shields.io/badge/Tailwind_CSS-0D1117?style=for-the-badge&logo=tailwind&labelColor=0D1117"/>
 <img src="https://img.shields.io/badge/Shadcn%20UI-0D1117?style=for-the-badge&logo=shadcnui&labelColor=0D1117"/>
 <img src="https://img.shields.io/badge/Next%20Js-0D1117?style=for-the-badge&logo=nextdotjs&labelColor=0D1117"/>
 <img src="https://img.shields.io/badge/TailwindCSS-0D1117?style=for-the-badge&logo=tailwindcss&labelColor=0D1117"/>
