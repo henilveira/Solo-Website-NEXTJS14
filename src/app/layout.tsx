@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   description: 'Soluções inteligentes para empresas inteligentes',
   icons: {
     icon: ['/favicon/favicon.ico'],
-    shortcut: ['/apple-touch-icon.png']
   }
 }
 

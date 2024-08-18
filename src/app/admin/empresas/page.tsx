@@ -14,7 +14,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 import Profile from "@/components/ui/profile";
 import { AuthProvider } from "@/components/ui/AuthProvider";
-import Sidebar from "@/components/ui/asidebar";
+import Sidebar from "@/components/ui/asidebar-admin";
 import ProtectedRoute from "@/components/ui/protected-route";
 
 export default function Dashboard() {

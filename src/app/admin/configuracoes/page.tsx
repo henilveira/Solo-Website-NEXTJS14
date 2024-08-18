@@ -7,7 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 import Profile from "@/components/ui/profile";
 import { AuthProvider, useAuth } from "@/components/ui/AuthProvider";
-import Sidebar from "@/components/ui/asidebar";
+import Sidebar from "@/components/ui/asidebar-admin";
 import { SettingsComponent } from "@/components/ui/settings-component";
 import ProtectedRoute from "@/components/ui/protected-route";
 

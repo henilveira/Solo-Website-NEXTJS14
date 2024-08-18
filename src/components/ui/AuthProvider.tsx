@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import {jwtDecode} from 'jwt-decode';
 
 interface AuthContextType {
@@ -10,7 +10,6 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const useAuth = () => {
@@ -68,7 +67,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
+        // credentials: 'include'
       });
+
 
       if (!response.ok) throw new Error(`Erro ao buscar o token: ${response.status}`);
 
@@ -88,7 +89,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setToken(null);
     setUserEmail(null);
     localStorage.removeItem('token');
-    push.router('/')
   };
 
   return (
