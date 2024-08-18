@@ -1,63 +1,43 @@
-'use client'
+'use client';
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useRouter } from 'next/router';
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from 'next/link';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
+import { useAuth } from '@/components/ui/AuthProvider'; // Importar useAuth
 
 const LoginForm = () => {
+    const { login } = useAuth(); // Desestruturar login
     const [error, setError] = useState<string | null>(null);
     const [inputError, setInputError] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);  // Estado de carregamento
     const formRef = useRef<HTMLFormElement>(null);
 
-    async function login(e: React.FormEvent<HTMLFormElement>) {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setLoading(true);  // Inicia o carregamento
         const formData = new FormData(e.currentTarget);
 
-        const data = {
-            email: formData.get("email"),
-            password: formData.get("senha"),
-        };
+        const email = formData.get("email")?.toString() || '';
+        const password = formData.get("senha")?.toString() || '';
 
         try {
-            const response = await fetch('http://3.19.188.117:8000/api/token/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                if (result.access) {
-                    localStorage.setItem('token', result.access);
-                    console.log('Token armazenado');
-                    // Redirecionar para o dashboard
-                    // window.location.href = "/dashboard/";
-                } else {
-                    setError('O token de acesso não foi encontrado na resposta.');
-                }
-            } else {
-                setError(result.detail || 'Login falhou');
-                setInputError(true);
-                if (formRef.current) {
-                    formRef.current.classList.add('shake');
-                    setTimeout(() => formRef.current?.classList.remove('shake'), 500); // Remove a classe após o efeito
-                }
-            }
+            await login(email, password); // Chamar função login do AuthProvider
+            window.location.href = "/dashboard/empresas"; // Redirecionar após sucesso
         } catch (error) {
-            console.error('Erro na solicitação de login', error);
-            setError('Ocorreu um erro inesperado.');
+            setError('Credenciais incorretas');
             setInputError(true);
             if (formRef.current) {
                 formRef.current.classList.add('shake');
-                setTimeout(() => formRef.current?.classList.remove('shake'), 500);
+                setTimeout(() => formRef.current?.classList.remove('shake'), 500); // Remove a classe após o efeito
             }
+        } finally {
+            setLoading(false);  // Termina o carregamento
         }
-    }
+    };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
         if (e.key === 'Enter') {
@@ -70,7 +50,7 @@ const LoginForm = () => {
     };
 
     return (
-        <form onSubmit={login} className="space-y-4" ref={formRef}>
+        <form onSubmit={handleSubmit} className="space-y-4" ref={formRef}>
             <Input 
                 className={`h-12 ${inputError ? 'border-red-500 text-red-500' : ''}`} 
                 placeholder="Insira seu email" 
@@ -101,8 +81,9 @@ const LoginForm = () => {
                     type="submit" 
                     variant="solo"
                     onKeyDown={handleKeyDown}
+                    disabled={loading}  // Desativa o botão quando carregando
                 >
-                    Entrar
+                    {loading ? 'Entrando...' : 'Entrar'}  
                 </Button>
                 <span className="text-sm">
                     Não possui uma conta?

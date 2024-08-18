@@ -13,6 +13,7 @@ import Team from "@/components/ui/conheca-time";
 import WhatsApp from "@/components/ui/wpp-button";
 
 
+
 export default function Component() {
 
   const sectionRefs = useRef<HTMLDivElement[]>([]);

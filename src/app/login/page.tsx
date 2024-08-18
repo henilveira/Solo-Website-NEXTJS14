@@ -1,5 +1,5 @@
 import Imagem from '@/components/ui/image-header';
-
+import { AuthProvider } from '@/components/ui/AuthProvider'; // Importar useAuth
 import LoginForm from '@/components/ui/login-form'
 import Link from 'next/link';
 
@@ -28,7 +28,9 @@ export default function Login() {
               Insira seu usuário e senha para iniciar sessão.
             </p>
           </div>
-          <LoginForm />
+          <AuthProvider>
+            <LoginForm />
+          </AuthProvider>
         </div>
       </div>
     </div>
