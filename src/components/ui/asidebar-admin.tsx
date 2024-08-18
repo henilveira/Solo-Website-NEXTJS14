@@ -41,11 +41,11 @@ const Sidebar = () => {
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
             <Link
-              href="/dashboard/usuarios"
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/usuarios' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
+              href="/dashboard/empresas"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/empresas' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
             >
-              <Users className="h-4 w-4" />
-              Usuários
+              <Building2 className="h-4 w-4" />
+              Empresas
             </Link>
             <Link
               href="/dashboard/automacoes"
@@ -53,6 +53,13 @@ const Sidebar = () => {
             >
               <Package className="h-4 w-4" />
               Automações
+            </Link>
+            <Link
+              href="/dashboard/usuarios"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/usuarios' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
+            >
+              <Users className="h-4 w-4" />
+              Usuários
             </Link>
             <Link
               href="/dashboard/configuracoes"

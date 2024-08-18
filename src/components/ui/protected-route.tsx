@@ -1,3 +1,5 @@
+'use client'
+
 import { useAuth } from '@/components/ui/AuthProvider';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -8,7 +10,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!token) {
-      router.push('/login'); // Redireciona para a página de login se não estiver autenticado
+      // router.push('/login'); // Redireciona para a página de login se não estiver autenticado
     }
   }, [token, router]);
 
