@@ -22,7 +22,7 @@ export default function Profile() {
       <PopoverContent className="p-4 w-50 mr-6 mt-1 bg-neutral-900 text-white shadow-xl">
         <div className="grid gap-4 p-2">
           <div className="space-x-3 flex justify-center items-center">
-            <Avatar className="cursor-pointer flex justify-center items-center align-center">
+            <Avatar className="flex justify-center items-center align-center">
               <AvatarImage src="https://avatars.githubusercontent.com/u/139990659?v=4" />
               <AvatarFallback>HA</AvatarFallback>
             </Avatar>

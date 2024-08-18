@@ -1,8 +1,8 @@
 'use client';
 
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/router'
-import {jwtDecode} from 'jwt-decode';
+import { useRouter } from 'next/router';
+import { jwtDecode } from 'jwt-decode';
 
 interface AuthContextType {
   token: string | null;
@@ -10,6 +10,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const useAuth = () => {
@@ -50,8 +51,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
+    console.log('Token armazenado:', storedToken); // Log para verificar o token no localStorage
     if (storedToken) {
       const decoded = decodeToken(storedToken);
+      console.log('Token decodificado:', decoded); // Log para verificar a decodificação do token
       if (decoded) {
         setToken(storedToken);
         setUserEmail(decoded.email);
@@ -67,13 +70,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
-        // credentials: 'include'
       });
-
 
       if (!response.ok) throw new Error(`Erro ao buscar o token: ${response.status}`);
 
       const data = await response.json();
+      console.log('Token recebido após login:', data.access); // Log do token recebido
       setToken(data.access);
       localStorage.setItem('token', data.access);
 

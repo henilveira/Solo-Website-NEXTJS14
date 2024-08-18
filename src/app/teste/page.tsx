@@ -1,12 +1,12 @@
-// _app.tsx ou App.tsx
-import { AuthProvider } from '@/components/ui/AuthProvider';
-import SomeComponent from './teste'
+import  ProtectedRoute from '@/components/ui/protected-route'
+import {AuthProvider} from '@/components/ui/AuthProvider'
 
-export default function MyApp() {
-  return (
-    <AuthProvider>
-      <SomeComponent />
-    </AuthProvider>
-  );
+export default function home() {
+    return (
+        <AuthProvider>
+            <ProtectedRoute>
+                <h1>Sessão privada</h1>
+            </ProtectedRoute>
+        </AuthProvider>
+    );
 }
-
