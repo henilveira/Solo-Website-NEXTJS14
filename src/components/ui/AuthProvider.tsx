@@ -66,10 +66,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await fetch('http://3.19.188.117:8000/api/token/', {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/token/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
+        credentials: 'include',
       });
 
       if (!response.ok) throw new Error(`Erro ao buscar o token: ${response.status}`);
