@@ -51,10 +51,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    console.log('Token armazenado:', storedToken); // Log para verificar o token no localStorage
+    // console.log('Token armazenado:', storedToken); // Log para verificar o token no localStorage
     if (storedToken) {
       const decoded = decodeToken(storedToken);
-      console.log('Token decodificado:', decoded); // Log para verificar a decodificação do token
+      // console.log('Token decodificado:', decoded); // Log para verificar a decodificação do token
       if (decoded) {
         setToken(storedToken);
         setUserEmail(decoded.email);

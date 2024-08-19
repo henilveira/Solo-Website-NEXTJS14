@@ -1,3 +1,4 @@
+'use client'
 import Link from "next/link";
 import {
   Menu,
@@ -16,8 +17,14 @@ import Profile from "@/components/ui/profile";
 import { AuthProvider } from "@/components/ui/AuthProvider";
 import Sidebar from "@/components/ui/asidebar-admin";
 import ProtectedRoute from "@/components/ui/protected-route";
+import React, { useState } from 'react';
 
 export default function Dashboard() {
+  const [showAddCompany, setShowAddCompany] = useState(false);
+
+  const handleAddCompany = () => {
+    setShowAddCompany(true);
+  };
   return (
     <AuthProvider>
       <ProtectedRoute>
@@ -92,7 +99,7 @@ export default function Dashboard() {
                 <p className="text-sm text-muted-foreground">
                   Comece a adicionar empresas clicando no botão abaixo
                 </p>
-                <Button variant='solo' className="mt-4">Adicionar empresa</Button>
+                <Button onClick={handleAddCompany} variant='solo' className="mt-4">Adicionar empresa</Button>
               </div>
             </div>
           </main>

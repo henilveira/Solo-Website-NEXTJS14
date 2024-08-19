@@ -1,7 +1,6 @@
 'use client'
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -23,7 +22,7 @@ export const SettingsComponent = () => {
                     <CardContent>
                         <div className="flex items-center gap-4">
                             <Avatar className="h-20 w-20">
-                                <AvatarImage src="/placeholder-user.jpg" alt="@shadcn" />
+                                <AvatarImage src="https://avatars.githubusercontent.com/u/139990659?v=4" alt="@shadcn" />
                                 <AvatarFallback>HA</AvatarFallback>
                             </Avatar>
                             <Button variant="outline">Fazer upload</Button>
@@ -39,8 +38,8 @@ export const SettingsComponent = () => {
                     </CardHeader>
                     <CardContent className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="username">Usuário</Label>
-                        <Input id="username" defaultValue="johndoe" />
+                        <Label htmlFor="username">Nome</Label>
+                        <Input id="username" defaultValue="Henrique da Silveira" />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="email">Email</Label>
@@ -48,7 +47,7 @@ export const SettingsComponent = () => {
                     </div>
                     <div className="space-y-2 space-x-4">
                         <Button className="bg-green-600 ">Atualizar dados</Button>
-                        <Button variant="outline">Reset Password</Button>
+                        <Button variant="outline">Resetar Senha</Button>
                     </div>
                     </CardContent>
                 </Card>

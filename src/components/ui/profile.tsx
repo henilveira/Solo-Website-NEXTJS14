@@ -6,8 +6,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { useAuth } from '@/components/ui/AuthProvider'; // Ajuste o caminho conforme necessário
 import { Badge } from "@/components/ui/badge"
 
-
-
 export default function Profile() {
   const { userEmail } = useAuth(); // Obtenha o e-mail do contexto de autenticação
 
