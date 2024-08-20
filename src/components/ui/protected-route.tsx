@@ -1,38 +1,42 @@
+// protected-route.tsx
 'use client';
 
 import { useAuth } from '@/components/ui/AuthProvider';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { userEmail } = useAuth();
+  const { checkAuth } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const verifyAuth = async () => {
       try {
-        const response = await fetch('http://3.19.188.117:8000/api/token/refresh/', {
-          method: 'GET',
-          credentials: 'include', // Inclui cookies na requisição
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.Access_token) {
-            setIsLoading(false);
-          } else {
-            window.location.href = '/login'; // Redireciona para a página de login
+        const isAuthenticated = await checkAuth();
+        
+        if (!isAuthenticated) {
+          // Se não estiver autenticado, redireciona para a página de login
+          if (!isRedirecting) {
+            setIsRedirecting(true);
+            // router.replace('/login');
           }
-        } else {
-          window.location.href = '/login'; // Redireciona para a página de login
         }
       } catch (error) {
         console.error('Erro ao verificar autenticação:', error);
-        window.location.href = '/login'; // Redireciona para a página de login
+        // Pode ser útil redirecionar para uma página de erro ou login se ocorrer um erro
+        if (!isRedirecting) {
+          setIsRedirecting(true);
+          // router.replace('/login');
+        }
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    checkAuth();
-  }, []);
+    verifyAuth();
+  }, [checkAuth, router, isRedirecting]);
 
   if (isLoading) {
     return <div>Carregando...</div>;
