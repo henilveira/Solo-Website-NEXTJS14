@@ -1,12 +1,13 @@
 import  ProtectedRoute from '@/components/ui/protected-route'
-import {AuthProvider} from '@/components/ui/AuthProvider'
+import {AuthProvider, useAuth} from '@/components/ui/AuthProvider'
+import Teste from '@/components/ui/teste';
 
 export default function home() {
+
     return (
         <AuthProvider>
-            <ProtectedRoute>
-                <h1>Sessão privada</h1>
-            </ProtectedRoute>
+            <Teste />
         </AuthProvider>
+
     );
 }

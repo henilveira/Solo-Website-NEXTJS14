@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import {Metadata} from 'next'
 import './globals.css';
 import { ThemeProvider } from '@/components/ui/theme-provider';
+import { AuthProvider } from '@/components/ui/AuthProvider';
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -41,9 +42,9 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
             enableSystem
             disableTransitionOnChange
           >
-          <main>{children}</main>
-          <Toaster />
-        </ThemeProvider>
+              <main>{children}</main>
+              <Toaster />
+            </ThemeProvider>
         </body>
       </html>
     </>

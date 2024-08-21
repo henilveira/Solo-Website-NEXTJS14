@@ -1,4 +1,3 @@
-// authprovider.tsx
 'use client';
 
 import { createContext, ReactNode, useContext, useState } from 'react';
@@ -8,8 +7,8 @@ interface AuthContextType {
   userEmail: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
-  checkAuth: () => Promise<boolean>; 
-  refreshAccessToken: () => Promise<boolean>; 
+  checkAuth: () => Promise<boolean>;
+  refreshAccessToken: () => Promise<boolean>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -32,7 +31,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const refreshAccessToken = async (): Promise<boolean> => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/token/refresh-access/', {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/api/token/refresh/', {
         method: 'POST',
         credentials: 'include',
       });
@@ -53,15 +52,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const checkAuth = async (): Promise<boolean> => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/token/get-cookies-token', {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/api/token/get-user-session/', {
         method: 'GET',
         credentials: 'include',
       });
 
       if (response.ok) {
         const data = await response.json();
-        setUserEmail(data.email || null);
-        console.log('Chamada ok da api')
+        setUserEmail(data.Email || null);
         return true;
       } else {
         const updated = await refreshAccessToken();
@@ -81,7 +79,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/token/', {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/api/token/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -100,15 +98,30 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = async () => {
     try {
-      await fetch('/api/auth/logout/', {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/api/token/logout/', {
         method: 'POST',
         credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
+  
+      // Log para verificar o status da resposta
+      console.log('Status da resposta do logout:', response.status);
+      console.log('Resposta do logout:', await response.text());
+  
+      if (!response.ok) {
+        throw new Error('Erro na resposta da solicitação de logout');
+      }
+  
       setUserEmail(null);
+      router.push('/login');
     } catch (error) {
       console.error('Erro ao fazer logout:', error);
     }
   };
+  
+  
 
   return (
     <AuthContext.Provider value={{ userEmail, login, logout, checkAuth, refreshAccessToken }}>

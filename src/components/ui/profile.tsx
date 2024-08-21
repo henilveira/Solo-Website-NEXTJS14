@@ -3,14 +3,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import LogoutButton from '@/components/ui/logout-button';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { useAuth, AuthProvider } from '@/components/ui/AuthProvider'; // Ajuste o caminho conforme necessário
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/ui/badge";
+import { useAuth } from '@/components/ui/AuthProvider'; // Ajuste o caminho conforme necessário
 
 export default function Profile() {
   const { userEmail } = useAuth(); // Obtenha o e-mail do contexto de autenticação
 
   return (
-    <AuthProvider>
     <Popover>
       <PopoverTrigger asChild className=''>
         <Avatar className="cursor-pointer">
@@ -26,7 +25,7 @@ export default function Profile() {
               <AvatarFallback>HA</AvatarFallback>
             </Avatar>
             <div className='flex flex-col justify-center align-center '>
-              <span>Olá, <span className='font-semibold'>Henrique</span> </span>
+              <span>Olá, <span className='font-semibold'>Henrique</span></span>
               <span className='text-muted-foreground'>{userEmail || 'Usuário'}</span> 
             </div>
           </div>
@@ -43,6 +42,5 @@ export default function Profile() {
         </div>
       </PopoverContent>
     </Popover>
-    </AuthProvider>
   );
 }
