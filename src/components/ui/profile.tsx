@@ -8,6 +8,7 @@ import { useAuth } from '@/components/ui/AuthProvider'; // Ajuste o caminho conf
 
 export default function Profile() {
   const { userEmail } = useAuth(); // Obtenha o e-mail do contexto de autenticação
+  const { userName } = useAuth(); // Obtenha o e-mail do contexto de autenticação
 
   return (
     <Popover>
@@ -25,13 +26,13 @@ export default function Profile() {
               <AvatarFallback>HA</AvatarFallback>
             </Avatar>
             <div className='flex flex-col justify-center align-center '>
-              <span>Olá, <span className='font-semibold'>Henrique</span></span>
+              <span>Olá, <span className='font-semibold'>{userName || 'Usuário'}</span></span>
               <span className='text-muted-foreground'>{userEmail || 'Usuário'}</span> 
             </div>
           </div>
           <div className='flex justify-between'>
             <div className='flex flex-col'>
-              <span className='text-base'>Henrique Silveira</span>
+              <span className='text-base'>{userName || 'Usuário'}</span>
               <span className='text-sm text-muted-foreground'>Solo Solutions</span>
             </div>
             <div className='flex items-center'>

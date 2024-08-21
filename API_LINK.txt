@@ -10,7 +10,7 @@ LOGIN = http://127.0.0.1:8000/api/accounts/token/
     "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczMjAxMzc1MiwiaWF0IjoxNzI0MjM3NzUyLCJqdGkiOiJlYjRlYzVkMjVjMjk0MDViODI5YTM1YzRjZjljZWE2NSIsInVzZXJfaWQiOiI4ZTEyMmFhMS00NjJiLTQxZGMtODRkOS02NmZiOWQxY2U5ODAiLCJlbWFpbCI6ImhlbnJpcXVlYXRhaWRlLmRldkBnbWFpbC5jb20ifQ.F4mjl0UdFFYu2TvxIaCc-nnWCgULMCxXEyYFiCHKLsM"
 }
 
-GET_USER_SESSION = http://127.0.0.1:8000/api/accounts/token/get-user-session/?format=api 
+GET_USER_SESSION = http://127.0.0.1:8000/api/accounts/token/get-user-session/?format=api
 {
     "Access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI0MjM4MDUyLCJpYXQiOjE3MjQyMzc3NTIsImp0aSI6IjE0MmQ2ZTEyYWZjODQyNjNhZTY4YzJkODA0ODE4YWFjIiwidXNlcl9pZCI6IjhlMTIyYWExLTQ2MmItNDFkYy04NGQ5LTY2ZmI5ZDFjZTk4MCIsImVtYWlsIjoiaGVucmlxdWVhdGFpZGUuZGV2QGdtYWlsLmNvbSJ9._pZzSit4oTe1zZnzi8QvjCRYgKYOJFKNKwyluDwABxs",
     "Email": "henriqueataide.dev@gmail.com"

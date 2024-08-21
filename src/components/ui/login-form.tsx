@@ -12,6 +12,7 @@ import { useToast } from "@/components/ui/use-toast"
 
 const LoginForm = () => {
     const { userEmail } = useAuth()
+    const { userName } = useAuth()
     const { toast } = useToast();
     const { login } = useAuth();
     const [error, setError] = useState<string | null>(null);
@@ -31,7 +32,7 @@ const LoginForm = () => {
         try {
             await login(email, password); 
             toast({
-                title: `Olá ${userEmail || 'Usuário'}`,
+                title: `Olá ${userName || 'Usuário'}`,
                 description: "Você foi autenticado com sucesso!",
                 variant: "default", // use "default", "success", "error", etc. conforme sua configuração
             });

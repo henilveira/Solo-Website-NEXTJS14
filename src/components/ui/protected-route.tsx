@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
           // Se não estiver autenticado, redireciona para a página de login
           if (!isRedirecting) {
             setIsRedirecting(true);
-            // router.replace('/login');
+            router.replace('/login');
           }
         }
       } catch (error) {
@@ -28,7 +28,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
         // Pode ser útil redirecionar para uma página de erro ou login se ocorrer um erro
         if (!isRedirecting) {
           setIsRedirecting(true);
-          // router.replace('/login');
+          router.replace('/login');
         }
       } finally {
         setIsLoading(false);
