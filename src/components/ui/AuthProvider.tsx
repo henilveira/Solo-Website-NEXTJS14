@@ -2,6 +2,7 @@
 
 import { createContext, ReactNode, useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios, { AxiosError } from 'axios';
 
 interface AuthContextType {
   userEmail: string | null;
@@ -34,12 +35,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const refreshAccessToken = async (): Promise<boolean> => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/token/refresh/', {
-        method: 'GET',
-        credentials: 'include',
+      const response = await axios.get('http://127.0.0.1:8000/api/accounts/token/refresh/', {
+        withCredentials: true,
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         return true;
       } else {
         router.push('/login');
@@ -52,30 +52,48 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const checkAuth = async (): Promise<boolean> => {
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/token/get-user-session/', {
-        method: 'GET',
-        credentials: 'include',
-      });
 
-      if (response.ok) {
-        const data = await response.json();
-        setUserEmail(data.Email || null);
-        setUserName(data.Nome || null);
-        return true;
-      } else {
-        const updated = await refreshAccessToken();
-        if (updated) {
-          return await checkAuth();
+const fetchUserSession = async (): Promise<{ Email: string; Nome: string } | null> => {
+    try {
+        const response = await fetch('/api/get-user-session/', {
+            method: 'GET',
+            credentials: 'include', // Necessário para enviar cookies com `access_token`
+        });
+
+        if (response.ok) {
+            // Sessão válida, dados do usuário disponíveis
+            const data = await response.json();
+            console.log(data);
+            return data;
         } else {
-          setUserEmail(null);
-          setUserName(null);
-          return false;
+            // Se o status for 401 (não autorizado)
+            if (response.status === 401) {
+                console.log('Usuário não autenticado');
+            } else {
+                console.log('Erro ao verificar a sessão:', response.statusText);
+            }
+            return null;
         }
-      }
     } catch (error) {
-      console.error('Erro ao verificar autenticação:', error);
+        const fetchError = error as FetchError;
+        if (fetchError.response && fetchError.response.status === 401) {
+            console.log('Usuário não autenticado');
+        } else {
+            console.log('Erro ao verificar a sessão:', fetchError.message);
+        }
+        return null;
+    }
+};
+  
+
+  const checkAuth = async (): Promise<boolean> => {
+    const userSession = await fetchUserSession();
+
+    if (userSession) {
+      setUserEmail(userSession.Email || null);
+      setUserName(userSession.Nome || null);
+      return true;
+    } else {
       setUserEmail(null);
       setUserName(null);
       return false;
@@ -84,18 +102,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/token/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-        credentials: 'include',
+      const response = await axios.post('http://127.0.0.1:8000/api/accounts/token/', {
+        email,
+        password,
+      }, {
+        withCredentials: true,
       });
 
-      if (!response.ok) throw new Error(`Erro ao buscar o token: ${response.status}`);
-
-      const data = await response.json();
-      setUserEmail(data.email);
-      setUserName(data.nome);
+      if (response.status === 200) {
+        setUserEmail(response.data.email);
+        setUserName(response.data.nome);
+      } else {
+        throw new Error(`Erro ao buscar o token: ${response.status}`);
+      }
     } catch (error) {
       console.error('Erro ao buscar o token:', error);
       throw error;
@@ -104,41 +123,36 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const changeUsername = async (name: string) => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/accounts/update-user-name/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nome: name }), // Enviando como 'nome'
-            credentials: 'include',
-        });
+      const response = await axios.post('http://127.0.0.1:8000/api/accounts/update-user-name/', {
+        nome: name,
+      }, {
+        withCredentials: true,
+      });
 
-        if (!response.ok) throw new Error(`Erro redefinir nome do usuário: ${response.status}`);
-
-        const data = await response.json();
-        setUserName(data.nome);
+      if (response.status === 200) {
+        setUserName(response.data.nome);
+      } else {
+        throw new Error(`Erro redefinir nome do usuário: ${response.status}`);
+      }
     } catch (error) {
-        console.error('Erro ao redefinir nome do usuário:', error);
-        throw error;
+      console.error('Erro ao redefinir nome do usuário:', error);
+      throw error;
     }
-};
-
+  };
 
   const logout = async () => {
     try {
-      const response = await fetch('/api/accounts/token/logout/', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+      const response = await axios.post('http://127.0.0.1:8000/api/accounts/token/logout/', {}, {
+        withCredentials: true,
       });
 
-      if (!response.ok) {
+      if (response.status === 200) {
+        setUserEmail(null);
+        setUserName(null);
+        router.push('/login');
+      } else {
         throw new Error('Erro na resposta da solicitação de logout');
       }
-
-      setUserEmail(null);
-      setUserName(null);
-      router.push('/login');
     } catch (error) {
       console.error('Erro ao fazer logout:', error);
     }
