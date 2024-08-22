@@ -1,8 +1,7 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import axios, { AxiosError } from 'axios';
 
 interface AuthContextType {
   userEmail: string | null;
@@ -10,7 +9,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   changeUsername: (name: string) => Promise<void>;
   logout: () => void;
-  checkAuth: () => Promise<boolean>;
+  checkAuth: () => boolean;
   refreshAccessToken: () => Promise<boolean>;
 }
 
@@ -33,13 +32,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [userName, setUserName] = useState<string | null>(null);
   const router = useRouter();
 
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('userEmail');
+    const storedName = localStorage.getItem('userName');
+    if (storedEmail && storedName) {
+      setUserEmail(storedEmail);
+      setUserName(storedName);
+    }
+  }, []);
+
   const refreshAccessToken = async (): Promise<boolean> => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/accounts/token/refresh/', {
-        withCredentials: true,
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/token/refresh/', {
+        method: 'GET',
+        credentials: 'include',
       });
 
-      if (response.status === 200) {
+      if (response.ok) {
         return true;
       } else {
         router.push('/login');
@@ -52,66 +61,29 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-
-const fetchUserSession = async (): Promise<{ Email: string; Nome: string } | null> => {
-    try {
-        const response = await fetch('/api/get-user-session/', {
-            method: 'GET',
-            credentials: 'include', // Necessário para enviar cookies com `access_token`
-        });
-
-        if (response.ok) {
-            // Sessão válida, dados do usuário disponíveis
-            const data = await response.json();
-            console.log(data);
-            return data;
-        } else {
-            // Se o status for 401 (não autorizado)
-            if (response.status === 401) {
-                console.log('Usuário não autenticado');
-            } else {
-                console.log('Erro ao verificar a sessão:', response.statusText);
-            }
-            return null;
-        }
-    } catch (error) {
-        const fetchError = error as FetchError;
-        if (fetchError.response && fetchError.response.status === 401) {
-            console.log('Usuário não autenticado');
-        } else {
-            console.log('Erro ao verificar a sessão:', fetchError.message);
-        }
-        return null;
-    }
-};
-  
-
-  const checkAuth = async (): Promise<boolean> => {
-    const userSession = await fetchUserSession();
-
-    if (userSession) {
-      setUserEmail(userSession.Email || null);
-      setUserName(userSession.Nome || null);
-      return true;
-    } else {
-      setUserEmail(null);
-      setUserName(null);
-      return false;
-    }
+  const checkAuth = (): boolean => {
+    const storedEmail = localStorage.getItem('userEmail');
+    const storedName = localStorage.getItem('userName');
+    return !!storedEmail && !!storedName;
   };
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/accounts/token/', {
-        email,
-        password,
-      }, {
-        withCredentials: true,
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/token/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ email, password }),
       });
 
-      if (response.status === 200) {
-        setUserEmail(response.data.email);
-        setUserName(response.data.nome);
+      if (response.ok) {
+        const data = await response.json();
+        setUserEmail(data.email);
+        setUserName(data.nome);
+        localStorage.setItem('userEmail', data.email);
+        localStorage.setItem('userName', data.nome);
       } else {
         throw new Error(`Erro ao buscar o token: ${response.status}`);
       }
@@ -123,16 +95,21 @@ const fetchUserSession = async (): Promise<{ Email: string; Nome: string } | nul
 
   const changeUsername = async (name: string) => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/accounts/update-user-name/', {
-        nome: name,
-      }, {
-        withCredentials: true,
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/update-user-name/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ nome: name }),
       });
 
-      if (response.status === 200) {
-        setUserName(response.data.nome);
+      if (response.ok) {
+        const data = await response.json();
+        setUserName(data.nome);
+        localStorage.setItem('userName', data.nome);
       } else {
-        throw new Error(`Erro redefinir nome do usuário: ${response.status}`);
+        throw new Error(`Erro ao redefinir nome do usuário: ${response.status}`);
       }
     } catch (error) {
       console.error('Erro ao redefinir nome do usuário:', error);
@@ -142,13 +119,16 @@ const fetchUserSession = async (): Promise<{ Email: string; Nome: string } | nul
 
   const logout = async () => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/accounts/token/logout/', {}, {
-        withCredentials: true,
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/token/logout/', {
+        method: 'POST',
+        credentials: 'include',
       });
 
-      if (response.status === 200) {
+      if (response.ok) {
         setUserEmail(null);
         setUserName(null);
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userName');
         router.push('/login');
       } else {
         throw new Error('Erro na resposta da solicitação de logout');
