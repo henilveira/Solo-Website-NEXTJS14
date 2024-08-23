@@ -11,13 +11,22 @@ import { Button } from './button';
 
 export default function Profile() {
   const { userEmail, userName, userPicture } = useAuth(); // Obtenha o e-mail e nome do contexto de autenticação
+  
+  // Função para obter a inicial do primeiro nome
+  const getInitial = (name: string | undefined) => {
+    if (name) {
+      const [firstName] = name.split(' ');
+      return firstName.charAt(0).toUpperCase();
+    }
+    return 'U'; // Retorna 'U' como fallback se o nome não estiver disponível
+  };
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Avatar className="cursor-pointer">
           <AvatarImage src={userPicture ?? ''} />
-          <AvatarFallback>HA</AvatarFallback>
+          <AvatarFallback>{getInitial(userName || '')}</AvatarFallback>
         </Avatar>
       </PopoverTrigger>
       <PopoverContent className='p-4 w-80 mr-6 mt-1 dark:bg-neutral-900 bg-neutral-50 text-dark dark:text-white shadow-xl'>
@@ -25,13 +34,14 @@ export default function Profile() {
           <div className="space-x-3 flex justify-start items-center">
             <Avatar className="flex justify-center items-center align-center">
               <AvatarImage src={userPicture ?? ''} />
-              <AvatarFallback>HA</AvatarFallback>
+              <AvatarFallback>{getInitial(userName || '')}</AvatarFallback>
             </Avatar>
             <div className='flex flex-col justify-center align-center'>
               <span>Olá, <span className='font-semibold'>{userName || 'Usuário'}</span></span>
               <span className='text-muted-foreground'>{userEmail || 'Usuário'}</span> 
             </div>
           </div>
+          <hr />
           <div className='flex justify-between'>
             <div className='flex flex-col'>
               <span className='text-base'>{userName || 'Usuário'}</span>
@@ -41,6 +51,7 @@ export default function Profile() {
               <Badge className='h-6 text-white bg-neutral-900 dark:text-black dark:bg-neutral-100'>Administrador</Badge>
             </div>
           </div>
+          <hr />
           <div className='flex flex-row space-x-2 w-full'>
             <Link href='/admin/empresas' className='w-full flex items-center space-x-2 rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-800 transition'>
               <Button className='w-full gap-2 '>

@@ -37,12 +37,16 @@ export const SettingsComponent = () => {
           try {
               // Faz o upload do arquivo imediatamente
               await updateProfilePicture(selectedFile);
-              setUploadStatus('Foto de perfil atualizada com sucesso!');
+              toast({
+                  title: 'Sua foto foi atualizada com sucesso!',
+                  description: `Caso ela não apareça, tente atualizar a página.`,
+                  variant: "default",
+              })
             } catch (error) {
                 toast({
-                    title: 'Sua foto foi atualizada com sucesso!',
-                    description: `Caso ela não apareça, tente atualizar a página.`,
-                    variant: "default",
+                    title: 'Houve um erro ao atualizar sua foto de perfil.',
+                    description: `Verifique o tipo de arquivo que você enviou ou tente outra imagem.`,
+                    variant: "destructive",
                 })
             }
         }
