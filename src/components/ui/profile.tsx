@@ -10,13 +10,13 @@ import Link from 'next/link';
 import { Button } from './button';
 
 export default function Profile() {
-  const { userEmail, userName } = useAuth(); // Obtenha o e-mail e nome do contexto de autenticação
+  const { userEmail, userName, userPicture } = useAuth(); // Obtenha o e-mail e nome do contexto de autenticação
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarImage src="https://avatars.githubusercontent.com/u/139990659?v=4" />
+          <AvatarImage src={userPicture ?? ''} />
           <AvatarFallback>HA</AvatarFallback>
         </Avatar>
       </PopoverTrigger>
@@ -24,7 +24,7 @@ export default function Profile() {
         <div className="grid gap-4 p-2">
           <div className="space-x-3 flex justify-start items-center">
             <Avatar className="flex justify-center items-center align-center">
-              <AvatarImage src="https://avatars.githubusercontent.com/u/139990659?v=4" />
+              <AvatarImage src={userPicture ?? ''} />
               <AvatarFallback>HA</AvatarFallback>
             </Avatar>
             <div className='flex flex-col justify-center align-center'>

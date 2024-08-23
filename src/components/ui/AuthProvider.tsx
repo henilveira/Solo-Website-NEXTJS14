@@ -6,9 +6,12 @@ import { useRouter } from 'next/navigation';
 interface AuthContextType {
   userEmail: string | null;
   userName: string | null;
+  userPicture: string | null;
   login: (email: string, password: string) => Promise<void>;
   changeUsername: (name: string) => Promise<void>;
+  updateProfilePicture: (file: File) => Promise<void>;
   logout: () => void;
+  deleteProfilePicture: () => void;
   checkAuth: () => Promise<boolean>;
   refreshAccessToken: () => Promise<boolean>;
 }
@@ -30,6 +33,7 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
+  const [userPicture, setUserPicture] = useState<string | null>(null);
   const router = useRouter();
 
   const refreshAccessToken = async (): Promise<boolean> => {
@@ -54,46 +58,48 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const checkAuth = async (): Promise<boolean> => {
     try {
-      // Faz uma requisição GET para verificar a sessão do usuário
       const response = await fetch('http://127.0.0.1:8000/api/accounts/token/get-user-session/', {
         method: 'GET',
-        credentials: 'include', // Inclui cookies na requisição
+        credentials: 'include',
       });
-  
-      // Verifica se a resposta é bem-sucedida
+
       if (response.ok) {
         const data = await response.json();
-        // Atualiza o estado do usuário com os dados retornados
-        setUserEmail(data.Email || null);
-        setUserName(data.Nome || null);
+        const profilePictureUrl = data.profile_picture
+          ? `http://127.0.0.1:8000${data.profile_picture}` // Ajuste a URL aqui
+          : null;
+
+        setUserEmail(data.email || null);
+        setUserName(data.nome || null);
+        setUserPicture(profilePictureUrl || null);
+
         return true;
-      } else if (response.status === 401) { // Verifica especificamente se o status é 401
-        // Tenta atualizar o token
+      } else if (response.status === 401) {
         const updated = await refreshAccessToken();
         if (updated) {
-          // Se o token foi atualizado, repete a verificação da autenticação
           return await checkAuth();
         } else {
-          // Se não foi possível atualizar o token, reseta o estado de autenticação
           setUserEmail(null);
           setUserName(null);
+          setUserPicture(null);
           return false;
         }
       } else {
-        // Maneja outros possíveis erros de resposta
         console.error('Erro inesperado ao verificar autenticação:', response.statusText);
         setUserEmail(null);
         setUserName(null);
+        setUserPicture(null);
         return false;
       }
     } catch (error) {
-      // Lida com erros de rede ou outros problemas na requisição
       console.error('Erro ao verificar autenticação:', error);
       setUserEmail(null);
       setUserName(null);
+      setUserPicture(null);
       return false;
     }
   };
+
   
 
   const login = async (email: string, password: string) => {
@@ -135,6 +141,50 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 };
 
+const updateProfilePicture = async (file: File): Promise<void> => {
+  const formData = new FormData();
+  formData.append('profile_picture', file);
+
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/accounts/update-profile-picture/', {
+      method: 'PATCH',
+      body: formData,
+      credentials: 'include',
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      const updatedPictureUrl = data.profile_picture
+        ? `http://127.0.0.1:8000${data.profile_picture}` // Ajuste a URL conforme necessário
+        : null;
+      setUserPicture(updatedPictureUrl); // Atualiza o estado com a nova URL da imagem
+    } else {
+      throw new Error('Erro ao atualizar foto de perfil');
+    }
+  } catch (error) {
+    console.error('Erro ao atualizar foto de perfil:', error);
+    throw error;
+  }
+};
+const deleteProfilePicture = async () => {
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/accounts/delete-profile-picture/', {
+      method: 'PATCH',
+      credentials: 'include',
+    });
+
+    if (response.ok) {
+      setUserPicture(null); // Atualiza o estado com a nova URL da imagem
+    } else {
+      throw new Error('Erro ao deletar foto de perfil');
+    }
+  } catch (error) {
+    console.error('Erro ao deletar foto de perfil:', error);
+    throw error;
+  }
+};
+
+
 
   const logout = async () => {
     try {
@@ -159,7 +209,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ userEmail, userName, login, logout, checkAuth, refreshAccessToken, changeUsername }}>
+    <AuthContext.Provider value={{ userEmail, userName, userPicture, login, logout, checkAuth, refreshAccessToken, updateProfilePicture, changeUsername, deleteProfilePicture }}>
       {children}
     </AuthContext.Provider>
   );
