@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react'; // Importa useState e useEffect
 import Link from 'next/link';
 import { Building2, Package, Users, Settings } from 'lucide-react';
+import Logo from './logo';
 
 const Sidebar = () => {
   const [activePath, setActivePath] = useState<string>('/');
@@ -34,29 +35,27 @@ const Sidebar = () => {
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-          <Link href="/" className="flex items-center gap-2 font-semibold">
-            <img src="/solo-logo-white.svg" width="125" alt="Logo" />
-          </Link>
+          <Logo />
         </div>
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
             <Link
               href="/dashboard/usuarios"
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/usuarios' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/usuarios' ? 'bg-azulsolo/80  text-white hover:text-neutral-200 ' : 'text-muted-foreground'}`}
             >
               <Users className="h-4 w-4" />
               Usuários
             </Link>
             <Link
               href="/dashboard/automacoes"
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/automacoes' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/automacoes' ? 'bg-azulsolo/80 text-white hover:text-neutral-200 ' : 'text-muted-foreground'}`}
             >
               <Package className="h-4 w-4" />
               Automações
             </Link>
             <Link
               href="/dashboard/configuracoes"
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/configuracoes' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/configuracoes' ? 'bg-azulsolo/80 text-white hover:text-neutral-200 ' : 'text-muted-foreground'}`}
             >
               <Settings className="h-4 w-4" />
               Configurações

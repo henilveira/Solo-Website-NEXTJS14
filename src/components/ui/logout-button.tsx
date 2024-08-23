@@ -14,7 +14,7 @@ export default function LogoutButton() {
     router.push('/login')
   }
   return (
-    <Button className="w-full" variant='solo' onClick={handleLogout}>
+    <Button className="w-full text-white" variant='destructive' onClick={handleLogout}>
       Sair
     </Button>
   );

@@ -42,28 +42,28 @@ const Sidebar = () => {
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
             <Link
               href="/admin/empresas"
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/empresas' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/admin/empresas' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
             >
               <Building2 className="h-4 w-4" />
               Empresas
             </Link>
             <Link
               href="/admin/automacoes"
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/automacoes' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/admin/automacoes' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
             >
               <Package className="h-4 w-4" />
               Automações
             </Link>
             <Link
               href="/admin/usuarios"
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/usuarios' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/admin/usuarios' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
             >
               <Users className="h-4 w-4" />
               Usuários
             </Link>
             <Link
               href="/admin/configuracoes"
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/dashboard/configuracoes' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${activePath === '/admin/configuracoes' ? 'bg-azulsolo/80 text-primary' : 'text-muted-foreground'}`}
             >
               <Settings className="h-4 w-4" />
               Configurações

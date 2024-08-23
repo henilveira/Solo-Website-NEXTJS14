@@ -11,6 +11,7 @@ import ScrollToTopButton from '@/components/ui/botao-cima';
 import Footer from "@/components/ui/footer";
 import Team from "@/components/ui/conheca-time";
 import WhatsApp from "@/components/ui/wpp-button";
+import Logo from '@/components/ui/logo'
 
 
 
@@ -90,15 +91,7 @@ export default function Component() {
   return (
     <div className="relative flex flex-col min-h-[100vh] bg-neutral-900">
   	  <header  className="mx-4 lg:mx-36 text-white px-4 lg:px-6 py-4 flex items-center justify-between">
-        <Link href="#" className="flex items-center gap-2" prefetch={false}>
-          <Imagem
-            src="/solo-logo.svg"
-            alt="Solo"
-            width={100}
-            height={300}
-            className=''
-          />
-        </Link>
+        <Logo />
         <nav className="hidden lg:flex items-center gap-8">
           <Link onClick={() => scrollToSection(6)} href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Sobre
@@ -181,7 +174,7 @@ export default function Component() {
                       src="/header.svg"
                       alt="Header"
                       width={600}
-                      height={300}
+                      height={600}
                       className=''
                     />
                   </div>

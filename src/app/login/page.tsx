@@ -3,6 +3,7 @@ import { AuthProvider } from '@/components/ui/AuthProvider'; // Importar useAuth
 import LoginForm from '@/components/ui/login-form'
 import Link from 'next/link';
 import ProtectedRoute from '@/components/ui/protected-route';
+import Logo from '@/components/ui/logo';
 
 export default function Login() {
   return (
@@ -18,20 +19,13 @@ export default function Login() {
             <div className="w-full md:w-1/2 flex items-center justify-center min-h-screen">
               <div className="max-w-sm space-y-4">
                 <div className="space-y-2 text-left">
-                  <Link href="/">
-                    <Imagem 
-                        src="/solo-logo-white.svg"
-                        
-                        width={150}
-                        className="text-center"
-                        />
-                  </Link>
+                <Logo />
                   <h1 className="text-3xl font-bold">Iniciar sessão</h1>
                   <p className="text-gray-500 dark:text-gray-400">
                     Insira seu usuário e senha para iniciar sessão.
                   </p>
                 </div>
-                    <LoginForm />
+                <LoginForm />
               </div>
             </div>
           </div>

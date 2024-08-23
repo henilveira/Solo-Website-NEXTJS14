@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Imagem from './image-header';
+import Logo from "./logo";
 
 export default function Footer() {
 
@@ -20,15 +21,7 @@ export default function Footer() {
   return (
     <footer className="bg-neutral-950 p-6 md:py-12 w-full">
       <div className="container max-w-7xl flex items-center justify-between">
-        <Link href="#" className="flex text-white items-center" prefetch={false}>
-          <Imagem
-              src="/solo-logo.svg"
-              alt="Solo"
-              width={100}
-              height={6}
-              className=''
-            />
-        </Link>
+      <Logo />
         <p className="text-white text-center text-lg :text-sm">Preparado para automatizar sua rotina?</p>
         <div className="flex items-center space-x-4">
           <a href="#" target="_blank" >
