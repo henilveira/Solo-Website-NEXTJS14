@@ -1,44 +1,31 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import LogoutButton from '@/components/ui/logout-button';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 import { Gauge, Shield } from 'lucide-react';
 import { useAuth } from '@/components/ui/AuthProvider'; // Ajuste o caminho conforme necessário
 import Link from 'next/link';
 import { Button } from './button';
+import ProfileAvatar from './avatar-profile';
+import LogoutButton from '@/components/ui/logout-button';
 
 export default function Profile() {
   const { userEmail, userName, userPicture } = useAuth(); // Obtenha o e-mail e nome do contexto de autenticação
-  
-  // Função para obter a inicial do primeiro nome
-  const getInitial = (name: string | undefined) => {
-    if (name) {
-      const [firstName] = name.split(' ');
-      return firstName.charAt(0).toUpperCase();
-    }
-    return 'U'; // Retorna 'U' como fallback se o nome não estiver disponível
-  };
 
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Avatar className="cursor-pointer">
-          <AvatarImage src={userPicture ?? ''} />
-          <AvatarFallback>{getInitial(userName || '')}</AvatarFallback>
-        </Avatar>
+        <div>
+          <ProfileAvatar className='cursor-pointer' />
+        </div>
       </PopoverTrigger>
       <PopoverContent className='p-4 w-80 mr-6 mt-1 dark:bg-neutral-900 bg-neutral-50 text-dark dark:text-white shadow-xl'>
         <div className="grid gap-4 p-2">
           <div className="space-x-3 flex justify-start items-center">
-            <Avatar className="flex justify-center items-center align-center">
-              <AvatarImage src={userPicture ?? ''} />
-              <AvatarFallback>{getInitial(userName || '')}</AvatarFallback>
-            </Avatar>
+            <ProfileAvatar className="flex justify-center items-center align-center" />
             <div className='flex flex-col justify-center align-center'>
               <span>Olá, <span className='font-semibold'>{userName || 'Usuário'}</span></span>
-              <span className='text-muted-foreground'>{userEmail || 'Usuário'}</span> 
+              <span className='text-muted-foreground'>{userEmail || 'Usuário'}</span>
             </div>
           </div>
           <hr />
@@ -54,7 +41,7 @@ export default function Profile() {
           <hr />
           <div className='flex flex-row space-x-2 w-full'>
             <Link href='/admin/empresas' className='w-full flex items-center space-x-2 rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-800 transition'>
-              <Button className='w-full gap-2 '>
+              <Button className='w-full gap-2'>
                 <Shield className='w-5 h-5' />
                 Admin
               </Button>

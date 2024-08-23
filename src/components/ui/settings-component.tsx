@@ -11,6 +11,7 @@ import { useAuth } from "./AuthProvider";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { useToast } from "@/components/ui/use-toast";
 import { useState, ChangeEvent, FormEvent, useRef } from 'react';
+import ProfileAvatar from "./avatar-profile";
 
 export const SettingsComponent = () => {
   const { userEmail, userName, userPicture, changeUsername, updateProfilePicture, deleteProfilePicture } = useAuth();
@@ -94,10 +95,7 @@ export const SettingsComponent = () => {
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-4">
-              <Avatar className="h-20 w-20">
-                <AvatarImage src={userPicture ?? ''} alt="Avatar" />
-                <AvatarFallback>HA</AvatarFallback>
-              </Avatar>
+            <ProfileAvatar className="h-20 w-20"/>
               <form onSubmit={(e) => e.preventDefault()}>
                 <div>
                   <Button variant="outline" onClick={handleButtonClick}>
