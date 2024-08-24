@@ -37,13 +37,13 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
           <title>{defaultMetadata.title}</title>
 
         <body>
-        {/* <ThemeProvider
+        <ThemeProvider
             attribute="class"
             defaultTheme="system"
-          > */}
+          >
               <main>{children}</main>
               <Toaster />
-            {/* </ThemeProvider> */}
+            </ThemeProvider>
         </body>
       </html>
     </>
