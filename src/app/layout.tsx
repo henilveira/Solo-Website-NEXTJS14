@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import {Metadata} from 'next'
 import './globals.css';
 import { ThemeProvider } from '@/components/ui/theme-provider';
-import { AuthProvider } from '@/components/ui/AuthProvider';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -30,17 +30,16 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta name="description" content={defaultMetadata.description} />
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-          <link rel="manifest" href="/favicon/site.webmanifest" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>
+          <link rel="manifest" href="/favicon/site.webmanifest"/>
           <title>{defaultMetadata.title}</title>
 
         <body>
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
           >
               <main>{children}</main>
               <Toaster />

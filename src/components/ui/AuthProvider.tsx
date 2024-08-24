@@ -125,7 +125,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const changeUsername = async (name: string) => {
     try {
         const response = await fetch('http://127.0.0.1:8000/api/accounts/update-user-name/', {
-            method: 'POST',
+            method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nome: name }), // Enviando como 'nome'
             credentials: 'include',
@@ -157,7 +157,7 @@ const updateProfilePicture = async (file: File): Promise<void> => {
       const updatedPictureUrl = data.profile_picture
         ? `http://127.0.0.1:8000${data.profile_picture}` // Ajuste a URL conforme necessário
         : null;
-      setUserPicture(updatedPictureUrl); // Atualiza o estado com a nova URL da imagem
+      setUserPicture(updatedPictureUrl); // Atualiza o estado com a nova URL da Image
     } else {
       throw new Error('Erro ao atualizar foto de perfil');
     }
@@ -174,7 +174,7 @@ const deleteProfilePicture = async () => {
     });
 
     if (response.ok) {
-      setUserPicture(null); // Atualiza o estado com a nova URL da imagem
+      setUserPicture(null); // Atualiza o estado com a nova URL da Image
     } else {
       throw new Error('Erro ao deletar foto de perfil');
     }

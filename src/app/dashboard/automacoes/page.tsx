@@ -5,20 +5,23 @@ import {
   Search,
   Users,
   Settings,
-  Building2,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 import Profile from "@/components/ui/profile";
 import { AuthProvider } from "@/components/ui/AuthProvider";
 import Sidebar from "@/components/ui/asidebar";
 import ProtectedRoute from "@/components/ui/protected-route";
-import { ToggleMenu } from "@/components/ui/toggle-dashboard-menu";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ToggleMenu } from "@/components/ui/toggle-menu";
 
 export default function Dashboard() {
+  
+  const companyMenuItems = [
+    { label: "Usuários", href: "/dashboard/usuarios", Icon: Users },
+    { label: "Automações", href: "/dashboard/automacoes", Icon: Package },
+    { label: "Configurações", href: "/dashboard/configuracoes", Icon: Settings },
+  ];
   
   return (
     <AuthProvider>
@@ -27,7 +30,7 @@ export default function Dashboard() {
         <Sidebar />
         <div className="flex flex-col w-full">
           <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-            <ToggleMenu />
+            <ToggleMenu items={companyMenuItems}/>
             <div className="w-full flex-1">
               <form>
                 <div className="relative">

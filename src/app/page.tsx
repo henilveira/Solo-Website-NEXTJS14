@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import Imagem from '@/components/ui/image-header'
 import Bloco from "@/components/ui/bloco";
 import FormularioContato from "../api/contato/pages";
 import { useEffect, useRef } from 'react';
@@ -76,7 +76,6 @@ export default function Component() {
     }
   };
 
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -118,7 +117,7 @@ export default function Component() {
     >
         <div className="flex items-center justify-between p-4">
           <Link href="#" className="flex items-center gap-2" prefetch={false}>
-            <Imagem
+            <Image
               src="/solo-logo.svg"
               alt="Solo"
               width={100}
@@ -170,7 +169,7 @@ export default function Component() {
                     </Button>
                   </div>
                   <div className="flex items-center justify-center">
-                    <Imagem
+                    <Image
                       src="/header.svg"
                       alt="Header"
                       width={600}
@@ -187,7 +186,7 @@ export default function Component() {
               <div className="container px-4 md:px-6">
                 <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
                   <div className="order-2 lg:order-1 flex items-center justify-center">
-                    <Imagem
+                    <Image
                       src="/robo_pagina.svg"
                       alt="Robo"
                       width={600}
@@ -236,7 +235,7 @@ export default function Component() {
                       <p className="text-gray-200 text-center">Gera ou lê arquivo Excel que contém informações para fazer parte de um processo, como enviar por e-mail.</p>
                     </div>
                     <div className="flex justify-center align-center my-12">
-                      <Imagem
+                      <Image
                         src="/clip.svg"
                         alt="Clipe"
                         width={175}
@@ -254,7 +253,7 @@ export default function Component() {
                       <p className="text-gray-200 text-center">Realiza automaticamente tarefas repetitivas em sites da internet, como inserção e busca de dados.</p>
                     </div>
                     <div className="flex justify-center align-center my-12">
-                      <Imagem
+                      <Image
                         src="/wifi.svg"
                         alt="Wifi"
                         width={175}
@@ -272,7 +271,7 @@ export default function Component() {
                       <p className="text-gray-200 text-center">Extrai informações de arquivos XML, facilitando a organização e análise de dados.</p>
                     </div>
                     <div className="flex justify-center align-center my-12">
-                      <Imagem
+                      <Image
                         src="/file.svg"
                         alt="Arquivo"
                         width={100}
@@ -317,7 +316,7 @@ export default function Component() {
                     </ul>
                   </div>
                   <div className="flex items-center justify-center">
-                    <img
+                    <Image
                       src="/erps2_pagina.svg"
                       width="550"
                       height="310"
@@ -386,7 +385,7 @@ export default function Component() {
               </div>
                 <div className="mt-24 grid gap-6 lg:grid-cols-2 lg:gap-12">
                   <div className="flex items-center justify-center">
-                  <Imagem
+                  <Image
                       src="/contact.svg"
                       alt="Contato"
                       width={600}

@@ -8,13 +8,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "./AuthProvider";
-import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { useToast } from "@/components/ui/use-toast";
 import { useState, ChangeEvent, FormEvent, useRef } from 'react';
 import ProfileAvatar from "./avatar-profile";
 
 export const SettingsComponent = () => {
-  const { userEmail, userName, userPicture, changeUsername, updateProfilePicture, deleteProfilePicture } = useAuth();
+  const { userEmail, userName, changeUsername, updateProfilePicture, deleteProfilePicture } = useAuth();
   const { toast } = useToast();
   const [error, setError] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
@@ -120,7 +119,7 @@ export const SettingsComponent = () => {
           <Card>
             <CardHeader>
               <CardTitle>Conta</CardTitle>
-              <CardDescription>Atualize as informações da sua conta.</CardDescription>
+              <CardDescription>Altere as informações da sua conta para sua preferência.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">

@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Imagem from './image-header';
 import Logo from "./logo";
 
 export default function Footer() {

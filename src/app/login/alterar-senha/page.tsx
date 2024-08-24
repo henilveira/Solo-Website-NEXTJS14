@@ -1,15 +1,17 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Imagem from '@/components/ui/image-header';
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import Link from 'next/link'
+import Image from 'next/image';
+
 
 export default function Login() {
   return (
     <div className="flex flex-col md:flex-row items-center min-h-screen min-w-screen">
       <div className="hidden md:block w-2/3 min-h-screen relative overflow-hidden">
-        <Imagem
+        <Image
+          alt="Imagem de fundo"
           src="/gradiente.svg"
           className="absolute top-0 left-0 w-full h-full object-cover"
         />
@@ -17,9 +19,9 @@ export default function Login() {
       <div className="w-full md:w-1/2 flex items-center justify-center min-h-screen">
         <div className="max-w-sm space-y-4">
           <div className="space-y-2 text-left">
-            <Imagem 
+            <Image 
                 src="/solo-logo-black.svg"
-
+                alt="Logo Solo"
                 width={150}
                 className="text-center"
                 />

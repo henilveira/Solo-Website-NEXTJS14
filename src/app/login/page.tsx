@@ -1,22 +1,16 @@
-import Imagem from '@/components/ui/image-header';
 import { AuthProvider } from '@/components/ui/AuthProvider'; // Importar useAuth
 import LoginForm from '@/components/ui/login-form'
 import Link from 'next/link';
 import ProtectedRoute from '@/components/ui/protected-route';
 import Logo from '@/components/ui/logo';
+import Image from 'next/image';
+
 
 export default function Login() {
   return (
       <AuthProvider>
         <ProtectedRoute> 
-          <div className="flex flex-col md:flex-row items-center min-h-screen min-w-screen dark:bg-neutral-900">
-            <div className="hidden md:block w-2/3 min-h-screen relative overflow-hidden">
-              <Imagem
-                src="/gradiente.svg"
-                className="absolute top-0 left-0 w-full h-full object-cover"
-              />
-            </div>
-            <div className="w-full md:w-1/2 flex items-center justify-center min-h-screen">
+          <div className="flex flex-col md:flex-row items-center min-h-screen justify-center min-w-screen dark:bg-neutral-900">
               <div className="max-w-sm space-y-4">
                 <div className="space-y-2 text-left">
                 <Logo />
@@ -26,7 +20,6 @@ export default function Login() {
                   </p>
                 </div>
                 <LoginForm />
-              </div>
             </div>
           </div>
       </ProtectedRoute>

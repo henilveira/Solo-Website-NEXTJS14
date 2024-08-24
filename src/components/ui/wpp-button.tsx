@@ -1,7 +1,5 @@
-import Imagem from '@/components/ui/image-header'
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FaWhatsapp, FaWhatsappSquare } from 'react-icons/fa';
+import { FaWhatsapp } from 'react-icons/fa';
 
 export default function WhatsApp() {
 

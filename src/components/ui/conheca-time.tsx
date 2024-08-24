@@ -53,7 +53,7 @@ export default function Team() {
                 <a target="_blank" href="https://www.linkedin.com/in/henrique-ataide/">
                   <FaLinkedin className="text-white h-7 w-7" />
                 </a>
-                <a target="_blank" href="https://www.github.com/imrickss">
+                <a target="_blank" href="https://www.github.com/henilveira">
                   <FaGithub className="h-8 w-7 text-white" />
                 </a>
               </div>
@@ -64,7 +64,7 @@ export default function Team() {
             <div className="p-4 bg-neutral-950 text-center flex flex-col items-center justify-between h-full">
               <div className="flex flex-col items-center">
                 <Avatar className="my-4 w-20 h-20">
-                  <AvatarImage src="https://pbs.twimg.com/profile_images/1799208166984404992/Uh98hFqJ_400x400.jpg" />
+                  <AvatarImage src="https://pbs.twImage.com/profile_images/1799208166984404992/Uh98hFqJ_400x400.jpg" />
                   <AvatarFallback>PO</AvatarFallback>
                 </Avatar>
                 <HoverCard>
@@ -76,7 +76,7 @@ export default function Team() {
                   <HoverCardContent className="w-80 relative z-50 bg-neutral-950 text-white sm:w-96">
                     <div className="flex flex-col sm:flex-row sm:justify-between space-x-0 sm:space-x-4">
                       <Avatar>
-                        <AvatarImage src="https://pbs.twimg.com/profile_images/1799208166984404992/Uh98hFqJ_400x400.jpg" />
+                        <AvatarImage src="https://pbs.twImage.com/profile_images/1799208166984404992/Uh98hFqJ_400x400.jpg" />
                         <AvatarFallback>HA</AvatarFallback>
                       </Avatar>
                       <div className="space-y-1 text-left mt-2 sm:mt-0">

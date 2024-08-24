@@ -1,8 +1,8 @@
 'use client';
 
-import useTheme from '@/components/ui/useTheme'; // Importando o hook do tema
-import Image from 'next/image';
+import {useTheme} from 'next-themes'; // Importando o hook do tema
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Logo = () => {
   const { theme } = useTheme();

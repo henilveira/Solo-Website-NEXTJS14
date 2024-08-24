@@ -18,7 +18,7 @@ import { AuthProvider } from "@/components/ui/AuthProvider";
 import Sidebar from "@/components/ui/asidebar-admin";
 import ProtectedRoute from "@/components/ui/protected-route";
 import React, { useState } from 'react';
-import { ToggleMenuAdmin } from "@/components/ui/toggle-dashboard-menu-admin";
+import { ToggleMenu } from "@/components/ui/toggle-menu";
 
 export default function Dashboard() {
   const [showAddCompany, setShowAddCompany] = useState(false);
@@ -26,6 +26,13 @@ export default function Dashboard() {
   const handleAddCompany = () => {
     setShowAddCompany(true);
   };
+
+  const adminMenuItems = [
+    { label: "aa", href: "/admin/empresas", Icon: Building2 },
+    { label: "Usuários", href: "/admin/usuarios", Icon: Users },
+    { label: "Automações", href: "/admin/automacoes", Icon: Package },
+    { label: "Configurações", href: "/admin/configuracoes", Icon: Settings },
+  ];
   return (
     <AuthProvider>
       <ProtectedRoute>
@@ -33,8 +40,8 @@ export default function Dashboard() {
         <Sidebar />
         <div className="flex flex-col w-full">
           <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-          <ToggleMenuAdmin />
-            <div className="w-full flex-1">
+          <ToggleMenu items={adminMenuItems}/>
+          <div className="w-full flex-1">
               <form>
                 <div className="relative">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />

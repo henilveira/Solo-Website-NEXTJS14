@@ -17,9 +17,16 @@ import { AuthProvider } from "@/components/ui/AuthProvider";
 import Sidebar from "@/components/ui/asidebar-admin";
 import ProtectedRoute from "@/components/ui/protected-route";
 import { Toaster } from "@/components/ui/toaster";
-import { ToggleMenuAdmin } from "@/components/ui/toggle-dashboard-menu-admin";
+import { ToggleMenu } from "@/components/ui/toggle-menu";
 
 export default function Dashboard() {
+
+  const adminMenuItems = [
+    { label: "aa", href: "/admin/empresas", Icon: Building2 },
+    { label: "Usuários", href: "/admin/usuarios", Icon: Users },
+    { label: "Automações", href: "/admin/automacoes", Icon: Package },
+    { label: "Configurações", href: "/admin/configuracoes", Icon: Settings },
+  ];
 
   return (
     <AuthProvider>
@@ -28,7 +35,7 @@ export default function Dashboard() {
         <Sidebar />
         <div className="flex flex-col w-full">
           <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-            <ToggleMenuAdmin />
+            <ToggleMenu items={adminMenuItems}/>
             <div className="w-full flex-1">
               <form>
                 <div className="relative">
