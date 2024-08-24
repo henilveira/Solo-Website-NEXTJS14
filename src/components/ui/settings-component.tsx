@@ -115,28 +115,35 @@ export const SettingsComponent = () => {
         </Card>
       </section>
       <section id="account">
-        <form onSubmit={handleSubmit}>
+
           <Card>
             <CardHeader>
               <CardTitle>Conta</CardTitle>
               <CardDescription>Altere as informações da sua conta para sua preferência.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="username">Nome</Label>
+                    <Input id="nome" name="nome" placeholder={userName ?? ''} />
+                  </div>
+                    <Button type="submit" className="bg-green-600 text-white hover:bg-green-500">Atualizar nome</Button>
+                </form>
+              <hr />
               <div className="space-y-2">
-                <Label htmlFor="username">Nome</Label>
-                <Input id="nome" name="nome" placeholder={userName ?? ''} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Seu Email</Label>
                 <Input id="email" placeholder={userEmail ?? ''} />
               </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Novo Email</Label>
+                <Input id="email" placeholder='novoemail@exemplo.com' />
+              </div>
               <div className="space-y-2 space-x-4">
-                <Button type="submit" className="bg-green-600 text-white hover:bg-green-500">Atualizar dados</Button>
+                <Button type="submit" className="bg-green-600 text-white hover:bg-green-500">Atualizar email</Button>
                 <Button variant="outline">Redefinir senha</Button>
               </div>
             </CardContent>
           </Card>
-        </form>
       </section>
       <section id="notifications" className="space-y-6">
         <Card>

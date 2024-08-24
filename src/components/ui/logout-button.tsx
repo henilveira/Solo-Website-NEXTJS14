@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation'
 import { useAuth } from "./AuthProvider";
-// import {logout} from '@/components/ui/AuthProvider'
 
 export default function LogoutButton() {
   const {logout} = useAuth()

@@ -1,6 +1,6 @@
 'use client';
 
-import {useTheme} from 'next-themes'; // Importando o hook do tema
+import useTheme from './useTheme'; // Importando o hook do tema
 import Link from 'next/link';
 import Image from 'next/image';
 
