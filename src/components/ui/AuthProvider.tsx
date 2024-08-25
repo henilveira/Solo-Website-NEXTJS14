@@ -8,7 +8,9 @@ interface AuthContextType {
   userName: string | null;
   userPicture: string | null;
   login: (email: string, password: string) => Promise<void>;
+  resetPasswordRequest: (email: string) => Promise<void>;
   requestEmailChange: (email_atual: string, email_novo: string) => Promise<void>;
+  resetPassword: (token: string, senha_atual: string, senha_nova: string, confirm_senha_nova: string) => Promise<void>;
   confirmEmailChange: (token: string) => Promise<void>;
   changeUsername: (name: string) => Promise<void>;
   updateProfilePicture: (file: File) => Promise<void>;
@@ -112,7 +114,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       });
 
       if (!response.ok) throw new Error(`Erro ao buscar o token: ${response.status}`);
-
       const data = await response.json();
       setUserEmail(data.email);
       setUserName(data.nome);
@@ -121,6 +122,50 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       throw error;
     }
   };
+  const resetPasswordRequest = async (email: string) => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/request-password-reset/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+        credentials: 'include',
+      });
+
+      if (!response.ok) throw new Error(`Erro ao buscar usuário: ${response.status}`);
+
+    } catch (error) {
+      console.error('Erro ao buscar o usuário:', error);
+      throw error;
+    }
+  };
+
+  const resetPassword = async (token:string, senha_atual: string, senha_nova: string, confirm_senha_nova: string) => {
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/accounts/reset-password/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token, senha_atual, senha_nova, confirm_senha_nova }),
+            credentials: 'include',
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            if (data.error) {
+                throw new Error(data.error);
+            } else {
+                throw new Error('Erro desconhecido ao redefinir a senha.');
+            }
+        }
+
+        return data;
+
+    } catch (error) {
+        console.error('Erro ao redefinir senha:', error);
+        throw error;
+    }
+};
+
   
   const confirmEmailChange = async (token: string) => {
     try {
@@ -246,7 +291,7 @@ const deleteProfilePicture = async () => {
   };
 
   return (
-    <AuthContext.Provider value={{ userEmail, userName, userPicture, login, logout, checkAuth, refreshAccessToken, updateProfilePicture, changeUsername, deleteProfilePicture, confirmEmailChange, requestEmailChange }}>
+    <AuthContext.Provider value={{ userEmail, userName, userPicture, login, logout, checkAuth, refreshAccessToken, resetPassword, resetPasswordRequest, updateProfilePicture, changeUsername, deleteProfilePicture, confirmEmailChange, requestEmailChange }}>
       {children}
     </AuthContext.Provider>
   );

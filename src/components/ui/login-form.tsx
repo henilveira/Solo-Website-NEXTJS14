@@ -85,7 +85,7 @@ const LoginForm = () => {
                     <Label htmlFor="remember" className="text-sm font-normal">Lembrar de mim</Label>
                 </div>
                 <span className='underline-offset-4'>
-                    <Link href='/esqueceu-a-senha'>
+                    <Link href='/reset-password'>
                         <span className="text-blue-600 font-semibold underline text-sm mt-2">Esqueceu sua senha?</span>
                     </Link>
                 </span>

@@ -9,7 +9,6 @@ const ConfirmEmail = () => {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const { confirmEmailChange, userEmail } = useAuth();
-    const pathname = usePathname();
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
 
