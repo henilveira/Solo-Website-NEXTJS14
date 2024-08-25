@@ -19,8 +19,9 @@ export default function Component() {
     <div className="relative flex flex-col min-h-[100vh] dark:bg-neutral-900 bg-neutral-100">
   	  <Navbar />
           <main className="flex-1">
-            <Header />
 
+            <Header />
+            
             <AutomatizeSection />
 
             <CardsAuto />
