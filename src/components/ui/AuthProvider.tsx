@@ -8,6 +8,8 @@ interface AuthContextType {
   userName: string | null;
   userPicture: string | null;
   login: (email: string, password: string) => Promise<void>;
+  requestEmailChange: (email_atual: string, email_novo: string) => Promise<void>;
+  confirmEmailChange: (token: string) => Promise<void>;
   changeUsername: (name: string) => Promise<void>;
   updateProfilePicture: (file: File) => Promise<void>;
   logout: () => void;
@@ -100,8 +102,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  
-
   const login = async (email: string, password: string) => {
     try {
       const response = await fetch('http://127.0.0.1:8000/api/accounts/token/', {
@@ -121,6 +121,43 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       throw error;
     }
   };
+  
+  const confirmEmailChange = async (token: string) => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/api/confirm-email-change/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
+        credentials: 'include',
+      })
+      if (response.ok) console.log('seu email foi alterado com sucesso!')
+    } catch (error) {
+      console.log('houve algum erro ao alterar seu email.', error)
+    }
+  }
+
+  const requestEmailChange = async (email_antigo: string, email_novo: string) => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/api/request-email-change/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email_antigo, email_novo }),
+        credentials: 'include',
+      })
+      if (!response.ok) {
+        throw new Error(`Erro ao redefinir seu email: ${response.status}`)
+      } else {
+        console.log('Um email de verificação foi enviado para seu novo email!')
+      }
+      
+    } catch(error) {
+      console.error('Erro ao redefinir seu email:', error);
+      throw error;
+    }
+  }
+
+  
+
 
   const changeUsername = async (name: string) => {
     try {
@@ -209,7 +246,7 @@ const deleteProfilePicture = async () => {
   };
 
   return (
-    <AuthContext.Provider value={{ userEmail, userName, userPicture, login, logout, checkAuth, refreshAccessToken, updateProfilePicture, changeUsername, deleteProfilePicture }}>
+    <AuthContext.Provider value={{ userEmail, userName, userPicture, login, logout, checkAuth, refreshAccessToken, updateProfilePicture, changeUsername, deleteProfilePicture, confirmEmailChange, requestEmailChange }}>
       {children}
     </AuthContext.Provider>
   );

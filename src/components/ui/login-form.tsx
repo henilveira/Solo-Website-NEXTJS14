@@ -12,7 +12,6 @@ import Link from 'next/link';
 import { useToast } from "@/components/ui/use-toast";
 
 const LoginForm = () => {
-    const { userName } = useAuth();
     const { toast } = useToast();
     const { login } = useAuth();
     const [error, setError] = useState<string | null>(null);
@@ -99,7 +98,7 @@ const LoginForm = () => {
                     variant="solo"
                     disabled={loading}
                 >
-                    {loading ? <span className='flex space-x-2'><Loader2 className="mr-2 h-4 w-4 animate-spin" />Entrando...</span> : 'Entrar'}  
+                    {loading ? <span className='flex space-x-2 items-center'><Loader2 className="mr-2 h-4 w-4 animate-spin" />Entrando...</span> : 'Entrar'}  
                 </Button>
                 <span className="text-sm underline-offset-4">
                     Não possui uma conta?

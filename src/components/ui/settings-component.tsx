@@ -13,7 +13,8 @@ import { useState, ChangeEvent, FormEvent, useRef } from 'react';
 import ProfileAvatar from "./avatar-profile";
 
 export const SettingsComponent = () => {
-  const { userEmail, userName, changeUsername, updateProfilePicture, deleteProfilePicture } = useAuth();
+  const [ novoEmail, setNovoEmail ] = useState<string>('');
+  const { userEmail, userName, changeUsername, updateProfilePicture, deleteProfilePicture, requestEmailChange, confirmEmailChange } = useAuth();
   const { toast } = useToast();
   const [error, setError] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
@@ -66,7 +67,7 @@ export const SettingsComponent = () => {
             
     }
     
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const handleChangeUsername = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
         const formData = new FormData(e.currentTarget);
@@ -84,6 +85,29 @@ export const SettingsComponent = () => {
     }
   }
 
+  const handleRequestEmail = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const formData = new FormData(e.currentTarget)
+    const email_antigo = formData.get("emailAtual")?.toString() || ''
+    const email_novo = formData.get("emailNovo")?.toString() || ''
+    setNovoEmail(email_novo)
+
+    try {
+      await requestEmailChange(email_antigo, email_novo)
+      toast({
+        title: 'Um email de confirmação foi enviado para você!',
+        description: `Entre no link encaminhado para o email: ${novoEmail}`,
+        variant: "default",
+    });
+    } catch(error) {
+      toast({
+        title: 'Ocorreu um erro ao alterar seu email.',
+        description: `Verifique se o email atual corresponde ao seu email.`,
+        variant: "destructive",
+    });
+    }
+  }
   return (
     <div className="p-4 space-y-6">
       <section id="profile" className="space-y-6">
@@ -122,26 +146,44 @@ export const SettingsComponent = () => {
               <CardDescription>Altere as informações da sua conta para sua preferência.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleChangeUsername} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="username">Nome</Label>
+                  <div className="flex flex-col ">
+                      <Label className="text-lg" htmlFor="username">Nome</Label>
+                      <span className="text-muted-foreground text-sm">Insira o nome que deseja, e será atualiado no mesmo momento.</span>
+                    </div>
                     <Input id="nome" name="nome" placeholder={userName ?? ''} />
                   </div>
                     <Button type="submit" className="bg-green-600 text-white hover:bg-green-500">Atualizar nome</Button>
                 </form>
               <hr />
-              <div className="space-y-2">
-                <Label htmlFor="email">Seu Email</Label>
-                <Input id="email" placeholder={userEmail ?? ''} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Novo Email</Label>
-                <Input id="email" placeholder='novoemail@exemplo.com' />
-              </div>
-              <div className="space-y-2 space-x-4">
-                <Button type="submit" className="bg-green-600 text-white hover:bg-green-500">Atualizar email</Button>
-                <Button variant="outline">Redefinir senha</Button>
-              </div>
+              <form onSubmit={handleRequestEmail}>
+                <div className="space-y-4">
+                  <div className="flex flex-col ">
+                      <Label className="text-lg" htmlFor="username">E-mail atual</Label>
+                      <span className="text-muted-foreground text-sm">Insira seu email e um link será enviado para redefinir seu email.</span>
+                  </div>
+                  <Input id="emailAtual" name="emailAtual" type='email' placeholder={userEmail ?? ''} />
+                <div className="space-y-2">
+                <Label className="text-lg" htmlFor="username">E-mail novo</Label>
+                  <Input id="emailNovo" name="emailNovo" type='email' placeholder='novoemail@exemplo.com' />
+                </div>
+                <div className="space-y-2 space-x-4">
+                  <Button className="bg-green-600 text-white hover:bg-green-500">Redefinir e-mail</Button>
+                </div>
+                </div>
+              </form>
+              <hr />
+              <form className="space-y-4">
+                  <div className="space-y-2">
+                    <div className="flex flex-col ">
+                      <Label className="text-lg" htmlFor="username">Senha</Label>
+                      <span className="text-muted-foreground text-sm">Insira seu email e um link será enviado para redefinir sua senha.</span>
+                    </div>
+                    <Input id="nome" name="nome" placeholder={userEmail ?? ''} />
+                  </div>
+                  <Button variant="outline">Redefinir senha</Button>
+                </form>
             </CardContent>
           </Card>
       </section>
