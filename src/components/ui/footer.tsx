@@ -18,16 +18,16 @@ export default function Footer() {
 
   
   return (
-    <footer className="bg-neutral-950 p-6 md:py-12 w-full">
+    <footer className="dark:bg-neutral-950 bg-neutral-200 p-6 md:py-12 w-full">
       <div className="container max-w-7xl flex items-center justify-between">
       <Logo />
-        <p className="text-white text-center text-lg :text-sm">Preparado para automatizar sua rotina?</p>
+        <p className="dark:text-white text-neutral-800 text-center text-lg :text-sm">Preparado para automatizar sua rotina?</p>
         <div className="flex items-center space-x-4">
           <a href="#" target="_blank" >
-            <MailOpenIcon className="h-5 w-5 text-white" />
+            <MailOpenIcon className="h-5 w-5 dark:text-white text-neutral-800" />
           </a>
           <a href="https://wa.me/+5547996750589?text=Ol%C3%A1!%20quero%20conhecer%20mais%20sobre%20as%20automa%C3%A7%C3%B5es" target="_blank" >
-            <PhoneIcon className="h-5 w-5 text-white" />
+            <PhoneIcon className="h-5 w-5 dark:text-white text-neutral-800" />
           </a>
         </div>
       </div>
