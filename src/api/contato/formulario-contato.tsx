@@ -58,20 +58,20 @@ export default function FormularioContato() {
     return (
         <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="space-y-2">
-                <Label className="text-white" htmlFor="empresa">Empresa</Label>
-                <Input required className="bg-transparent text-white" id="empresa" placeholder="Digite o nome da sua empresa" />
+                <Label className="dark:text-white text-neutral-800" htmlFor="empresa">Empresa</Label>
+                <Input required className="bg-transparent dark:text-white text-neutral-800" id="empresa" placeholder="Digite o nome da sua empresa" />
             </div>
             <div className="space-y-2">
-                <Label className="text-white" htmlFor="nome">Nome completo</Label>
-                <Input required className="bg-transparent text-white" id="nome" placeholder="Digite seu nome completo" />
+                <Label className="dark:text-white text-neutral-800" htmlFor="nome">Nome completo</Label>
+                <Input required className="bg-transparent dark:text-white text-neutral-800" id="nome" placeholder="Digite seu nome completo" />
             </div>
             <div className="space-y-2">
-                <Label className="text-white" htmlFor="email">Email</Label>
-                <Input required className="bg-transparent text-gray-200" id="email" type="email" placeholder="Digite seu email" />
+                <Label className="dark:text-white text-neutral-800" htmlFor="email">Email</Label>
+                <Input required className="bg-transparent dark:text-gray-200 text-gray-400" id="email" type="email" placeholder="Digite seu email" />
             </div>
             <div className="space-y-2">
-                <Label className="text-white" htmlFor="mensagem">Mensagem</Label>
-                <Textarea required id="mensagem" placeholder="Digite sua mensagem" className="bg-transparent min-h-[100px] text-white" />
+                <Label className="dark:text-white text-neutral-800" htmlFor="mensagem">Mensagem</Label>
+                <Textarea required id="mensagem" placeholder="Digite sua mensagem" className="bg-transparent min-h-[100px] dark:text-white text-neutral-800" />
             </div>
             <Button
                 variant="solo"
