@@ -1,6 +1,5 @@
 import { AuthProvider } from '@/components/ui/AuthProvider'; // Importar useAuth
 import ResetPasswordForm from '@/components/ui/reset-password-form'
-import ProtectedRoute from '@/components/ui/protected-route';
 import Logo from '@/components/ui/logo';
 
 

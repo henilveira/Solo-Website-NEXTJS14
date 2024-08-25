@@ -1,8 +1,6 @@
 'use client'
-import { usePathname, useSearchParams } from 'next/navigation'
 import { AuthProvider } from '@/components/ui/AuthProvider'
-import { FormEvent } from 'react'
-import ConfirmEmail from '@/components/ui/confirm-email'
+import ConfirmEmail from '@/components/ui/confirm-email-form'
 
 export default function Page() {
     return(

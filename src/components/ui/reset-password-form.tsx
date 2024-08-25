@@ -1,7 +1,7 @@
+// reset-password/page.tsx
 'use client';
-
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useAuth } from '@/components/ui/AuthProvider'; 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,20 +9,18 @@ import { Loader2 } from "lucide-react";
 import Link from 'next/link';
 import { useToast } from "@/components/ui/use-toast";
 
-const ResetPasswordForm = () => {
+const ResetPasswordContent = () => {
     const { toast } = useToast();
     const { resetPasswordRequest, resetPassword, logout } = useAuth();
     const [error, setError] = useState<string | null>(null);
     const [inputError, setInputError] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    const [showResetForm, setShowResetForm] = useState<boolean>(false); // Para alternar entre os formulários
+    const [showResetForm, setShowResetForm] = useState<boolean>(false);
     const formRef = useRef<HTMLFormElement>(null);
-    const router = useRouter()
     const searchParams = useSearchParams();
     const token = searchParams.get('token') || '';
 
     useEffect(() => {
-        // Verifica se o token está presente nos parâmetros da URL
         if (token) {
             setShowResetForm(true);
         }
@@ -52,22 +50,22 @@ const ResetPasswordForm = () => {
             setLoading(false);
         }
     };
-    
+
     const handlePasswordSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
         const formData = new FormData(e.currentTarget);
-        
+
         const senha_atual = formData.get("senha_atual")?.toString() || '';
         const senha_nova = formData.get("senha_nova")?.toString() || '';
         const confirm_senha_nova = formData.get("confirm_senha_nova")?.toString() || '';
-        
+
         if (senha_nova !== confirm_senha_nova) {
             setError("As novas senhas não coincidem.");
             setLoading(false);
             return;
         }
-        
+
         try {
             await resetPassword(token, senha_atual, senha_nova, confirm_senha_nova); 
             toast({
@@ -87,7 +85,7 @@ const ResetPasswordForm = () => {
             setLoading(false);
         }
     };
-    
+
     return (
         <main>
             {showResetForm ? (
@@ -98,28 +96,28 @@ const ResetPasswordForm = () => {
                         required 
                         type="password" 
                         name="senha_atual"
-                        />
+                    />
                     <Input
                         className={`h-12 ${inputError ? 'border-red-500 text-red-500' : ''}`} 
                         placeholder="Nova senha" 
                         required 
                         type="password" 
                         name="senha_nova"
-                        />
+                    />
                     <Input
                         className={`h-12 ${inputError ? 'border-red-500 text-red-500' : ''}`} 
                         placeholder="Confirme a nova senha" 
                         required 
                         type="password" 
                         name="confirm_senha_nova"
-                        />
+                    />
                     {error && <p className="text-red-600">{error}</p>}
                     <Button 
                         className="w-full text-white" 
                         type="submit" 
                         variant="solo"
                         disabled={loading}
-                        >
+                    >
                         {loading ? <span className='flex space-x-2 items-center'><Loader2 className="mr-2 h-4 w-4 animate-spin" />Redefinindo...</span> : 'Redefinir Senha'}  
                     </Button>
                 </form>
@@ -131,14 +129,14 @@ const ResetPasswordForm = () => {
                         required 
                         type="text" 
                         name="email"
-                        />
+                    />
                     {error && <p className="text-red-600">{error}</p>}
                     <Button 
                         className="w-full text-white" 
                         type="submit" 
                         variant="solo"
                         disabled={loading}
-                        >
+                    >
                         {loading ? <span className='flex space-x-2 items-center'><Loader2 className="mr-2 h-4 w-4 animate-spin" />Enviando...</span> : 'Enviar'}  
                     </Button>
                 </form>
@@ -156,6 +154,12 @@ const ResetPasswordForm = () => {
             </span>
         </main>
     );
-}
+};
+
+const ResetPasswordForm = () => (
+    <Suspense fallback={<div>Carregando...</div>}>
+        <ResetPasswordContent />
+    </Suspense>
+);
 
 export default ResetPasswordForm;
