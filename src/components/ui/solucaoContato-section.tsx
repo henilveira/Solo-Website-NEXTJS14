@@ -15,7 +15,7 @@ const SolucaoContatoSection = () => {
             processos repetitivos? Entre em contato conosco
           </p>
         </div>
-        <div className="mt-24 grid gap-6 lg:grid-cols-2 lg:gap-12">
+        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
           <div className="flex items-center justify-center">
             <Image
               src="/contact.svg"

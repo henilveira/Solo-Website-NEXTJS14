@@ -50,7 +50,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       if (response.ok) {
         return true;
       } else {
-        router.push('/login');
         return false;
       }
     } catch (error) {

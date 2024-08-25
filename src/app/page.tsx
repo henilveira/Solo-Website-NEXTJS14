@@ -11,13 +11,16 @@ import AutomatizeSection from '@/components/ui/automatize-section'
 import ConecteSection from '@/components/ui/conecte-section'
 import SolucaoContatoSection from '@/components/ui/solucaoContato-section'
 import Navbar from '@/components/ui/navbar'
+import { AuthProvider } from '@/components/ui/AuthProvider';
 
 
 export default function Component() {
 
   return (
-    <div className="relative flex flex-col min-h-[100vh] dark:bg-neutral-900 bg-neutral-100">
-  	  <Navbar />
+      <AuthProvider>
+      <div className="relative flex flex-col min-h-[100vh] dark:bg-neutral-900 bg-neutral-100">
+  	    <Navbar />
+
           <main className="flex-1">
 
             <Header />
@@ -38,5 +41,6 @@ export default function Component() {
           <ScrollToTopButton />
           <WhatsApp />
         </div>
+        </AuthProvider>
   )
 }
