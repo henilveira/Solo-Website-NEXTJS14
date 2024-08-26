@@ -44,8 +44,9 @@ RPA (Robotic Process Automation) refere-se à automação de tarefas repetitivas
 ### Outros
 <p align="left">
 <img src="https://img.shields.io/badge/AWS-0D1117?style=for-the-badge&logo=aws&labelColor=0D1117"/>
-<img src="https://img.shields.io/badge/vscode-0D1117?style=for-the-badge&logo=vscode&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/Vscode-0D1117?style=for-the-badge&logo=vscode&labelColor=0D1117"/>
 <img src="https://img.shields.io/badge/Insomnia-0D1117?style=for-the-badge&logo=insomnia&labelColor=0D1117"/>
+<img src="https://img.shields.io/badge/Postman-0D1117?style=for-the-badge&logo=postman&labelColor=0D1117"/>
 <img src="https://img.shields.io/badge/Figma-0D1117?style=for-the-badge&logo=figma&labelColor=0D1117"/>
 </p>
 
