@@ -19,6 +19,7 @@ import Sidebar from "@/components/ui/asidebar-admin";
 import ProtectedRoute from "@/components/ui/protected-route";
 import React, { useState } from 'react';
 import { ToggleMenu } from "@/components/ui/toggle-menu";
+import App from "@/components/ui/empresa-dashboard";
 
 export default function Dashboard() {
   const [showAddCompany, setShowAddCompany] = useState(false);
@@ -65,6 +66,7 @@ export default function Dashboard() {
                 <h3 className="text-2xl font-bold tracking-tight">
                   Você não tem empresas cadastradas
                 </h3>
+                <App />
                 <p className="text-sm text-muted-foreground">
                   Comece a adicionar empresas clicando no botão abaixo
                 </p>
