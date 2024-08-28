@@ -235,10 +235,9 @@ const updateProfilePicture = async (file: File): Promise<void> => {
 
     if (response.ok) {
       const data = await response.json();
-      const updatedPictureUrl = data.profile_picture
-        ? `http://127.0.0.1:8000${data.profile_picture}` // Ajuste a URL conforme necessário
-        : null;
+      const updatedPictureUrl = data.profile_picture // Ajuste a URL conforme necessário
       setUserPicture(updatedPictureUrl); // Atualiza o estado com a nova URL da Image
+      console.log(userPicture)
     } else {
       throw new Error('Erro ao atualizar foto de perfil');
     }
