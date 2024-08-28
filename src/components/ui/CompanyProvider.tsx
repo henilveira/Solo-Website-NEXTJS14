@@ -3,7 +3,7 @@
 import React, { createContext, ReactNode, useContext, useState, useEffect } from 'react';
 
 type CompanyData = {
-    id: string;
+    id?: string;
     nome: string;
     cnpj: string;
     endereco: string;
@@ -11,9 +11,9 @@ type CompanyData = {
 };
 
 interface CompanyContextType {
-    registerCompany: (companyData: CompanyData) => Promise<void>;
+    registrarEmpresas: (companyData: CompanyData) => Promise<void>;
+    listarEmpresas: () => Promise<void>;
     companies: CompanyData[];
-    fetchCompanies: () => Promise<void>;
 }
 
 const CompanyContext = createContext<CompanyContextType | undefined>(undefined);
@@ -33,7 +33,7 @@ interface CompanyContextProps {
 export const CompanyProvider = ({ children }: CompanyContextProps) => {
     const [companies, setCompanies] = useState<CompanyData[]>([]);
 
-    const registerCompany = async (companyData: CompanyData): Promise<void> => {
+    const registrarEmpresas = async (companyData: CompanyData): Promise<void> => {
         try {
             const response = await fetch('http://127.0.0.1:8000/api/empresas/create-empresa/', {
                 method: 'POST',
@@ -49,16 +49,12 @@ export const CompanyProvider = ({ children }: CompanyContextProps) => {
                 console.error('Resposta do servidor:', errorData);
                 throw new Error('Erro ao cadastrar empresa');
             }
-
-            const data = await response.json();
-            setCompanies(prevCompanies => [...prevCompanies, data]);
-
         } catch (error) {
             console.error('Erro ao cadastrar empresa:', error);
         }
     };
 
-    const fetchCompanies = async (): Promise<void> => {
+    const listarEmpresas = async (): Promise<void> => {
         try {
             const response = await fetch('http://127.0.0.1:8000/api/empresas/list-empresas/', {
                 method: 'GET',
@@ -78,11 +74,11 @@ export const CompanyProvider = ({ children }: CompanyContextProps) => {
     };
 
     useEffect(() => {
-        fetchCompanies();
+        listarEmpresas();
     }, []);
 
     return (
-        <CompanyContext.Provider value={{ registerCompany, companies, fetchCompanies }}>
+        <CompanyContext.Provider value={{ registrarEmpresas, companies, listarEmpresas }}>
             {children}
         </CompanyContext.Provider>
     );
