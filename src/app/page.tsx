@@ -19,17 +19,17 @@ export default function Component() {
   return (
       <AuthProvider>
       <div className="relative flex flex-col min-h-[100vh] dark:bg-neutral-900 bg-neutral-100">
-  	    <Navbar />
+  	    <Navbar /> // Contém os ambas navbars, mobile e pc
 
           <main className="flex-1">
 
-            <Header />
+            <Header /> // header do site
             
-            <AutomatizeSection />
+            <AutomatizeSection /> // seção de propaganda automatize
 
-            <CardsAuto />
+            <CardsAuto /> // cards de automação
 
-            <ConecteSection />
+            <ConecteSection /> // sessão de propagando apra session
             
             <Blocos />
 
