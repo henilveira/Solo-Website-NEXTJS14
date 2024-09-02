@@ -168,7 +168,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   
   const confirmEmailChange = async (token: string) => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/api/confirm-email-change/', {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/confirm-email-change/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token }),
@@ -182,7 +182,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const requestEmailChange = async (email_antigo: string, email_novo: string) => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/api/request-email-change/', {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/request-email-change/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email_antigo, email_novo }),
