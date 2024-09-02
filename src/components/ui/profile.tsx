@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export default function Profile() {
-  const { userEmail, userName, logout } = useAuth(); // Obtenha o e-mail e nome do contexto de autenticação
+  const { userEmail, userName, userCompany, userPermission, logout } = useAuth(); // Obtenha o e-mail e nome do contexto de autenticação
   const router = useRouter();
 
   const handleLogout = () => {
@@ -54,10 +54,10 @@ export default function Profile() {
               <div className="flex justify-between p-2">
                 <div className="flex flex-col">
                   <span className="text-base">{userName || 'Usuário'}</span>
-                  <span className="text-sm text-muted-foreground">Solo Solutions</span>
+                  <span className="text-sm text-muted-foreground">{userCompany || 'Convidado'}</span>
                 </div>
                 <div className="items-center flex">
-                  <Badge className="h-6">Administrador</Badge>
+                  <Badge className="h-6">{userPermission || 'Membro'}</Badge>
                 </div>
               </div>
             </DropdownMenuGroup>

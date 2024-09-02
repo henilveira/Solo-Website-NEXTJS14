@@ -1,35 +1,26 @@
 'use client'
-import Link from "next/link";
 import {
-  Menu,
   Package,
   Search,
   Users,
   Settings,
   Building2,
-  PlusCircle,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 import Profile from "@/components/ui/profile";
 import { AuthProvider } from "@/components/ui/AuthProvider";
 import Sidebar from "@/components/ui/asidebar-admin";
 import ProtectedRoute from "@/components/ui/protected-route";
-import React, { useState } from 'react';
+import React from 'react';
 import { ToggleMenu } from "@/components/ui/toggle-menu";
 import Tables from "@/components/ui/empresasTable";
 import { CompanyProvider } from "@/components/ui/CompanyProvider";
-import RegisterCompanyModal from "@/components/ui/RegisterCompanyModal";
+import DeleteCompanyModal from "@/components/ui/DeleteCompanyModal";
+import RegistrarCompanyModal from "@/components/ui/RegistrarCompanyModal";
 
 export default function Dashboard() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
-
   const adminMenuItems = [
     { label: "aa", href: "/admin/empresas", Icon: Building2 },
     { label: "Usuários", href: "/admin/usuarios", Icon: Users },
@@ -64,13 +55,11 @@ export default function Dashboard() {
               <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
                 <div className="flex items-center justify-between">
                   <h1 className="text-xl font-semibold md:text-4xl">Empresas</h1>
-                  <Button onClick={handleOpenModal} variant="solo" className="text-white">
-                    <PlusCircle className=" h-4 w-4 mr-2"/>
-                    Adicionar Empresa
-                  </Button>
+                  <div className="space-x-2">
+                    <DeleteCompanyModal />
+                    <RegistrarCompanyModal />
+                  </div>
                 </div>
-                {/* Botão para abrir o modal */}
-                <RegisterCompanyModal isOpen={isModalOpen} onClose={handleCloseModal} />
                 <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
                   <Tables />
                 </div>

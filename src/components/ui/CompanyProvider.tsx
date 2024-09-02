@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { createContext, ReactNode, useContext, useState, useEffect } from 'react';
 
@@ -7,17 +7,19 @@ type CompanyData = {
     nome: string;
     cnpj: string;
     endereco: string;
+    created_at?: string | Date | number;
+    updated_at?: string | Date | number;
     automacoes: string[];
 };
 
 interface CompanyContextType {
     registrarEmpresas: (companyData: CompanyData) => Promise<void>;
-    listarEmpresas: (page: number) => Promise<void>;
+    listarEmpresas: (page?: number) => Promise<void>;
     companies: CompanyData[];
     currentPage: number;
     totalPages: number;
-    deletarEmpresa: (nomeEmpresa: string) => Promise<void>
-    setPage: (page: number) => void;
+    deletarEmpresa: (nomeEmpresa: string) => Promise<void>;
+    setPage: (page?: number) => void;
 }
 
 const CompanyContext = createContext<CompanyContextType | undefined>(undefined);
@@ -49,18 +51,40 @@ export const CompanyProvider = ({ children }: CompanyContextProps) => {
                 credentials: 'include',
                 body: JSON.stringify(companyData),
             });
-
+    
             if (!response.ok) {
-                const errorData = await response.text();
-                console.error('Resposta do servidor:', errorData);
-                throw new Error('Erro ao cadastrar empresa');
+                const errorData = await response.json();
+                let errorMessages: string[] = [];
+    
+                if (response.status === 400) {
+                    if (errorData.email) {
+                        errorMessages.push(errorData.email[0]);
+                    }
+                    if (errorData.nome) {
+                        errorMessages.push(errorData.nome[0]);
+                    }
+                    if (errorData.cnpj) {
+                        errorMessages.push(errorData.cnpj[0]);
+                    }
+                }
+    
+                if (errorMessages.length > 0) {
+                    throw new Error(errorMessages.join(' | ')); // Concatenar mensagens de erro
+                } else {
+                    throw new Error('Erro ao cadastrar empresa.');
+                }
             }
-        } catch (error) {
-            console.error('Erro ao cadastrar empresa:', error);
+    
+            // Se chegou aqui, a empresa foi cadastrada com sucesso
+            await listarEmpresas(); // Opcional: atualizar a lista de empresas após cadastro
+        } catch (error: any) {
+            console.error('Erro ao cadastrar empresa:', error.message);
+            throw error; // Relança o erro para que o componente que chamou trate do feedback
         }
     };
+    
 
-    const deletarEmpresa = async(nomeEmpresa: string): Promise<void> => {
+    const deletarEmpresa = async (nomeEmpresa: string): Promise<void> => {
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/empresas/delete-by-name/?nome=${nomeEmpresa}`, {
                 method: 'DELETE',
@@ -68,19 +92,19 @@ export const CompanyProvider = ({ children }: CompanyContextProps) => {
                     'Content-Type': 'application/json',
                 },
                 credentials: 'include',
-            })
+            });
             if (!response.ok) {
-                throw new Error("Erro ao deletar empresa")
-            } 
-            }catch (error) {
-                console.log('Erro ao deletar empresa: ', error)
-
+                throw new Error("Erro ao deletar empresa");
+            }
+        } catch (error) {
+            console.log('Erro ao deletar empresa: ', error);
         }
-    }
+    };
 
-    const listarEmpresas = async (page = 1): Promise<void> => {
+    const listarEmpresas = async (page?: number): Promise<void> => {
+        const pageNumber = page ?? currentPage; // Usar a página atual se `page` não for fornecido
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/empresas/list-empresas/?page=${page}`, {
+            const response = await fetch(`http://127.0.0.1:8000/api/empresas/list-empresas/?page=${pageNumber}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -98,13 +122,15 @@ export const CompanyProvider = ({ children }: CompanyContextProps) => {
         }
     };
 
-    const setPage = (page: number) => {
-        setCurrentPage(page);
-        listarEmpresas(page);
+    const setPage = (page?: number) => {
+        if (page !== undefined) {
+            setCurrentPage(page);
+            listarEmpresas(page);
+        }
     };
 
     useEffect(() => {
-        listarEmpresas(currentPage);
+        listarEmpresas();
     }, [currentPage]);
 
     return (

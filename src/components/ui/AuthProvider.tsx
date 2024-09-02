@@ -7,6 +7,8 @@ interface AuthContextType {
   userEmail: string | null;
   userName: string | null;
   userPicture: string | null;
+  userCompany: string | null;
+  userPermission: boolean | null;
   login: (email: string, password: string) => Promise<void>;
   resetPasswordRequest: (email: string) => Promise<void>;
   requestEmailChange: (email_atual: string, email_novo: string) => Promise<void>;
@@ -38,6 +40,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
   const [userPicture, setUserPicture] = useState<string | null>(null);
+  const [userCompany, setUserCompany] = useState<string | null>(null);
+  const [userPermission, setUserPermission] = useState<boolean | null>(null);
   const router = useRouter();
 
   const refreshAccessToken = async (): Promise<boolean> => {
@@ -74,6 +78,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
         setUserEmail(data.email || null);
         setUserName(data.nome || null);
+        setUserPermission(data.is_admin_empresa || null);
+        setUserCompany(data.empresa || null);
         setUserPicture(profilePictureUrl || null);
 
         return true;
@@ -200,8 +206,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }
 
-  
-
 
   const changeUsername = async (name: string) => {
     try {
@@ -265,7 +269,6 @@ const deleteProfilePicture = async () => {
 };
 
 
-
   const logout = async () => {
     try {
       const response = await fetch('http://127.0.0.1:8000/api/accounts/token/logout/', {
@@ -289,7 +292,7 @@ const deleteProfilePicture = async () => {
   };
 
   return (
-    <AuthContext.Provider value={{ userEmail, userName, userPicture, login, logout, checkAuth, refreshAccessToken, resetPassword, resetPasswordRequest, updateProfilePicture, changeUsername, deleteProfilePicture, confirmEmailChange, requestEmailChange }}>
+    <AuthContext.Provider value={{ userEmail, userName, userPicture, userCompany, userPermission, login, logout, checkAuth, refreshAccessToken, resetPassword, resetPasswordRequest, updateProfilePicture, changeUsername, deleteProfilePicture, confirmEmailChange, requestEmailChange }}>
       {children}
     </AuthContext.Provider>
   );
