@@ -12,7 +12,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   resetPasswordRequest: (email: string) => Promise<void>;
   requestEmailChange: (email_atual: string, email_novo: string) => Promise<void>;
-  resetPassword: (token: string, senha_atual: string, senha_nova: string, confirm_senha_nova: string) => Promise<void>;
+  resetPassword: (token: string, senha_nova: string, confirm_senha_nova: string) => Promise<void>;
   confirmEmailChange: (token: string) => Promise<void>;
   changeUsername: (name: string) => Promise<void>;
   updateProfilePicture: (file: File) => Promise<void>;
@@ -144,12 +144,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const resetPassword = async (token:string, senha_atual: string, senha_nova: string, confirm_senha_nova: string) => {
+  const resetPassword = async (token:string, senha_nova: string, confirm_senha_nova: string) => {
     try {
         const response = await fetch('http://127.0.0.1:8000/api/accounts/reset-password/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token, senha_atual, senha_nova, confirm_senha_nova }),
+            body: JSON.stringify({ token, senha_nova, confirm_senha_nova }),
             credentials: 'include',
         });
 
