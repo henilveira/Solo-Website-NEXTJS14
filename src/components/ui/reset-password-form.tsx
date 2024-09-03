@@ -66,7 +66,7 @@ const ResetPasswordContent = () => {
         }
 
         try {
-            await resetPassword(token, senha_atual, senha_nova, confirm_senha_nova); 
+            await resetPassword(token, senha_nova, confirm_senha_nova); 
             toast({
                 title: `Senha redefinida com sucesso!`,
                 description: "Sua senha foi atualizada.",
