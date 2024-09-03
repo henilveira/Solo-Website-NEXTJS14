@@ -55,8 +55,7 @@ const ResetPasswordContent = () => {
         e.preventDefault();
         setLoading(true);
         const formData = new FormData(e.currentTarget);
-
-        const senha_atual = formData.get("senha_atual")?.toString() || '';
+        
         const senha_nova = formData.get("senha_nova")?.toString() || '';
         const confirm_senha_nova = formData.get("confirm_senha_nova")?.toString() || '';
 
@@ -90,13 +89,6 @@ const ResetPasswordContent = () => {
         <main>
             {showResetForm ? (
                 <form onSubmit={handlePasswordSubmit} className="space-y-4" ref={formRef}>
-                    <Input
-                        className={`h-12 ${inputError ? 'border-red-500 text-red-500' : ''}`} 
-                        placeholder="Senha antiga" 
-                        required 
-                        type="password" 
-                        name="senha_atual"
-                    />
                     <Input
                         className={`h-12 ${inputError ? 'border-red-500 text-red-500' : ''}`} 
                         placeholder="Nova senha" 
