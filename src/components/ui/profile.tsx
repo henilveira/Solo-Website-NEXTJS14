@@ -57,39 +57,39 @@ export default function Profile() {
                   <span className="text-sm text-muted-foreground">{userCompany || 'Convidado'}</span>
                 </div>
                 <div className="items-center flex">
-                  <Badge className="h-6">{userPermission || 'Membro'}</Badge>
+                  <Badge className="h-6">{userPermission ? <span>Administrador</span> : <span>Membro</span>}</Badge>
                 </div>
               </div>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
               <Link href='/' className="flex items-center">
+                <DropdownMenuItem className="w-full cursor-pointer">
                   <Home className="mr-2 h-4 w-4" />
                   <span>Página inicial</span>
-                </Link>
-              </DropdownMenuItem>
+                </DropdownMenuItem>
+              </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem className="cursor-pointer">
                 <Link href='/admin/empresas' className="flex items-center">
-                  <Shield className="mr-2 h-4 w-4" />
-                  <span>Admin</span>
+                  <DropdownMenuItem className="cursor-pointer w-full">
+                    <Shield className="mr-2 h-4 w-4" />
+                    <span>Admin</span>
+                  </DropdownMenuItem>
                 </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
                 <Link href='/dashboard/usuarios' className="flex items-center">
-                  <Gauge className="mr-2 h-4 w-4" />
-                  <span>Dashboard</span>
+                  <DropdownMenuItem className="cursor-pointer w-full">
+                    <Gauge className="mr-2 h-4 w-4" />
+                    <span>Dashboard</span>
+                  </DropdownMenuItem>
                 </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
                 <Link href='/dashboard/configuracoes' className="flex items-center">
-                  <Settings className="mr-2 h-4 w-4" />
-                  <span>Configurações</span>
+                  <DropdownMenuItem className="cursor-pointer w-full">
+                    <Settings className="mr-2 h-4 w-4" />
+                    <span>Configurações</span>
+                  </DropdownMenuItem>
                 </Link>
-              </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
