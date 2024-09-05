@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useToast } from "@/components/ui/use-toast";
 
 const ResetPasswordContent = () => {
+    const router = useRouter()
     const { toast } = useToast();
     const { resetPasswordRequest, resetPassword, logout } = useAuth();
     const [error, setError] = useState<string | null>(null);
@@ -73,6 +74,7 @@ const ResetPasswordContent = () => {
                 variant: "default",
             });
             logout()
+            router.push('/login')
         } catch (error) {
             setError(String(error));
             setInputError(true);

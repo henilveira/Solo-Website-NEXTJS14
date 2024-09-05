@@ -1,7 +1,5 @@
 'use client';
-import {
-  Settings, Home
-} from "lucide-react";
+import { Settings, Home } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Gauge, Shield, LogOut } from 'lucide-react';
 import { useAuth } from '@/components/ui/AuthProvider'; // Ajuste o caminho conforme necessário
@@ -19,12 +17,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export default function Profile() {
-  const { userEmail, userName, userCompany, userPermission, logout } = useAuth(); // Obtenha o e-mail e nome do contexto de autenticação
+  const { userEmail, userName, userCompany, isAdminEmpresa, isAdminSolo, logout } = useAuth(); // Obtenha isAdminSolo
   const router = useRouter();
 
   const handleLogout = () => {
     logout();
     router.push('/login');
+  };
+
+  // Função para redirecionar com base nas permissões do usuário
+  const handleDashboardRedirect = () => {
+    if (isAdminSolo) {
+      router.push('/dashboard/empresas'); // Admin Solo vai para /dashboard/empresas
+    } else if (isAdminEmpresa) {
+      router.push('/dashboard/usuarios'); // Admin de Empresa vai para /dashboard/usuarios
+    } else {
+      router.push('/dashboard/automacoes'); // Membros normais vão para /dashboard/automacoes
+    }
   };
 
   return (
@@ -57,7 +66,7 @@ export default function Profile() {
                   <span className="text-sm text-muted-foreground">{userCompany || 'Convidado'}</span>
                 </div>
                 <div className="items-center flex">
-                  <Badge className="h-6">{userPermission ? <span>Administrador</span> : <span>Membro</span>}</Badge>
+                  <Badge className="h-6">{isAdminEmpresa || isAdminSolo ? <span>Administrador</span> : <span>Membro</span>}</Badge>
                 </div>
               </div>
             </DropdownMenuGroup>
@@ -72,24 +81,17 @@ export default function Profile() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-                <Link href='/admin/empresas' className="flex items-center">
-                  <DropdownMenuItem className="cursor-pointer w-full">
-                    <Shield className="mr-2 h-4 w-4" />
-                    <span>Admin</span>
-                  </DropdownMenuItem>
-                </Link>
-                <Link href='/dashboard/usuarios' className="flex items-center">
-                  <DropdownMenuItem className="cursor-pointer w-full">
-                    <Gauge className="mr-2 h-4 w-4" />
-                    <span>Dashboard</span>
-                  </DropdownMenuItem>
-                </Link>
-                <Link href='/dashboard/configuracoes' className="flex items-center">
-                  <DropdownMenuItem className="cursor-pointer w-full">
-                    <Settings className="mr-2 h-4 w-4" />
-                    <span>Configurações</span>
-                  </DropdownMenuItem>
-                </Link>
+              {/* Botão do Dashboard, ao clicar executa a função de redirecionamento */}
+              <DropdownMenuItem onClick={handleDashboardRedirect} className="cursor-pointer w-full">
+                <Gauge className="mr-2 h-4 w-4" />
+                <span>Dashboard</span>
+              </DropdownMenuItem>
+              <Link href='/dashboard/configuracoes' className="flex items-center">
+                <DropdownMenuItem className="cursor-pointer w-full">
+                  <Settings className="mr-2 h-4 w-4" />
+                  <span>Configurações</span>
+                </DropdownMenuItem>
+              </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">

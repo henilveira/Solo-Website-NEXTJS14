@@ -24,40 +24,46 @@ const LoadingSpinner = () => (
   </div>
 );
 
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { checkAuth } = useAuth();
+const AdminProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { checkAuth, isAdminEmpresa, isAdminSolo } = useAuth(); // Verifica autenticação e status de admin
   const [isLoading, setIsLoading] = useState(true);
   const [isRedirecting, setIsRedirecting] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const verifyAuth = async () => {
+    const verifyAdminAuth = async () => {
       try {
         const isAuthenticated = await checkAuth();
+        console.log(`Admin empresa: ${isAdminEmpresa}`)
+        console.log(`Admin empresa: ${isAdminSolo}`)
         
         if (!isAuthenticated) {
-          // Se não estiver autenticado, redireciona para a página de login
+          // Redireciona para login se não estiver autenticado
           if (!isRedirecting) {
             setIsRedirecting(true);
             router.replace('/login');
           }
+        } else if (!isAdminEmpresa) {
+          // Redireciona para acesso negado se não for admin
+          if (!isRedirecting) {
+            setIsRedirecting(true);
+            router.replace('/acesso-negado');
+          }
+        } else {
+          // Usuário autenticado e tem permissão, não redirecionar
+          setIsLoading(false);
         }
-
       } catch (error) {
         console.error('Erro ao verificar autenticação:', error);
-        // Pode ser útil redirecionar para uma página de erro ou login se ocorrer um erro
         if (!isRedirecting) {
           setIsRedirecting(true);
           router.replace('/login');
         }
-      } finally {
-        setIsLoading(false); // Atualiza o estado para parar a exibição do GIF
       }
     };
-    
 
-    verifyAuth();
-  }, [checkAuth, router, isRedirecting]);
+    verifyAdminAuth();
+  }, [checkAuth, isAdminEmpresa, isAdminSolo, router, isRedirecting]);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -66,4 +72,4 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-export default ProtectedRoute;
+export default AdminProtectedRoute;

@@ -15,6 +15,7 @@ type CompanyData = {
 interface CompanyContextType {
     registrarEmpresas: (companyData: CompanyData) => Promise<void>;
     listarEmpresas: (page?: number) => Promise<void>;
+    createUser: (email: string, nome?: string) => Promise<void>;
     companies: CompanyData[];
     currentPage: number;
     totalPages: number;
@@ -122,6 +123,24 @@ export const CompanyProvider = ({ children }: CompanyContextProps) => {
         }
     };
 
+    const createUser = async (email: string, nome?: string) => {
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/accounts/create-user/',  {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, nome }),
+                credentials: 'include',
+            });
+            if (!response.ok) {
+                throw new Error('Erro ao cadastrar usuário')
+            }
+        } catch (error) {
+
+        }
+    }
+
     const setPage = (page?: number) => {
         if (page !== undefined) {
             setCurrentPage(page);
@@ -134,7 +153,7 @@ export const CompanyProvider = ({ children }: CompanyContextProps) => {
     }, [currentPage]);
 
     return (
-        <CompanyContext.Provider value={{ registrarEmpresas, companies, deletarEmpresa, listarEmpresas, currentPage, totalPages, setPage }}>
+        <CompanyContext.Provider value={{ registrarEmpresas, companies, deletarEmpresa, createUser, listarEmpresas, currentPage, totalPages, setPage }}>
             {children}
         </CompanyContext.Provider>
     );

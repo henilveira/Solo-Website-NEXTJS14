@@ -8,7 +8,8 @@ interface AuthContextType {
   userName: string | null;
   userPicture: string | null;
   userCompany: string | null;
-  userPermission: boolean | null;
+  isAdminEmpresa: boolean | null;
+  isAdminSolo: boolean | null;
   login: (email: string, password: string) => Promise<void>;
   resetPasswordRequest: (email: string) => Promise<void>;
   requestEmailChange: (email_atual: string, email_novo: string) => Promise<void>;
@@ -41,7 +42,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [userName, setUserName] = useState<string | null>(null);
   const [userPicture, setUserPicture] = useState<string | null>(null);
   const [userCompany, setUserCompany] = useState<string | null>(null);
-  const [userPermission, setUserPermission] = useState<boolean | null>(null);
+  const [isAdminEmpresa, setIsAdminEmpresa] = useState<boolean | null>(Boolean);
+  const [isAdminSolo, setIsAdminSolo] = useState<boolean | null>(Boolean);
+  
   const router = useRouter();
 
   const refreshAccessToken = async (): Promise<boolean> => {
@@ -78,9 +81,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
         setUserEmail(data.email || null);
         setUserName(data.nome || null);
-        setUserPermission(data.is_admin_empresa || null);
+        setIsAdminEmpresa(data.is_admin_empresa);
+        setIsAdminSolo(data.is_staff);
         setUserCompany(data.empresa || null);
         setUserPicture(profilePictureUrl || null);
+        console.log(`Admin empresa: ${isAdminEmpresa}`)
+        console.log(`Admin solo: ${isAdminSolo}`)
 
         return true;
       } else if (response.status === 401) {
@@ -292,7 +298,7 @@ const deleteProfilePicture = async () => {
   };
 
   return (
-    <AuthContext.Provider value={{ userEmail, userName, userPicture, userCompany, userPermission, login, logout, checkAuth, refreshAccessToken, resetPassword, resetPasswordRequest, updateProfilePicture, changeUsername, deleteProfilePicture, confirmEmailChange, requestEmailChange }}>
+    <AuthContext.Provider value={{ userEmail, userName, userPicture, userCompany, isAdminEmpresa, isAdminSolo, login, logout, checkAuth, refreshAccessToken, resetPassword, resetPasswordRequest, updateProfilePicture, changeUsername, deleteProfilePicture, confirmEmailChange, requestEmailChange }}>
       {children}
     </AuthContext.Provider>
   );

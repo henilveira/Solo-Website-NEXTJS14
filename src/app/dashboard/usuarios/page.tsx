@@ -7,8 +7,13 @@ import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 import Profile from "@/components/ui/profile";
 import { AuthProvider } from "@/components/ui/AuthProvider";
 import Sidebar from "@/components/ui/asidebar";
-import ProtectedRoute from "@/components/ui/protected-route";
 import { ToggleMenu } from "@/components/ui/toggle-menu";
+import Tables from "@/components/ui/users-table";
+import { CompanyProvider } from "@/components/ui/CompanyProvider";
+import DeletarUsuario from "@/components/ui/deletar-usuario";
+import RegistrarUsuario from "@/components/ui/registrar-usuario";
+import ProtectedRoute from "@/components/ui/admin-protected-route";
+import AdminProtectedRoute from "@/components/ui/admin-protected-route";
 
 export default function Dashboard() {
   const companyMenuItems = [
@@ -18,7 +23,8 @@ export default function Dashboard() {
   ];
   return (
     <AuthProvider>
-      <ProtectedRoute>
+      <AdminProtectedRoute>
+        <CompanyProvider>
         <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
           <Sidebar />
           <div className="flex flex-col w-full">
@@ -39,26 +45,22 @@ export default function Dashboard() {
               <ThemeSwitcher />
               <Profile />
             </header>
-              <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 ">
-                <div className="flex items-center">
+            <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+                <div className="flex items-center justify-between">
                   <h1 className="text-xl font-semibold md:text-4xl">Usuários</h1>
-                </div>
-                <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
-                  <div className="flex flex-col items-center gap-1 text-center">
-                    <h3 className="text-2xl font-bold tracking-tight">
-                      Você não tem usuários ativos
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Comece a cadastrar novos usuários clicando no botão abaixo
-                    </p>
-                    <Button variant='solo' className="mt-4 text-white">Cadastrar usuário</Button>
+                  <div className="space-x-2">
+                    <DeletarUsuario />
+                    <RegistrarUsuario />
                   </div>
                 </div>
+                <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
+                  <Tables />
+                </div>
               </main>
-
           </div>
         </div>
-      </ProtectedRoute>
+        </CompanyProvider>
+      </AdminProtectedRoute>
     </AuthProvider>
   );
 }

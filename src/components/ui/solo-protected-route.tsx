@@ -24,40 +24,43 @@ const LoadingSpinner = () => (
   </div>
 );
 
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { checkAuth } = useAuth();
+const SoloProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { checkAuth, isAdminSolo } = useAuth();  // Verifica autenticação e status de admin
   const [isLoading, setIsLoading] = useState(true);
   const [isRedirecting, setIsRedirecting] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const verifyAuth = async () => {
+    const verifySoloAuth = async () => {
       try {
         const isAuthenticated = await checkAuth();
         
         if (!isAuthenticated) {
-          // Se não estiver autenticado, redireciona para a página de login
+          // Redireciona para login se não estiver autenticado
           if (!isRedirecting) {
             setIsRedirecting(true);
             router.replace('/login');
           }
+        } else if (!isAdminSolo) {
+          // Redireciona para acesso negado se não for admin
+          if (!isRedirecting) {
+            setIsRedirecting(true);
+            router.replace('/acesso-negado');
+          }
         }
-
       } catch (error) {
         console.error('Erro ao verificar autenticação:', error);
-        // Pode ser útil redirecionar para uma página de erro ou login se ocorrer um erro
         if (!isRedirecting) {
           setIsRedirecting(true);
           router.replace('/login');
         }
       } finally {
-        setIsLoading(false); // Atualiza o estado para parar a exibição do GIF
+        setIsLoading(false);  // Para de mostrar o loading quando terminar
       }
     };
-    
 
-    verifyAuth();
-  }, [checkAuth, router, isRedirecting]);
+    verifySoloAuth();
+  }, [checkAuth, isAdminSolo, router, isRedirecting]);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -66,4 +69,4 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-export default ProtectedRoute;
+export default SoloProtectedRoute;

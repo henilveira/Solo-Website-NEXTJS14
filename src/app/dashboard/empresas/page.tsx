@@ -11,18 +11,18 @@ import { Input } from "@/components/ui/input";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 import Profile from "@/components/ui/profile";
 import { AuthProvider } from "@/components/ui/AuthProvider";
-import Sidebar from "@/components/ui/asidebar-admin";
-import ProtectedRoute from "@/components/ui/protected-route";
+import Sidebar from "@/components/ui/asidebar";
 import React from 'react';
 import { ToggleMenu } from "@/components/ui/toggle-menu";
 import Tables from "@/components/ui/empresasTable";
 import { CompanyProvider } from "@/components/ui/CompanyProvider";
 import DeleteCompanyModal from "@/components/ui/DeleteCompanyModal";
 import RegistrarCompanyModal from "@/components/ui/RegistrarCompanyModal";
+import SoloProtectedRoute from "@/components/ui/solo-protected-route";
 
 export default function Dashboard() {
   const adminMenuItems = [
-    { label: "aa", href: "/admin/empresas", Icon: Building2 },
+    { label: "Empresas", href: "/admin/empresas", Icon: Building2 },
     { label: "Usuários", href: "/admin/usuarios", Icon: Users },
     { label: "Automações", href: "/admin/automacoes", Icon: Package },
     { label: "Configurações", href: "/admin/configuracoes", Icon: Settings },
@@ -31,7 +31,7 @@ export default function Dashboard() {
   return (
     <AuthProvider>
       <CompanyProvider>
-        <ProtectedRoute>
+        <SoloProtectedRoute>
           <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
             <Sidebar />
             <div className="flex flex-col w-full">
@@ -66,7 +66,7 @@ export default function Dashboard() {
               </main>
               </div>
           </div>
-        </ProtectedRoute>
+        </SoloProtectedRoute>
       </CompanyProvider>
     </AuthProvider>
   );

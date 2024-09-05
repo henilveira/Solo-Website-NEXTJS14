@@ -13,7 +13,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 const LoginForm = () => {
     const { toast } = useToast();
-    const { login } = useAuth();
+    const { login, isAdminEmpresa } = useAuth();
     const [error, setError] = useState<string | null>(null);
     const [inputError, setInputError] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
@@ -36,7 +36,12 @@ const LoginForm = () => {
                 description: "Você foi autenticado com sucesso!",
                 variant: "default",
             });
-            router.push("/dashboard/usuarios"); 
+            if (!isAdminEmpresa) {
+                router.push("/dashboard/automacoes"); 
+            } else {
+                router.push("/dashboard/usuarios"); 
+
+            }
         } catch (error) {
             setError('Credenciais incorretas');
             setInputError(true);
