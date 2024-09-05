@@ -10,7 +10,7 @@ const LoadingSpinner = () => (
     <style jsx>{`
       .spinner {
         border: 4px solid rgba(0, 0, 0, 0.1);
-        border-top: 4px solid #0070f3; /* Cor do spinner */
+        border-top: 4px solid #0070f3;
         border-radius: 50%;
         width: 60px;
         height: 60px;
@@ -25,45 +25,23 @@ const LoadingSpinner = () => (
 );
 
 const AdminProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { checkAuth, isAdminEmpresa, isAdminSolo } = useAuth(); // Verifica autenticação e status de admin
-  const [isLoading, setIsLoading] = useState(true);
-  const [isRedirecting, setIsRedirecting] = useState(false);
+  const { checkAuth, isAdminEmpresa, isAdminSolo } = useAuth(); 
+  const [isLoading, setIsLoading] = useState(true); 
   const router = useRouter();
 
   useEffect(() => {
     const verifyAdminAuth = async () => {
-      try {
-        const isAuthenticated = await checkAuth();
-        console.log(`Admin empresa: ${isAdminEmpresa}`)
-        console.log(`Admin empresa: ${isAdminSolo}`)
-        
-        if (!isAuthenticated) {
-          // Redireciona para login se não estiver autenticado
-          if (!isRedirecting) {
-            setIsRedirecting(true);
-            router.replace('/login');
-          }
-        } else if (!isAdminEmpresa) {
-          // Redireciona para acesso negado se não for admin
-          if (!isRedirecting) {
-            setIsRedirecting(true);
-            router.replace('/acesso-negado');
-          }
-        } else {
-          // Usuário autenticado e tem permissão, não redirecionar
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error('Erro ao verificar autenticação:', error);
-        if (!isRedirecting) {
-          setIsRedirecting(true);
-          router.replace('/login');
-        }
+      const isAuthenticated = await checkAuth();
+
+      if (!isAuthenticated || (!isAdminEmpresa && !isAdminSolo)) {
+        router.push('/acesso-negado');
+      } else {
+        setIsLoading(false); // Desbloqueia a renderização
       }
     };
 
     verifyAdminAuth();
-  }, [checkAuth, isAdminEmpresa, isAdminSolo, router, isRedirecting]);
+  }, [isAdminEmpresa, isAdminSolo, checkAuth, router]); // Certifica-se de reexecutar se os estados mudarem
 
   if (isLoading) {
     return <LoadingSpinner />;

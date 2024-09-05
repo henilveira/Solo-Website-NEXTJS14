@@ -78,15 +78,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         const profilePictureUrl = data.profile_picture
           ? `http://127.0.0.1:8000${data.profile_picture}` // Ajuste a URL aqui
           : null;
-
         setUserEmail(data.email || null);
         setUserName(data.nome || null);
         setIsAdminEmpresa(data.is_admin_empresa);
-        setIsAdminSolo(data.is_staff);
+        setIsAdminSolo(data.is_solo_admin);
         setUserCompany(data.empresa || null);
         setUserPicture(profilePictureUrl || null);
-        console.log(`Admin empresa: ${isAdminEmpresa}`)
-        console.log(`Admin solo: ${isAdminSolo}`)
+        // console.log(`Admin empresa: ${isAdminEmpresa}`)
+        // console.log(`Admin solo: ${isAdminSolo}`)
 
         return true;
       } else if (response.status === 401) {
