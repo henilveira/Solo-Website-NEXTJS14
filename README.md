@@ -1,4 +1,4 @@
-# Automatização de Processos Solo Solutions
+# Automatização de Processos com a Solo Solutions
 
 Este projeto foi desenvolvido para a empresa Solo, especializada em automação de processos empresariais.
 
