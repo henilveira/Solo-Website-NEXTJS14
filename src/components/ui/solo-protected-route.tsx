@@ -3,6 +3,7 @@
 import { useAuth } from '@/components/ui/AuthProvider';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useCompany } from './CompanyProvider';
 
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -25,7 +26,8 @@ const LoadingSpinner = () => (
 );
 
 const SoloProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { checkAuth, isAdminSolo } = useAuth();  // Verifica autenticação e status de admin
+  const { listarEmpresas } = useCompany();  // Verifica autenticação e status de admin
+  const { checkAuth } = useAuth();  // Verifica autenticação e status de admin
   const [isLoading, setIsLoading] = useState(true);
   const [isRedirecting, setIsRedirecting] = useState(false);
   const router = useRouter();
@@ -33,15 +35,15 @@ const SoloProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const verifySoloAuth = async () => {
       try {
+        const isAuthorized = await listarEmpresas();
         const isAuthenticated = await checkAuth();
-        
         if (!isAuthenticated) {
-          // Redireciona para login se não estiver autenticado
           if (!isRedirecting) {
             setIsRedirecting(true);
             router.replace('/login');
           }
-        } else if (!isAdminSolo) {
+        }
+        if (!isAuthorized) {
           // Redireciona para acesso negado se não for admin
           if (!isRedirecting) {
             setIsRedirecting(true);
@@ -60,7 +62,7 @@ const SoloProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     };
 
     verifySoloAuth();
-  }, [checkAuth, isAdminSolo, router, isRedirecting]);
+  }, [checkAuth, listarEmpresas, router, isRedirecting]);
 
   if (isLoading) {
     return <LoadingSpinner />;

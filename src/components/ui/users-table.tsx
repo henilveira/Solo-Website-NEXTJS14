@@ -57,7 +57,7 @@ const LoadingSpinner = () => (
   );
   
   export default function Tables() {
-    const { companies, currentPage, totalPages, setPage, deletarEmpresa } = useCompany();
+    const { users, currentPage, totalPages, setPage } = useCompany();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
   
@@ -98,7 +98,7 @@ const LoadingSpinner = () => (
   
     useEffect(() => {
       setLoading(false); // Desativar o estado de carregamento quando os dados são carregados
-    }, [companies]);
+    }, [users]);
 
 
   
@@ -114,19 +114,18 @@ const LoadingSpinner = () => (
                   <TableRow className="hover:bg-zinc-950">
                     <TableHead>ID</TableHead>
                     <TableHead>Nome</TableHead>
-                    <TableHead className="hidden md:table-cell">E-mail</TableHead>
+                    <TableHead className="hidden md:table-cell">Empresa</TableHead>
                     <TableHead className="hidden md:table-cell">Criado em</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {Array.isArray(companies) &&
-                    companies.map((company) => (
-                      <TableRow key={company.id}>
-                        <TableCell className="font-medium">{formatId(company.id)}</TableCell>
-                        <TableCell>{company.nome}</TableCell>
-                        <TableCell className="hidden md:table-cell">{formatData(company.created_at)}</TableCell>
-                        <TableCell className="hidden md:table-cell">{formatData(company.updated_at)}</TableCell>
-                        <TableCell className="hidden md:table-cell">{company.automacoes.join(", ")}</TableCell>
+                  {Array.isArray(users) &&
+                    users.map((user) => (
+                      <TableRow key={user.id}>
+                        <TableCell className="font-medium">{formatId(user.id)}</TableCell>
+                        <TableCell>{user.nome}</TableCell>
+                        <TableCell className="hidden md:table-cell">{user.empresa}</TableCell>
+                        <TableCell className="hidden md:table-cell">{formatData(user.date_joined)}</TableCell>
                         <TableCell>
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>

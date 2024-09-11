@@ -36,14 +36,14 @@ const RegistrarUsuario = () => {
         await createUser(email, nome);
         toast({
             title: 'Sucesso',
-            description: `A empresa foi adicionada com sucesso!`,
+            description: `Usuário foi criado com sucesso!`,
             variant: 'default',
         });
     } catch (error: any) {
         // Mostrar o erro específico no toast
         toast({
             title: 'Erro',
-            description: error.message || 'Erro ao cadastrar empresa. Tente novamente.',
+            description: error.message || 'Erro ao cadastrar usuário. Tente novamente.',
             variant: 'destructive', // Exibir toast com estilo de erro
         });
     } finally {

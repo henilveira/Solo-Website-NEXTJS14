@@ -19,6 +19,7 @@ import { CompanyProvider } from "@/components/ui/CompanyProvider";
 import DeleteCompanyModal from "@/components/ui/DeleteCompanyModal";
 import RegistrarCompanyModal from "@/components/ui/RegistrarCompanyModal";
 import SoloProtectedRoute from "@/components/ui/solo-protected-route";
+import ProtectedRoute from "@/components/ui/protected-route";
 
 export default function Dashboard() {
   const adminMenuItems = [

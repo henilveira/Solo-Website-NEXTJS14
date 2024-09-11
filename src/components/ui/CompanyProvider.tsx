@@ -2,6 +2,16 @@
 
 import React, { createContext, ReactNode, useContext, useState, useEffect } from 'react';
 
+type UserData = {
+    id?: string;
+    email: string;
+    nome: string;
+    empresa: string;
+    date_joined: string | Date | number;
+    profile_pictrure: string;
+    // Outros campos de usuários, se necessário
+};
+
 type CompanyData = {
     id?: string;
     nome: string;
@@ -14,8 +24,10 @@ type CompanyData = {
 
 interface CompanyContextType {
     registrarEmpresas: (companyData: CompanyData) => Promise<void>;
-    listarEmpresas: (page?: number) => Promise<void>;
+    listarEmpresas: (page?: number) => Promise<boolean>;
+    listarUsuarios: (page?: number) => Promise<boolean>;
     createUser: (email: string, nome?: string) => Promise<void>;
+    users: UserData[]; // Adicionar o estado dos usuários aqui
     companies: CompanyData[];
     currentPage: number;
     totalPages: number;
@@ -39,6 +51,7 @@ interface CompanyContextProps {
 
 export const CompanyProvider = ({ children }: CompanyContextProps) => {
     const [companies, setCompanies] = useState<CompanyData[]>([]);
+    const [users, setUsers] = useState<UserData[]>([]); // Adicionar estado para os usuários
     const [totalPages, setTotalPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -102,7 +115,7 @@ export const CompanyProvider = ({ children }: CompanyContextProps) => {
         }
     };
 
-    const listarEmpresas = async (page?: number): Promise<void> => {
+    const listarEmpresas = async (page?: number): Promise<boolean> => {
         const pageNumber = page ?? currentPage; // Usar a página atual se `page` não for fornecido
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/empresas/list-empresas/?page=${pageNumber}`, {
@@ -118,8 +131,33 @@ export const CompanyProvider = ({ children }: CompanyContextProps) => {
             const data = await response.json();
             setCompanies(data.results.empresas);
             setTotalPages(Math.ceil(data.count / 8));
+            return true
         } catch (error) {
             console.error('Erro ao buscar empresas:', error);
+            return false
+        }   
+    };
+
+    const listarUsuarios = async (page?: number): Promise<boolean> => {
+        const pageNumber = page ?? currentPage;
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/accounts/get-users-empresa/?page=${pageNumber}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+            if (!response.ok) {
+                throw new Error('Erro ao buscar usuários');
+            }
+            const data = await response.json();
+            setUsers(data.results.users); // Atualizar o estado dos usuários
+            setTotalPages(Math.ceil(data.count / 8)); // Atualizar a paginação
+            return true;
+        } catch (error) {
+            console.error('Erro ao buscar usuários:', error);
+            return false;
         }
     };
 
@@ -137,7 +175,7 @@ export const CompanyProvider = ({ children }: CompanyContextProps) => {
                 throw new Error('Erro ao cadastrar usuário')
             }
         } catch (error) {
-
+            console.error('Erro ao criar usuário:', error);
         }
     }
 
@@ -145,15 +183,17 @@ export const CompanyProvider = ({ children }: CompanyContextProps) => {
         if (page !== undefined) {
             setCurrentPage(page);
             listarEmpresas(page);
+            listarUsuarios(page); // Atualizar também os usuários ao mudar de página
         }
     };
 
     useEffect(() => {
-        listarEmpresas();
+        // listarEmpresas();
+        listarUsuarios();
     }, [currentPage]);
 
     return (
-        <CompanyContext.Provider value={{ registrarEmpresas, companies, deletarEmpresa, createUser, listarEmpresas, currentPage, totalPages, setPage }}>
+        <CompanyContext.Provider value={{ users, registrarEmpresas, listarUsuarios, companies, deletarEmpresa, createUser, listarEmpresas, currentPage, totalPages, setPage }}>
             {children}
         </CompanyContext.Provider>
     );
