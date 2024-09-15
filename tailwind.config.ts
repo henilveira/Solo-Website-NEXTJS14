@@ -20,6 +20,7 @@ const config = {
     extend: {
       colors: {
         azulsolo: "#1573FE",
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
