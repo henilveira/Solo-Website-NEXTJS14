@@ -1,12 +1,11 @@
 'use client'
+import {CardDemo} from "@/components/ui/cardHeroSection";
 import { AnimatedBeamDemo } from "@/components/ui/allConectedHeroSection";
 import { AuthProvider } from "@/components/ui/AuthProvider";
 import { BentoDemo } from "@/components/ui/bentoGridHeroSection";
-import { Button } from "@/components/ui/button";
 import { MarqueeDemo } from "@/components/ui/marqueeHeroSection";
 import Header from "@/components/ui/modernHeader";
 import Navbar from "@/components/ui/navbar";
-import oQueEstaoFalando from "@/components/ui/oQueEstaoFalando";
 
 export default function Home() {
     return (
@@ -18,6 +17,7 @@ export default function Home() {
                     <MarqueeDemo />
                     <BentoDemo />
                     <AnimatedBeamDemo />
+                    <CardDemo />
                 </main>
             </div>
         </AuthProvider>
