@@ -13,7 +13,7 @@ const Logo = () => {
             <Image
                 src={theme === 'light' ? '/solo-logo-black.svg' : '/solo-logo-white.svg'}
                 alt="Logo"
-                width={125}
+                width={100}
                 height={50}
                 />
         </Link>
