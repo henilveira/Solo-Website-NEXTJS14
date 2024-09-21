@@ -3,42 +3,44 @@ import Marquee from "@/components/magicui/marquee";
 
 const reviews = [
   {
-    name: "Jack",
-    username: "@jack",
-    body: "I've never seen anything like this before. It's amazing. I love it.",
-    img: "https://avatar.vercel.sh/jack",
+    name: "Carlos",
+    username: "@carlos",
+    body: "Facilitou muito meu dia a dia. Indispensável!",
+    img: "https://avatar.vercel.sh/carlos",
   },
   {
-    name: "Jill",
-    username: "@jill",
-    body: "I don't know what to say. I'm speechless. This is amazing.",
-    img: "https://avatar.vercel.sh/jill",
+    name: "Mariana",
+    username: "@mariana",
+    body: "Meus processos estão muito mais rápidos agora.",
+    img: "https://avatar.vercel.sh/mariana",
   },
   {
-    name: "John",
-    username: "@john",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/john",
+    name: "José",
+    username: "@jose",
+    body: "Otimização total! A produtividade aumentou muito.",
+    img: "https://avatar.vercel.sh/jose",
   },
   {
-    name: "Jane",
-    username: "@jane",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jane",
+    name: "Ana",
+    username: "@ana",
+    body: "Simplicidade e eficiência em um só lugar.",
+    img: "https://avatar.vercel.sh/ana",
   },
   {
-    name: "Jenny",
-    username: "@jenny",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jenny",
+    name: "Fernanda",
+    username: "@fernanda",
+    body: "Economizei muito tempo com esse software.",
+    img: "https://avatar.vercel.sh/fernanda",
   },
   {
-    name: "James",
-    username: "@james",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/james",
+    name: "Pedro",
+    username: "@pedro",
+    body: "Mudou meu negócio. Super fácil de usar.",
+    img: "https://avatar.vercel.sh/pedro",
   },
 ];
+
+
 
 const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);

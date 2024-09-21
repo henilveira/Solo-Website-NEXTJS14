@@ -5,7 +5,7 @@ import { AuthProvider } from "@/components/ui/AuthProvider";
 import { BentoDemo } from "@/components/ui/bentoGridHeroSection";
 import { MarqueeDemo } from "@/components/ui/marqueeHeroSection";
 import Header from "@/components/ui/modernHeader";
-import Navbar from "@/components/ui/navbar";
+import Navbar from "@/components/magicui/navbar";
 
 export default function Home() {
     return (

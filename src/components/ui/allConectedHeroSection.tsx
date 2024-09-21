@@ -4,6 +4,8 @@ import React, { forwardRef, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/magicui/animated-beam";
+import Logo from "./logo";
+import Image from 'next/image'
 
 const Circle = forwardRef<
   HTMLDivElement,
@@ -58,7 +60,12 @@ export function AnimatedBeamDemo() {
             <Icons.notion />
           </Circle>
           <Circle ref={div4Ref} className="size-16">
-            <Icons.openai />
+            <Image 
+              src='/solo.svg'
+              width={30}
+              height={30}
+              alt='logo'
+            />
           </Circle>
           <Circle ref={div6Ref}>
             <Icons.zapier />

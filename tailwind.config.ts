@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss"
+import plugin from "tailwindcss/plugin"
+
 
 const config = {
   darkMode: ["class"],
@@ -18,10 +20,13 @@ const config = {
       },
     },
     extend: {
-      
       colors: {
+        "color-1": "hsl(var(--color-1))",
+        "color-2": "hsl(var(--color-2))",
+        "color-3": "hsl(var(--color-3))",
+        "color-4": "hsl(var(--color-4))",
+        "color-5": "hsl(var(--color-5))",
         azulsolo: "#1573FE",
-
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -66,6 +71,14 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        rainbow: {
+          "0%": { "background-position": "0%" },
+          "100%": { "background-position": "200%" },
+        },
+        fadeDown: {
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
         "spin-around": {
           "0%": {
             transform: "translateZ(0) rotate(0)",
@@ -118,6 +131,8 @@ const config = {
         },
       },
       animation: {
+        rainbow: "rainbow var(--speed, 2s) infinite linear",
+        fadeDown: 'fadeDown 0.5s ease-out forwards',
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
         slide: "slide var(--speed) ease-in-out infinite alternate",
         marquee: "marquee var(--duration) linear infinite",
@@ -129,8 +144,24 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    variants: {
+      extend: {
+        animation: ['motion-safe'],
+      },
+    },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function({ addUtilities }) {
+      const animationDelayUtilities: Record<string, { 'animation-delay': string }> = {}
+      for (let i = 1; i <= 20; i++) {
+        animationDelayUtilities[`.animation-delay-${i * 20}`] = {
+          'animation-delay': `${i * 100}ms`,
+        }
+      }
+      addUtilities(animationDelayUtilities)
+    }),
+  ],
+}
 
 export default config

@@ -6,6 +6,7 @@ import Image from "next/image"; // Importando o Image do Next.js
 import { BorderBeam } from "../magicui/border-beam";
 import AnimatedShinyText from "../magicui/animated-shiny-text";
 import { ArrowRightIcon } from "lucide-react";
+import { RainbowButton } from "../magicui/rainbow-button";
 
 const Header = () => {
     return (
@@ -33,22 +34,26 @@ const Header = () => {
                                 "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]"
                             )}
                         />
-                        <Button variant="solo" className="inline-flex items-center gap-2 text-white">
-                            Comece agora
-                        </Button>
+
+                        <RainbowButton>
+                            <span className="flex items-center justify-between">
+                                Comece agora
+                                <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-1 text-black" />
+                            </span>
+                        </RainbowButton>
                     </div>
                 </div>
             </div>
             <div className="flex w-full justify-center items-center">
                 <div className="relative flex h-[570px] w-[1000px] flex-col items-center border justify-center align-center overflow-hidden rounded-3xl bg-background md:shadow-xl">
-                    <Image 
+                    <Image
                         src='/your_robots.svg'
                         alt="Seus Robos"
                         width='1000'
                         height='600'
                     />
                     <BorderBeam size={250} duration={12} delay={9} />
-                </div>q
+                </div>
             </div>
         </section>
     );
