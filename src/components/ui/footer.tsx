@@ -2,32 +2,18 @@ import Link from "next/link"
 import Logo from "./logo";
 
 export default function Footer() {
-
-  interface ExternalLinkProps {
-    to: string;
-    children: React.ReactNode;
-  }
-  
-  const ExternalLink: React.FC<ExternalLinkProps> = ({ to, children }) => (
-    <Link href={to} passHref>
-      <a target="_blank" rel="noopener noreferrer">
-        {children}
-      </a>
-    </Link>
-  );
-
   
   return (
-    <footer className="dark:bg-neutral-950 bg-neutral-200 p-6 md:py-12 w-full">
+    <footer className="dark:bg-zinc-950 bg-zinc-100 p-6 md:py-12 w-full">
       <div className="container max-w-7xl flex items-center justify-between">
       <Logo />
-        <p className="dark:text-white text-neutral-800 text-center text-lg :text-sm">Preparado para automatizar sua rotina?</p>
+        <p className="dark:text-white text-neutral-800 text-center text-lg ">Preparado para automatizar sua rotina?</p>
         <div className="flex items-center space-x-4">
           <a href="#" target="_blank" >
-            <MailOpenIcon className="h-5 w-5 dark:text-white text-neutral-800" />
+            <MailOpenIcon className="h-5 w-5 dark:text-white text-zinc-950" />
           </a>
           <a href="https://wa.me/+5547996750589?text=Ol%C3%A1!%20quero%20conhecer%20mais%20sobre%20as%20automa%C3%A7%C3%B5es" target="_blank" >
-            <PhoneIcon className="h-5 w-5 dark:text-white text-neutral-800" />
+            <PhoneIcon className="h-5 w-5 dark:text-white text-zinc-950" />
           </a>
         </div>
       </div>
@@ -75,27 +61,3 @@ function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
-
-function BotIcon(props: React.SVGProps<SVGSVGElement>) {
-    return (
-      <svg
-        {...props}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 8V4H8" />
-        <rect width="16" height="12" x="4" y="8" rx="2" />
-        <path d="M2 14h2" />
-        <path d="M20 14h2" />
-        <path d="M15 13v2" />
-        <path d="M9 13v2" />
-      </svg>
-    )
-  }

@@ -1,12 +1,13 @@
 import { CalendarIcon, FileTextIcon } from "@radix-ui/react-icons";
 import { BellIcon, Share2Icon, TvMinimal } from "lucide-react";
-
+import Globe from "@/components/magicui/globe";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import {AnimatedBeamMultipleOutputDemo} from "@/components/ui/animated-beam-multiple-outputs";
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import Marquee from "@/components/magicui/marquee";
 import {AnimatedListDemo} from "@/components/ui/animated-list-demo";
+import { GlobeDemo } from "./globe-demo";
 
 const files = [
   {
@@ -72,14 +73,14 @@ const features = [
   },
   
   {
-    Icon: BellIcon,
+    Icon: TvMinimal,
     name: "Monitore suas automações",
     description: "Acompanhe todo o processo em tempo real",
     href: "#",
     cta: "Ver mais",
     className: "col-span-3 lg:col-span-2",
     background: (
-      <AnimatedListDemo className="absolute right-2 top-4 h-[300px] w-full border-none transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] group-hover:scale-105" />
+      <Globe />
     ),
   },
   {

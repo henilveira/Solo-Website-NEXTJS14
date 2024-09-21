@@ -20,8 +20,21 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": [
+      "debounce",
+      "react-reconciler"
+      // "offscreencanvas" foi removido daqui
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/login/auth-teste.tsx", "src/app/login/auth-context.js", "src/utils/auth.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/login/auth-teste.tsx",
+    "src/app/login/auth-context.js",
+    "src/utils/auth.js"
+  ],
   "exclude": ["node_modules"]
 }

@@ -37,8 +37,10 @@ const Navbar = () => {
                     </div>
                     <div className="hidden lg:flex items-center gap-4">
                         <ThemeSwitcher />
-                        <Button variant='outline'>
-                            Iniciar sessão
+                        <Button variant='outline' >
+                            <Link href='/login'>
+                                Iniciar sessão
+                            </Link>
                         </Button>
                         <ShimmerButton background="#1472FF" borderRadius="5px" className="p-3 text-sm">
                             <span className="whitespace-pre-wrap text-center font-medium tracking-tight leading-none text-white">
