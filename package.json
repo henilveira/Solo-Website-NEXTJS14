@@ -72,6 +72,7 @@
     "react-spring": "^9.7.4",
     "shadcn-ui": "^0.2.3",
     "simplex-noise": "^4.0.3",
+    "swr": "^2.2.5",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.168.0",

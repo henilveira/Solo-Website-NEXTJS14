@@ -84,8 +84,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setIsAdminSolo(data.is_solo_admin);
         setUserCompany(data.empresa || null);
         setUserPicture(profilePictureUrl || null);
-        // console.log(`Admin empresa: ${isAdminEmpresa}`)
-        // console.log(`Admin solo: ${isAdminSolo}`)
 
         return true;
       } else if (response.status === 401) {

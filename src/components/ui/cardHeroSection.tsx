@@ -386,10 +386,10 @@ export const MetaIconOutline = ({ className }: { className?: string }) => {
           gradientTransform="matrix(1, 0, 0, -1, 0, 192)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#0064e1" />
-          <stop offset="0.4" stop-color="#0064e1" />
-          <stop offset="0.83" stop-color="#0073ee" />
-          <stop offset="1" stop-color="#0082fb" />
+          <stop offset="0" stopColor="#0064e1" />
+          <stop offset="0.4" stopColor="#0064e1" />
+          <stop offset="0.83" stopColor="#0073ee" />
+          <stop offset="1" stopColor="#0082fb" />
         </linearGradient>
         <linearGradient
           id="linear-gradient-2"
@@ -400,8 +400,8 @@ export const MetaIconOutline = ({ className }: { className?: string }) => {
           gradientTransform="matrix(1, 0, 0, -1, 0, 192)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#0082fb" />
-          <stop offset="1" stop-color="#0064e0" />
+          <stop offset="0" stopColor="#0082fb" />
+          <stop offset="1" stopColor="#0064e0" />
         </linearGradient>
       </defs>
       <path

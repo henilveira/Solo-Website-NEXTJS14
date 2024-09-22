@@ -2,7 +2,6 @@
 import { Settings, Home } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Gauge, Shield, LogOut } from 'lucide-react';
-import { useAuth } from '@/components/ui/AuthProvider'; // Ajuste o caminho conforme necessário
 import Link from 'next/link';
 import ProfileAvatar from './avatar-profile';
 import { useRouter } from 'next/navigation';
@@ -15,24 +14,29 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAuthCheck } from "@/hooks/useAuthCheck";
+import { useLogout } from "@/hooks/useLogout";
 
 export default function Profile() {
-  const { userEmail, userName, userCompany, isAdminEmpresa, isAdminSolo, logout } = useAuth(); // Obtenha isAdminSolo
+  const { user, isLoading, isError } = useAuthCheck();
+  const { logout, isLoading: isLoggingOut } = useLogout();
   const router = useRouter();
 
-  const handleLogout = () => {
-    logout();
+  if (isLoading) return <p>Carregando...</p>;
+  if (isError) return <p>Erro ao carregar dados do usuário</p>;
+
+  const handleLogout = async () => {
+    await logout();
     router.push('/login');
   };
 
-  // Função para redirecionar com base nas permissões do usuário
   const handleDashboardRedirect = () => {
-    if (isAdminSolo) {
-      router.push('/dashboard/empresas'); // Admin Solo vai para /dashboard/empresas
-    } else if (isAdminEmpresa) {
-      router.push('/dashboard/usuarios'); // Admin de Empresa vai para /dashboard/usuarios
+    if (user?.is_solo_admin) {
+      router.push('/dashboard/empresas');
+    } else if (user?.is_admin_empresa) {
+      router.push('/dashboard/usuarios');
     } else {
-      router.push('/dashboard/automacoes'); // Membros normais vão para /dashboard/automacoes
+      router.push('/dashboard/automacoes');
     }
   };
 
@@ -41,7 +45,7 @@ export default function Profile() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <div>
-            <ProfileAvatar className="cursor-pointer" />
+            <ProfileAvatar className="cursor-pointer" src={user?.profile_picture || undefined} />
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuPortal>
@@ -52,21 +56,23 @@ export default function Profile() {
             forceMount
           >
             <div className="p-3 space-x-3 flex justify-start items-center">
-              <ProfileAvatar className="flex justify-center items-center align-center" />
+              <ProfileAvatar className="flex justify-center items-center align-center" src={user?.profile_picture || undefined} />
               <div className='flex flex-col justify-center align-center'>
-                <span>Olá, <span className='font-semibold'>{userName || 'Usuário'}</span></span>
-                <span className='text-muted-foreground'>{userEmail || 'Usuário'}</span>
+                <span>Olá, <span className='font-semibold'>{user?.nome || 'Usuário'}</span></span>
+                <span className='text-muted-foreground'>{user?.email || 'Usuário'}</span>
               </div>
             </div>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <div className="flex justify-between p-2">
                 <div className="flex flex-col">
-                  <span className="text-base">{userName || 'Usuário'}</span>
-                  <span className="text-sm text-muted-foreground">{userCompany || 'Convidado'}</span>
+                  <span className="text-base">{user?.nome || 'Usuário'}</span>
+                  <span className="text-sm text-muted-foreground">{user?.empresa || 'Convidado'}</span>
                 </div>
                 <div className="items-center flex">
-                  <Badge className="h-6">{isAdminEmpresa || isAdminSolo ? <span>Administrador</span> : <span>Membro</span>}</Badge>
+                  <Badge className="h-6">
+                    {user?.is_admin_empresa || user?.is_solo_admin ? <span>Administrador</span> : <span>Membro</span>}
+                  </Badge>
                 </div>
               </div>
             </DropdownMenuGroup>
@@ -81,7 +87,6 @@ export default function Profile() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              {/* Botão do Dashboard, ao clicar executa a função de redirecionamento */}
               <DropdownMenuItem onClick={handleDashboardRedirect} className="cursor-pointer w-full">
                 <Gauge className="mr-2 h-4 w-4" />
                 <span>Dashboard</span>
@@ -96,7 +101,7 @@ export default function Profile() {
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
               <LogOut className="mr-2 h-4 w-4" />
-              <span>Sair</span>
+              <span>{isLoggingOut ? 'Saindo...' : 'Sair'}</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenuPortal>
