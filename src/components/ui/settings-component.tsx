@@ -12,10 +12,13 @@ import { useToast } from "@/components/ui/use-toast";
 import { useState, ChangeEvent, FormEvent, useRef } from 'react';
 import ProfileAvatar from "./avatar-profile";
 import { Loader2 } from "lucide-react";
+import { useUser } from "@/hooks/useUser";
+import { useUsername } from "@/hooks/useUsername";
 
 export const SettingsComponent = () => {
   const [novoEmail, setNovoEmail] = useState<string>('');
-  const { userEmail, userName, changeUsername, updateProfilePicture, deleteProfilePicture, requestEmailChange, resetPasswordRequest } = useAuth();
+  const { userEmail, userName, updateProfilePicture, deleteProfilePicture, requestEmailChange, resetPasswordRequest } = useUser();
+  const {changeUsername} = useUsername()
   const { toast } = useToast();
   const [error, setError] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);

@@ -1,12 +1,8 @@
 import useSWR, { SWRConfiguration } from 'swr';
 import { useRouter } from 'next/navigation';
+import { ApiError } from '@/types/types'; // Importe o tipo ApiError do seu arquivo de tipos
 
 const API_URL = 'http://127.0.0.1:8000/api';
-
-interface ApiError extends Error {
-  info?: any;
-  status?: number;
-}
 
 async function fetcher(url: string) {
   const res = await fetch(url, {
@@ -20,7 +16,9 @@ async function fetcher(url: string) {
     throw error;
   }
 
-  return res.json();
+  const data = await res.json();
+  console.log('Fetch succeeded with data:', data);
+  return data;
 }
 
 export function useApiBase<T = any>(
@@ -29,20 +27,17 @@ export function useApiBase<T = any>(
 ) {
   const router = useRouter();
 
-  const { data, error, mutate } = useSWR<T>(
+  const { data, error, mutate, isValidating } = useSWR<T>(
     `${API_URL}${endpoint}`,
     fetcher,
     {
       ...options,
       onError: async (err: ApiError) => {
         if (err.status === 401) {
-          // Try to refresh the token
           const refreshed = await refreshAccessToken();
           if (refreshed) {
-            // If refreshed successfully, retry the request
             mutate();
           } else {
-            // If refresh failed, redirect to login
             router.push('/login');
           }
         }
@@ -50,7 +45,7 @@ export function useApiBase<T = any>(
     }
   );
 
-  return { data, error, mutate };
+  return { data, error, mutate, isLoading: !error && !data, isValidating };
 }
 
 async function refreshAccessToken(): Promise<boolean> {

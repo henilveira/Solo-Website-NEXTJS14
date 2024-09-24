@@ -8,8 +8,6 @@ import Image from 'next/image';
 
 export default function Login() {
   return (
-      <AuthProvider>
-        <ProtectedRoute> 
           <div className="flex flex-col md:flex-row items-center min-h-screen justify-center min-w-screen dark:bg-zinc-950">
               <div className="max-w-sm space-y-4">
                 <div className="space-y-2 text-left items-center flex flex-col">
@@ -24,7 +22,5 @@ export default function Login() {
                 </div>
             </div>
           </div>
-      </ProtectedRoute>
-    </AuthProvider>
   );
 }

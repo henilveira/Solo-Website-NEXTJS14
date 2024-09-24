@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
-import { useAuth } from '@/components/ui/AuthProvider'; 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -10,10 +9,13 @@ import { Loader2, Eye, EyeOff } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from 'next/link';
 import { useToast } from "@/components/ui/use-toast";
+import { useLogin } from '@/hooks/useLogin';
+import { useUser } from '@/hooks/useUser';
 
 const LoginForm = () => {
     const { toast } = useToast();
-    const { login, isAdminEmpresa } = useAuth();
+    const { login } = useLogin()
+    const { isAdminEmpresa } = useUser()
     const [error, setError] = useState<string | null>(null);
     const [inputError, setInputError] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);

@@ -16,14 +16,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuthCheck } from "@/hooks/useAuthCheck";
 import { useLogout } from "@/hooks/useLogout";
+import { useUser } from "@/hooks/useUser";
 
 export default function Profile() {
+  const { userName, userEmpresa, userEmail, isAdminEmpresa, isAdminSolo, userPicture } = useUser()
   const { user, isLoading, isError } = useAuthCheck();
   const { logout, isLoading: isLoggingOut } = useLogout();
   const router = useRouter();
-
-  if (isLoading) return <p>Carregando...</p>;
-  if (isError) return <p>Erro ao carregar dados do usuário</p>;
 
   const handleLogout = async () => {
     await logout();
@@ -31,9 +30,9 @@ export default function Profile() {
   };
 
   const handleDashboardRedirect = () => {
-    if (user?.is_solo_admin) {
+    if (isAdminSolo) {
       router.push('/dashboard/empresas');
-    } else if (user?.is_admin_empresa) {
+    } else if (isAdminEmpresa) {
       router.push('/dashboard/usuarios');
     } else {
       router.push('/dashboard/automacoes');
@@ -45,7 +44,7 @@ export default function Profile() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <div>
-            <ProfileAvatar className="cursor-pointer" src={user?.profile_picture || undefined} />
+            <ProfileAvatar className="cursor-pointer" src={userPicture || undefined} />
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuPortal>
@@ -56,22 +55,22 @@ export default function Profile() {
             forceMount
           >
             <div className="p-3 space-x-3 flex justify-start items-center">
-              <ProfileAvatar className="flex justify-center items-center align-center" src={user?.profile_picture || undefined} />
+              <ProfileAvatar className="flex justify-center items-center align-center" src={userPicture || undefined} />
               <div className='flex flex-col justify-center align-center'>
-                <span>Olá, <span className='font-semibold'>{user?.nome || 'Usuário'}</span></span>
-                <span className='text-muted-foreground'>{user?.email || 'Usuário'}</span>
+                <span>Olá, <span className='font-semibold'>{userName || 'Usuário'}</span></span>
+                <span className='text-muted-foreground'>{userEmail || 'Usuário'}</span>
               </div>
             </div>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <div className="flex justify-between p-2">
                 <div className="flex flex-col">
-                  <span className="text-base">{user?.nome || 'Usuário'}</span>
-                  <span className="text-sm text-muted-foreground">{user?.empresa || 'Convidado'}</span>
+                  <span className="text-base">{userName || 'Usuário'}</span>
+                  <span className="text-sm text-muted-foreground">{userEmpresa || 'Convidado'}</span>
                 </div>
                 <div className="items-center flex">
                   <Badge className="h-6">
-                    {user?.is_admin_empresa || user?.is_solo_admin ? <span>Administrador</span> : <span>Membro</span>}
+                    {isAdminEmpresa || isAdminSolo ? <span>Administrador</span> : <span>Membro</span>}
                   </Badge>
                 </div>
               </div>
