@@ -25,6 +25,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useListUsers } from '@/hooks/useListUsers';
+import ProfileAvatar from "@/components/ui/avatar-profile";
 
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center h-full">
@@ -93,8 +94,9 @@ export default function UsersTable() {
             <Table>
               <TableHeader>
                 <TableRow className="hover:bg-zinc-950">
-                  <TableHead>ID</TableHead>
+                  
                   <TableHead>Nome</TableHead>
+                  <TableHead className="hidden md:table-cell">E-mail</TableHead>
                   <TableHead className="hidden md:table-cell">Empresa</TableHead>
                   <TableHead className="hidden md:table-cell">Criado em</TableHead>
                   <TableHead>Ações</TableHead>
@@ -104,8 +106,13 @@ export default function UsersTable() {
                 {Array.isArray(users) &&
                   users.map((user) => (
                     <TableRow key={user.id}>
-                      <TableCell className="font-medium">{formatId(user.id)}</TableCell>
-                      <TableCell>{user.nome}</TableCell>
+                      <TableCell className="font-medium">
+                        <div className="flex gap-4 items-center">
+                          <ProfileAvatar src={user.profile_picture}/>
+                          <span>{user.nome}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="hidden md:table-cell">{user.email}</TableCell>
                       <TableCell className="hidden md:table-cell">{user.empresa}</TableCell>
                       <TableCell className="hidden md:table-cell">{formatData(user.date_joined)}</TableCell>
                       <TableCell>

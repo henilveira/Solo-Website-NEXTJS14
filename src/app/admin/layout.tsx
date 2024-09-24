@@ -50,8 +50,8 @@ export default function DashboardLayout({
       >
         <main className="flex min-h-screen w-full flex-col bg-muted/40">
           <DesktopNav />
-          <div className="flex flex-col sm:gap-4 pt-4 sm:pl-14 bg-zinc-950">
-            <header className="sticky top-0 justify-between z-30 flex h-14 items-center gap-4 border-b bg-zinc-950 px-4 sm:static sm:h-auto sm:border-0 sm:bg-zinc-950 sm:px-6">
+          <div className="flex flex-col sm:gap-4 pt-4 sm:pl-14">
+            <header className="sticky top-0 justify-between z-30 flex h-14 items-center gap-4 border-b  px-4 sm:static sm:h-auto sm:border-0  sm:px-6">
               <MobileNav />
               <div className='flex w-full justify-end'>
                 <div className='flex gap-3'>
@@ -61,7 +61,7 @@ export default function DashboardLayout({
                 </div>
               </div>
             </header>
-            <main className="grid flex-1 items-start gap-2 p-4 sm:px-6 sm:py-0 md:gap-4 bg-muted/40">
+            <main className="grid flex-1 items-start gap-2 p-4 sm:px-6 sm:py-0 md:gap-4 ">
               {children}
             </main>
           </div>

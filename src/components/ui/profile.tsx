@@ -100,7 +100,7 @@ export default function Profile() {
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
               <LogOut className="mr-2 h-4 w-4" />
-              <span>{isLoggingOut ? 'Saindo...' : 'Sair'}</span>
+              <span>Sair</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenuPortal>
